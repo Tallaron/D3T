@@ -21,7 +21,7 @@ class LadderController extends AbstractController {
     public function showAction($realm, $mode, $num, $class, $min, $max) {
         $_SESSION['error_tpl'] = 'ladder_retry_button';
         $_SESSION['error_content'] = BASE_DIR . '/ladder/show/'.$realm.'/'.$mode.'/'.$num.'/'.$class.'/'.$min.'/'.$max;
-        $ranking = new \Entities\Ranking();
+        $ranking = new \Entities\Ranking(self::$settings);
         $ranking->setRealm($realm)
                 ->setMode($mode)
                 ->setNum($num)
@@ -29,9 +29,9 @@ class LadderController extends AbstractController {
                 ->setRange($min, $max);
         $ranking->loadData();
 
-        \Views\View::getInstance()->assign('realms', BNET_REALM_NAME);
-        \Views\View::getInstance()->assign('modes', BNET_MODE);
-        \Views\View::getInstance()->assign('classes', BNET_CLASSES);
+//        \Views\View::getInstance()->assign('realms', BNET_REALM_NAME);
+//        \Views\View::getInstance()->assign('modes', BNET_MODE);
+//        \Views\View::getInstance()->assign('classes', BNET_CLASSES);
         \Views\View::getInstance()->assign('ranking', $ranking);
         \Views\View::getInstance()->display('show_ladder.tpl');
         

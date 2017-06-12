@@ -14,12 +14,14 @@ class Ranking {
     private $ranks = array();
     
     private $data;
+    private $settings;
 
 
 
-    public function __construct() {
-        $this->min = RANKING_DEFAULT_MIN;
-        $this->max = RANKING_DEFAULT_MAX;
+    public function __construct($settings) {
+        $this->settings = $settings;
+        $this->min = $this->settings->get('RANKING_DEFAULT_MIN');
+        $this->max = $this->settings->get('RANKING_DEFAULT_MAX');
     }
 
 
@@ -45,9 +47,9 @@ class Ranking {
 
 
     private function determineRealm() {
-        if(array_key_exists($this->getRealm(), BNET_URL)) {
+        if(array_key_exists($this->getRealm(), $this->settings->get('BNET_URL'))) {
             return $this->getRealm();
-        } return RANKING_DEFAULT_REALM;
+        } return $this->settings->get('RANKING_DEFAULT_REALM');
     }
 
     private function determineLang() {
@@ -55,7 +57,7 @@ class Ranking {
             case 'kr':
                 return 'ko';
             default:
-                return RANKING_DEFAULT_LANG;
+                return $this->settings->get('RANKING_DEFAULT_LANG');
         }
     }
 
@@ -68,18 +70,18 @@ class Ranking {
             case 'shc':
                 return 'season';
             default:
-                return RANKING_DEFAULT_MODE;
+                return $this->settings->get('RANKING_DEFAULT_MODE');
         }
     }
 
     private function determineNum() {
         switch($this->determineMode()) {
             case 'era':
-                return min(BNET_MAX_ERA , max(BNET_MIN_ERA, $this->getNum()));
+                return min($this->settings->get('BNET_MAX_ERA') , max($this->settings->get('BNET_MIN_ERA'), $this->getNum()));
             case 'season':
-                return min(BNET_MAX_SEASON , max(BNET_MIN_SEASON, $this->getNum()));
+                return min($this->settings->get('BNET_MAX_SEASON') , max($this->settings->get('BNET_MIN_SEASON'), $this->getNum()));
             default:
-                return RANKING_DEFAULT_NUM;
+                return $this->settings->get('RANKING_DEFAULT_NUM');
         }
     }
 
@@ -92,14 +94,14 @@ class Ranking {
             case 'shc':
                 return 'hardcore-';
             default:
-                return RANKING_DEFAULT_TYPE;
+                return $this->settings->get('RANKING_DEFAULT_TYPE');
         }
     }
 
     private function determineClass() {
-        if(array_key_exists($this->getClass(), BNET_CLASSES)) {
+        if(array_key_exists($this->getClass(), $this->settings->get('BNET_CLASSES'))) {
             return $this->getClass();
-        } return RANKING_DEFAULT_CLASS;
+        } return $this->settings->get('RANKING_DEFAULT_CLASS');
     }
 
     
@@ -124,7 +126,7 @@ class Ranking {
                 ->setLevel($this->getRankLevel($data))
                 ->setTime($this->getRankTime($data))
                 ->setDate($this->getRankDate($data))
-                ->setProfile($this->getRankProfile($data) ? BNET_URL[$this->getRealm()].trim($this->getRankProfile($data), '/') : false);
+                ->setProfile($this->getRankProfile($data) ? $this->settings->get('BNET_URL', $this->getRealm()).trim($this->getRankProfile($data), '/') : false);
             $this->ranks[] = $rank;
         }
     }
@@ -196,7 +198,7 @@ class Ranking {
 
 
 
-
+    
 
 
 

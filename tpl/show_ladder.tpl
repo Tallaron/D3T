@@ -10,10 +10,10 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3 class="panel-title">
-            <div class="badge">{$realms[$ranking->getRealm()]}</div>
-            <div class="badge">{$modes[$ranking->getMode()]}</div>
+            <div class="badge">{$settings->get('BNET_REALM_NAME', $ranking->getRealm())}</div>
+            <div class="badge">{$settings->get('BNET_MODE', $ranking->getMode())}</div>
             <div class="badge">{$ranking->getNum()}</div>
-            <div class="badge">{$classes[$ranking->getClass()]}</div>
+            <div class="badge">{$settings->get('BNET_CLASSES', $ranking->getClass())}</div>
             <div class="badge">{$ranking->getMin()}-{$ranking->getMax()}</div>
         </h3>
     </div>

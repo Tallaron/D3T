@@ -21,19 +21,34 @@ class FrontController {
             $path = trim(substr($path, strlen($this->basepath)), '/');
         }
 
-        @list($c, $a, $p) = explode('/', $path, 3);
+//        @list($c, $a, $p) = explode('/', $path, 3);
+//
+//        if (isset($c)) {
+//            $this->setController($c);
+//        }
+//
+//        if (isset($a)) {
+//            $this->setAction($a);
+//        }
+//
+//        if (isset($p)) {
+//            $this->setParams($p);
+//        }
 
-        if (isset($c)) {
-            $this->setController($c);
+        $params = explode('/', $path, 3);
+
+        if (isset($params[0])) {
+            $this->setController($params[0]);
         }
 
-        if (isset($a)) {
-            $this->setAction($a);
+        if (isset($params[1])) {
+            $this->setAction($params[1]);
         }
 
-        if (isset($p)) {
-            $this->setParams($p);
+        if (isset($params[2])) {
+            $this->setParams($params[2]);
         }
+        
     }
 
     public function getController() {

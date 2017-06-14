@@ -13,6 +13,7 @@
         <div class="navbar-form navbar-left">
             <div class="btn-group" role="group" aria-label="...">
                 <a href="{BASE_DIR}/ladder" class="btn btn-primary">Ladder</a>
+                <a href="{BASE_DIR}/paragon" class="btn btn-primary">Paragon</a>
             </div>
         </div>
     </div>

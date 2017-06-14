@@ -1,11 +1,6 @@
-{include file="ladder_form.tpl"}
+{include file="ladder/ladder_form.tpl"}
 
-<div class="panel panel-default">
-    <div class="panel-body">
-        <div class="col-sm-12">Avg. Level: {$ranking->getAverageLevel()}</div>
-    </div>
-</div>
-
+{include file="ladder/ladder_results.tpl"}
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -27,8 +22,12 @@
                 <th>Time</th>
             </tr>
             {foreach from=$ranking->getRanksOutput() key=$i item=$rank}
-                <tr>
-                    <td>{$i+$ranking->getMin()}</td>
+                {if $rank->isMatch()}
+                    <tr class="custom-tr-green">
+                {else}
+                    <tr>
+                {/if}
+                    <td>{if $rank->isMatch()}<a class="custom-anchor" name="r{$rank->getPos()}"></a>{/if}{$rank->getPos()+1}</td>
                     <td>{$rank->getLevel()}</td>
                     {if $rank->getProfile()}
                         <td><a href="{$rank->getProfile()}/" target="_blank">{$rank->getName()}</a></td>

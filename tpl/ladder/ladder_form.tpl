@@ -7,10 +7,11 @@
 
             <div class="col-sm-6">
                 <form method="post" action="{BASE_DIR}/ladder/load">
-                    {include file="ladder_form_parts/realm.tpl"}
-                    {include file="ladder_form_parts/mode.tpl"}
-                    {include file="ladder_form_parts/class.tpl"}
-                    {include file="ladder_form_parts/minmax.tpl"}
+                    {include file="ladder/ladder_form_parts/realm.tpl"}
+                    {include file="ladder/ladder_form_parts/mode.tpl"}
+                    {include file="ladder/ladder_form_parts/class.tpl"}
+                    {include file="ladder/ladder_form_parts/minmax.tpl"}
+                    {include file="ladder/ladder_form_parts/names.tpl"}
                 </form>
             </div>
                 <div class="col-sm-6">

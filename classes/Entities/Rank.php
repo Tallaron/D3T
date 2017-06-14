@@ -4,11 +4,13 @@ namespace Entities;
 
 class Rank {
 
+    private $pos;
     private $name;
     private $level;
     private $time;
     private $date;
     private $profile;
+    private $isMatch = false;
 
 
 
@@ -17,7 +19,13 @@ class Rank {
 
 
 
-
+    public function setMatch() {
+        $this->isMatch = true;
+    }
+    
+    public function isMatch() {
+        return $this->isMatch;
+    }
 
     public function getProfile() {
         return $this->profile;
@@ -64,7 +72,14 @@ class Rank {
         return $this;
     }
 
+    public function getPos() {
+        return $this->pos;
+    }
 
-    
+    public function setPos($pos) {
+        $this->pos = $pos;
+        return $this;
+    }
+
     
 }

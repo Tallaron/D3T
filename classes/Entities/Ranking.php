@@ -10,6 +10,8 @@ class Ranking {
     private $class;
     private $min;
     private $max;
+    private $names = array();
+    private $results = array();
 
     private $ranks = array();
     
@@ -118,27 +120,52 @@ class Ranking {
 
 
     private function fillArray() {
+        $namesHaystack = array_map('strtolower', $this->names);
         $dataRows = explode('<td class="cell-Rank"', $this->data);
         array_shift($dataRows);
-        foreach($dataRows as $data) {
+        foreach($dataRows as $k => $data) {
             $rank = new Rank();
-            $rank->setName($this->getRankName($data))
+            $rank->setPos($k)
+                ->setName($this->getRankName($data))
                 ->setLevel($this->getRankLevel($data))
                 ->setTime($this->getRankTime($data))
                 ->setDate($this->getRankDate($data))
                 ->setProfile($this->getRankProfile($data) ? $this->settings->get('BNET_URL', $this->getRealm()).trim($this->getRankProfile($data), '/') : false);
+            if(
+                $this->isMatch( strtolower(trim($rank->getName())), array_map('strtolower', $this->getNames())) &&
+                $k >= $this->getMin() &&
+                $k <= $this->getMax()
+            ) {
+                $rank->setMatch();
+                $sp = new SearchResult( $rank->getName() );
+                $sp->setKey($k);
+                $this->results[] = $sp;
+            }
             $this->ranks[] = $rank;
         }
     }
 
+
     
+
+
+    private function isMatch($string, $patterns) {
+        foreach($patterns as $pattern) {
+            if(substr_count($string, $pattern) > 0) {
+                return true;
+            }
+        } return false;
+    }
     
-    
-    
-    
-    
-    
-    
+    public function hasSearch() {
+        return count($this->getNames()) ? true : false;
+    }
+
+    public function getSearchResults() {
+        return $this->results;
+    }
+
+
     private function getRankName($data) {
         $open = '<td class="cell-BattleTag" >';
         $close = '</td>';
@@ -196,17 +223,29 @@ class Ranking {
 
 
 
+    public function setNames($names) {
+        foreach(explode(";", $names) as $name) {
+            if(strlen(trim($name)) > 0) {
+                $this->names[] = trim($name);
+            }
+        }
+        return $this;
+    }
 
+    public function getNamesString() {
+        return implode("; ", $this->getNames());
+    }
 
-    
-
-
+    public function getNames() {
+        return $this->names;
+    }
 
     public function setRange($min, $max) {
         if($max >= $min) {
             $this->min = min(1000, max(1, $min));
             $this->max = min(1000, max(1, $max));
         }
+        return $this;
     }
 
     private function getLength() {

@@ -16,6 +16,6 @@
         {/if}
     </div>
     <div class="col-sm-2">
-        <button type="submit" class="btn btn-primary pull-right">Ok</button>
+        
     </div>
 </div>

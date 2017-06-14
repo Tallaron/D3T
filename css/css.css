@@ -2,6 +2,67 @@ body {
     padding-top: 70px;
 }
 
+th {
+    text-align: center;
+}
+
+
+progress[value] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  
+  border: none;
+  
+  width: 100%;
+}
+
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+
+progress[value]::-webkit-progress-value {
+    background-color: #009900;
+    border-radius: 2px; 
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+progress[value]::-moz-progress-bar { 
+  background-color: #009900;
+  border-radius: 2px; 
+  background-size: 35px 20px, 100% 100%, 100% 100%; 
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+
+
+
+
+
+
+
 .custom-grey-name {
     color: #999999;
+}
+
+.custom-tr-green td {
+    background-color: #ddffdd;
+}
+
+.custom-tr-green:hover td {
+    background-color: #bbffbb;
+}
+
+.custom-anchor {
+    padding-top: 100px;
 }

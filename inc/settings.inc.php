@@ -9,6 +9,14 @@ define('SMARTY_CACHE_DIR', 'cache/');
 define('SMARTY_CACHE', false);
 define('SMARTY_CACHE_LIFETIME', 60);
 
+define('MAX_PARAGON', 10000);
+define('MIN_PARAGON', 0);
+define('PARAGON_LIMIT_STEP', 500);
+
+define('THOUSAND', 1000);
+define('MILLION', 1000000);
+define('BILLION', 1000000000);
+define('TRILLION', 1000000000000);
 
 
 $settings = new \Controllers\Settings();

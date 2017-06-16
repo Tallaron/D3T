@@ -1,7 +1,7 @@
 <?php
 
 
-define('BASE_DIR', '/d3.tallaron.de');
+define('BASE_DIR', '/D3T');
 
 define('SMARTY_TPL_DIR', 'tpl/');
 define('SMARTY_COMP_DIR', 'tpl_c/');

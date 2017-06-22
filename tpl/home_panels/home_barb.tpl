@@ -1,17 +1,9 @@
-<div class="col-sm-4">
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">Barbarian</h3>
-        </div>
-        <div class="panel-body">
-            <ul>
-                <li>Zodiac WW</li>
-                <li>R6I4</li>
-                <li>I6R4</li>
-                <li>LeapQuake</li>
-                <li>Frenzy Thorns</li>
-                <li>Support</li>
-            </ul>
-        </div>
-    </div>
+<div class="page-header">
+  <h3>Barbarian</h3>
 </div>
+
+<div class="row">
+    <div class="col-lg-3">{include file="home_panels/home_barb_nav.tpl" once=true}</div>
+    <div class="col-lg-9">CONTENT</div>
+</div>
+    

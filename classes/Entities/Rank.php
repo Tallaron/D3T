@@ -5,39 +5,36 @@ namespace Entities;
 class Rank {
 
     private $pos;
-    private $name;
     private $level;
     private $time;
-    private $date;
-    private $profile;
+    private $completionTime;
+    private $player;
+
     private $isMatch = false;
 
-
-
-
-
-
-
-
-    public function setMatch() {
-        $this->isMatch = true;
-    }
-    
     public function isMatch() {
         return $this->isMatch;
     }
-
-    public function getProfile() {
-        return $this->profile;
+    
+    public function setMatch($val) {
+        $this->isMatch = $val;
     }
 
-    public function setProfile($profile) {
-        $this->profile = $profile;
-        return $this;
+    public function getTimeFormatted() {
+        return sprintf(
+                '%02d:%02d.%03d',
+                ($this->getTime()/1000/60)%60,
+                ($this->getTime()/1000)%60,
+                $this->getTime()%1000);
     }
 
-    public function getName() {
-        return $this->name;
+    public function getCompletionDate($format = 'd.m.Y H:i:s') {
+        $date = new \DateTime();
+        return $date->setTimestamp(floor($this->getCompletionTime()/1000))->format($format);
+    }
+
+    public function getPos() {
+        return $this->pos;
     }
 
     public function getLevel() {
@@ -48,8 +45,20 @@ class Rank {
         return $this->time;
     }
 
-    public function setName($name) {
-        $this->name = $name;
+    public function getCompletionTime() {
+        return $this->completionTime;
+    }
+
+    public function getPlayer() {
+        return $this->player;
+    }
+
+    public function getIsMatch() {
+        return $this->isMatch;
+    }
+
+    public function setPos($pos) {
+        $this->pos = $pos;
         return $this;
     }
 
@@ -63,23 +72,21 @@ class Rank {
         return $this;
     }
 
-    public function getDate() {
-        return $this->date;
-    }
-
-    public function setDate($date) {
-        $this->date = $date;
+    public function setCompletionTime($completionTime) {
+        $this->completionTime = $completionTime;
         return $this;
     }
 
-    public function getPos() {
-        return $this->pos;
-    }
-
-    public function setPos($pos) {
-        $this->pos = $pos;
+    public function setPlayer($player) {
+        $this->player = $player;
         return $this;
     }
+
+    public function setIsMatch($isMatch) {
+        $this->isMatch = $isMatch;
+        return $this;
+    }
+
 
     
 }

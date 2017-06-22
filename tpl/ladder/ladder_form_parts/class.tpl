@@ -1,10 +1,10 @@
 <div class="form-group clearfix">
-    <lable for="class" class="col-sm-4 control-label">Class</lable>
+    <lable for="class" class="col-sm-2 control-label">Class</lable>
     <div class="col-sm-6">
         <select size="1" id="class" name="class" class="form-control">
             {foreach from=$settings->get('BNET_CLASSES') key=$key item=$class}
-                {if isset($ranking)}
-                    {if $key == $ranking->getClass()}
+                {if isset($ladder)}
+                    {if $key == $ladder->getClass()}
                         <option value="{$key}" selected>{$class}</option>
                     {else}
                         <option value="{$key}">{$class}</option>
@@ -19,5 +19,5 @@
             {/foreach}
         </select>
     </div>
-    <div class="col-sm-2"></div>
+    <div class="col-sm-4"></div>
 </div>

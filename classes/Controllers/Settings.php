@@ -16,8 +16,7 @@ class Settings {
     }
     
     public function get($k, $sub = false) {
-        if($sub) {
-//            echo $sub;
+        if($sub !== false) {
             return $this->context[$k][$sub];
         } else {
             return $this->context[$k];

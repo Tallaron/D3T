@@ -3,7 +3,9 @@
         "psr-0": {
             "Entities": "./classes",
             "Controllers": "./classes",
-            "Views": "./classes"
+            "Views": "./classes",
+            "Factories": "./classes",
+            "Mappers": "./classes"
         }
     },
     "require": {

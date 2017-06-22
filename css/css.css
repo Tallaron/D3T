@@ -2,9 +2,18 @@ body {
     padding-top: 70px;
 }
 
-th {
-    text-align: center;
+.paragon-summary th {
+    text-align: right;
 }
+
+.paragon-summary th:first-child {
+    text-align: left;
+}
+
+.ranking-list th {
+    text-align: left;
+}
+
 
 
 progress[value] {

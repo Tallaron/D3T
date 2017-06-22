@@ -11,27 +11,24 @@ class LadderController extends AbstractController {
     
     public function loadAction() {
         $post = filter_input_array(INPUT_POST);
-        $_SESSION["names"] = strip_tags( trim(trim($post["names"], ";")) );
-        $this->redirect('ladder/show/'.$post['realm'].'/'.$post['mode'].'/'.$post['num'].'/'.$post['class'].'/'.$post['min'].'/'.$post['max']);
+        $_SESSION["search"] = strip_tags( $post["search"] );
+        $this->redirect('ladder/show/'.$post['realm'].'/'.$post['season'].'/'.$post['hardcore'].'/'.$post['index'].'/'.$post['class'].'/'.$post['min'].'/'.$post['max']);
     }
 
     
 
 
 
-    public function showAction($realm, $mode, $num, $class, $min, $max) {
-        $_SESSION['error_tpl'] = 'ladder/ladder_retry_button';
-        $_SESSION['error_content'] = BASE_DIR . '/ladder/show/'.$realm.'/'.$mode.'/'.$num.'/'.$class.'/'.$min.'/'.$max;
-        $ranking = new \Entities\Ranking(self::$settings);
-        $ranking->setRealm($realm)
-                ->setMode($mode)
-                ->setNum($num)
-                ->setClass($class)
-                ->setRange($min, $max)
-                ->setNames($_SESSION["names"]);
-        $ranking->loadData();
+    public function showAction($realm, $season, $hardcore, $index, $class, $min, $max) {
+//        $_SESSION['error_tpl'] = 'ladder/ladder_retry_button';
+        $_SESSION['called'] = BASE_DIR . '/ladder/show/'.$realm.'/'.$season.'/'.$hardcore.'/'.$index.'/'.$class.'/'.$min.'/'.$max;
         
-        \Views\View::getInstance()->assign('ranking', $ranking);
+        $lm = new \Mappers\LadderMapper();
+        $lm->initLadder($realm, $season, $hardcore, $index, $class, $min, $max);
+        $lm->initSearch($_SESSION['search']);
+        $lm->loadLadderData(self::$settings);
+        
+        \Views\View::getInstance()->assign('ladder', $lm->getLadder());
         \Views\View::getInstance()->display('ladder/show_ladder.tpl');
     }
     

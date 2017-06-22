@@ -1,5 +1,6 @@
 <?php
 
+\Mappers\AbstractMapper::setToken('ym27gyghj5bmsws4xu578vbt');
 
 define('BASE_DIR', '/D3T');
 
@@ -21,31 +22,30 @@ define('TRILLION', 1000000000000);
 
 $settings = new \Controllers\Settings();
 $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
-        ->addContext('RANKING_DEFAULT_MODE', 'era')
-        ->addContext('RANKING_DEFAULT_SELECT_MODE', 'n')
-        ->addContext('RANKING_DEFAULT_TYPE', '')
-        ->addContext('RANKING_DEFAULT_NUM', '7')
+        ->addContext('RANKING_DEFAULT_SEASON', false)
+        ->addContext('RANKING_DEFAULT_HARDCORE', false)
+        ->addContext('RANKING_DEFAULT_INDEX', '7')
         ->addContext('RANKING_DEFAULT_CLASS', 'team-4')
         ->addContext('RANKING_DEFAULT_MIN', '1')
         ->addContext('RANKING_DEFAULT_MAX', '1000')
-        ->addContext('RANKING_DEFAULT_LANG', 'en')
-        ->addContext('BNET_MIN_ERA', 1)
-        ->addContext('BNET_MAX_ERA', 7)
-        ->addContext('BNET_MIN_SEASON', 1)
-        ->addContext('BNET_MAX_SEASON', 10)
-        ->addContext('BNET_URL', array(
-                        'eu' => 'https://eu.battle.net/',
-                        'us' => 'https://us.battle.net/',
-                        'kr' => 'https://kr.battle.net/',))
+        ->addContext('RANKING_MIN_SEASON_INDEX', '1')
+        ->addContext('RANKING_MAX_SEASON_INDEX', '10')
+        ->addContext('RANKING_MIN_ERA_INDEX', '1')
+        ->addContext('RANKING_MAX_ERA_INDEX', '7')
+        ->addContext('BNET_PROFILE_URL', array(
+                        'eu' => 'https://eu.battle.net/d3/en/profile/',
+                        'us' => 'https://us.battle.net/d3/en/profile/',
+                        'kr' => 'https://kr.battle.net/d3/ko/profile/',))
         ->addContext('BNET_REALM_NAME', array(
                         'eu' => 'Europe',
                         'us' => 'America',
                         'kr' => 'Korea',))
-        ->addContext('BNET_MODE', array(
-                    'n' => 'Normal (Era)',
-                    'hc' => 'Hardcore (Era)',
-                    's' => 'Seasonal (Season)',
-                    'shc' => 'Seasonal Hardcore (Season)',))
+        ->addContext('RANKING_TYPE', array(
+                        'Era',
+                        'Season',))
+        ->addContext('RANKING_MODE', array(
+                        'Normal',
+                        'Hardcore',))
         ->addContext('BNET_CLASSES', array(
                     'barbarian'  => 'Barbarian',
                     'crusader'  => 'Crusader',

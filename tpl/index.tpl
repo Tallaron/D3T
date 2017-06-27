@@ -6,6 +6,9 @@
         <script src="{BASE_DIR}/js/bootstrap.min.js" type="text/javascript"></script>
         <link href="{BASE_DIR}/css/css.css" rel="stylesheet" type="text/css"/>
         <script src="{BASE_DIR}/js/js.js" type="text/javascript"></script>
+        
+        <link title="Diablo® III - News" href="/d3/en/feed/news" type="application/atom+xml" rel="alternate" />
+        
     </head>
     <body>
         

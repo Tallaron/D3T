@@ -2,7 +2,7 @@
 
 namespace Factories;
 
-class BlizzardApiUrlFactory {
+class BlizzardLadderApiUrlFactory {
 
     private $realm; //eu,us,kr
     private $season; //season, era

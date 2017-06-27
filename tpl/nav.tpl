@@ -14,6 +14,8 @@
             <div class="btn-group" role="group" aria-label="...">
                 <a href="{BASE_DIR}/ladder" class="btn btn-primary">Ladder</a>
                 <a href="{BASE_DIR}/paragon" class="btn btn-primary">Paragon</a>
+                <a href="{BASE_DIR}/profile" class="btn btn-primary">Profile</a>
+{*                <a href="{BASE_DIR}/build" class="btn btn-primary">Builds</a>*}
             </div>
         </div>
     </div>

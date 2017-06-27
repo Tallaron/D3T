@@ -15,6 +15,7 @@ class Ladder {
     private $avgLevel;
     private $patterns = [];
     private $results = [];
+    private $lastUpdate;
 
 
     public function addSearchResult($player) {
@@ -144,6 +145,15 @@ class Ladder {
 
     public function setResults($results) {
         $this->results = $results;
+        return $this;
+    }
+
+    public function getLastUpdate() {
+        return $this->lastUpdate;
+    }
+
+    public function setLastUpdate($lastUpdate) {
+        $this->lastUpdate = $lastUpdate;
         return $this;
     }
 

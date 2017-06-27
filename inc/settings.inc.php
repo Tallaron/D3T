@@ -1,6 +1,9 @@
 <?php
 
 \Mappers\AbstractMapper::setToken('ym27gyghj5bmsws4xu578vbt');
+\Mappers\AbstractMapper::setApiKey('b75sttwvpwh73arvv6848nty26ytprek');
+
+define('DEBUG_MODE', true);
 
 define('BASE_DIR', '/D3T');
 

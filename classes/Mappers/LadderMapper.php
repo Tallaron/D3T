@@ -12,7 +12,7 @@ class LadderMapper extends AbstractMapper {
     }
 
     public function loadLadderData($settings) {
-        $bf = new \Factories\BlizzardApiUrlFactory($settings);
+        $bf = new \Factories\BlizzardLadderApiUrlFactory($settings);
         $bf->setParams(
                 $this->getLadder()->getRealm(),
                 $this->getLadder()->getSeason(),
@@ -20,6 +20,7 @@ class LadderMapper extends AbstractMapper {
                 $this->getLadder()->getIndex(),
                 $this->getLadder()->getClass());
         $this->data = self::getApiJson($bf->getLeaderboardApiUrl());
+        $this->getLadder()->setLastUpdate($this->getData()['last_update_time']);
         $this->addRanks();
     }
 

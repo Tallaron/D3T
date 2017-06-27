@@ -20,9 +20,6 @@ class LadderController extends AbstractController {
 
 
     public function showAction($realm, $season, $hardcore, $index, $class, $min, $max) {
-//        $_SESSION['error_tpl'] = 'ladder/ladder_retry_button';
-        $_SESSION['called'] = BASE_DIR . '/ladder/show/'.$realm.'/'.$season.'/'.$hardcore.'/'.$index.'/'.$class.'/'.$min.'/'.$max;
-        
         $lm = new \Mappers\LadderMapper();
         $lm->initLadder($realm, $season, $hardcore, $index, $class, $min, $max);
         $lm->initSearch($_SESSION['search']);

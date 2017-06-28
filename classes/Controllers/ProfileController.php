@@ -22,10 +22,11 @@ class ProfileController extends AbstractController {
     
     
     
-    public function showAction($realm, $btag) {
+    public function showAction($realm, $btag, $content = 'overview', $id = 0) {
         $pm = new \Mappers\ProfileMapper();
-        $pm->initProfile($realm, str_replace('-', '#', $btag));
+        $pm->initProfile($realm, str_replace('-', '#', $btag), $content, $id);
         $pm->loadProfileData(self::$settings);
+        \Views\View::getInstance()->assign('content', $content);
         \Views\View::getInstance()->assign('profile', $pm->getProfile());
         \Views\View::getInstance()->display('profile/profile.tpl');
     }

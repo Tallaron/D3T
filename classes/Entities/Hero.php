@@ -12,10 +12,22 @@ class Hero {
     private $eliteKills;
     private $seasonal;
     private $hardcore;
+    private $activeSkills = [];
+    private $passiveSkills = [];
+    private $inventory;
+
+
+
+    public function addActiveSkill($skill) {
+        $this->activeSkills[] = $skill;
+    }
     
+    public function addPassiveSkill($skill) {
+        $this->passiveSkills[] = $skill;
+    }
+
     
-    
-    
+
     public function getId() {
         return $this->id;
     }
@@ -87,6 +99,34 @@ class Hero {
         $this->hardcore = $hardcore;
         return $this;
     }
+
+    public function getActiveSkills() {
+        return $this->activeSkills;
+    }
+
+    public function getPassiveSkills() {
+        return $this->passiveSkills;
+    }
+
+    public function setActiveSkills($activeSkills) {
+        $this->activeSkills = $activeSkills;
+        return $this;
+    }
+
+    public function setPassiveSkills($passiveSkills) {
+        $this->passiveSkills = $passiveSkills;
+        return $this;
+    }
+
+    public function getInventory() {
+        return $this->inventory;
+    }
+
+    public function setInventory($inventory) {
+        $this->inventory = $inventory;
+        return $this;
+    }
+
 
 
     

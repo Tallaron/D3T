@@ -19,7 +19,7 @@ class LadderMapper extends AbstractMapper {
                 $this->getLadder()->getHardcore(),
                 $this->getLadder()->getIndex(),
                 $this->getLadder()->getClass());
-        $this->data = self::getApiJson($bf->getLeaderboardApiUrl());
+        $this->data = self::getApiArrayWithToken($bf->getLeaderboardApiUrl());
         $this->getLadder()->setLastUpdate($this->getData()['last_update_time']);
         $this->addRanks();
     }

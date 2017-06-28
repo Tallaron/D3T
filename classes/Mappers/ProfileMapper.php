@@ -6,6 +6,8 @@ class ProfileMapper extends AbstractMapper {
 
     private $data;
     private $profile;
+    private $content;
+    private $contentId;
 
     public function __construct() {
         $this->setProfile(new \Entities\Profile());
@@ -16,15 +18,17 @@ class ProfileMapper extends AbstractMapper {
         $bf->setParams(
                 $this->getProfile()->getRealm(),
                 $this->getProfile()->getBTag());
-        $this->data = self::getApiJsonWithKey($bf->getProfileApiUrl());
+        $this->data = self::getApiArrayWithKey($bf->getProfileApiUrl());
         $this->loadProfileInformation();
         $this->loadHeroes();
         $this->loadSeasons();
     }
 
-    public function initProfile($realm, $bTag) {
+    public function initProfile($realm, $bTag, $content, $contentId) {
         $this->getProfile()->setRealm($realm);
         $this->getProfile()->setBTag($bTag);
+        $this->setContent($content);
+        $this->setContentId($contentId);
     }
     
     
@@ -40,9 +44,28 @@ class ProfileMapper extends AbstractMapper {
     
 
     private function loadHeroes() {
+        $bf = new \Factories\BlizzardHeroApiUrlFactory(null);
+        
         foreach($this->getData()['heroes'] as $heroData) {
             $hm = new \Mappers\HeroMapper($heroData);
             $this->getProfile()->addHero($hm->getHero());
+            
+            if($this->getContent() == 'hero' && $hm->getHero()->getId() == $this->getContentId()) {
+                $bf->setParams(
+                        $this->getProfile()->getRealm(),
+                        $this->getProfile()->getBTag(),
+                        $hm->getHero()->getId());
+
+                $heroData = self::getApiObjWithKey($bf->getHeroApiUrl());
+
+                $hm->loadHeroActiveSkills($heroData->skills->active);
+                $hm->loadHeroPassiveSkills($heroData->skills->passive);
+                $hm->loadHeroItems($heroData->items);
+                $hm->loadHeroCube($heroData->legendaryPowers);
+                $this->getProfile()->setHero($hm->getHero());
+            }
+            
+            
         }
     }
 
@@ -78,7 +101,25 @@ class ProfileMapper extends AbstractMapper {
         return $this;
     }
 
-    
+    public function getContent() {
+        return $this->content;
+    }
+
+    public function setContent($content) {
+        $this->content = $content;
+        return $this;
+    }
+
+    public function getContentId() {
+        return $this->contentId;
+    }
+
+    public function setContentId($contentId) {
+        $this->contentId = $contentId;
+        return $this;
+    }
+
+
     
     
 }

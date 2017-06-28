@@ -7,7 +7,7 @@
                     <span>[{$news->getPublished()}] </span>
                     <span><strong>{$news->getTitle()}</strong></span>
             </div>
-            <div id="e{$news->getId()}" class="panel-collapse collapse">
+            <div id="e{$news->getId()}" class="panel-collapse collapse in">
                 <div class="panel-body">{$news->getSummary()}</div>
                 <div class="panel-footer text-right">
                     <a href="{$news->getLink()}" target="_blank" class="btn btn-xs btn-primary">Read more</a>

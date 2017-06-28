@@ -24,7 +24,7 @@ abstract class AbstractMapper {
     }
 
         
-    protected static function getApiJson($api) {
+    protected static function getApiArrayWithToken($api) {
         if(substr_count($api, "?") > 0) {
             return json_decode(file_get_contents($api.'&access_token='.self::getToken()), true);
         } else {
@@ -32,11 +32,19 @@ abstract class AbstractMapper {
         }
     }
 
-    protected static function getApiJsonWithKey($api) {
+    protected static function getApiArrayWithKey($api) {
         if(substr_count($api, "?") > 0) {
             return json_decode(file_get_contents($api.'&apikey='.self::getApiKey()), true);
         } else {
             return json_decode(file_get_contents($api.'?apikey='.self::getApiKey()), true);
+        }
+    }
+
+    protected static function getApiObjWithKey($api) {
+        if(substr_count($api, "?") > 0) {
+            return json_decode(file_get_contents($api.'&apikey='.self::getApiKey()), false);
+        } else {
+            return json_decode(file_get_contents($api.'?apikey='.self::getApiKey()), false);
         }
     }
 

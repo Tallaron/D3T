@@ -1,1 +1,1 @@
-<div class="page-header"><h3>{$profile->getBTag()}</h3></div>
+<div class="page-header"><h3>{$profile->getBTag()} <small>&lt;{$profile->getClan()}&gt;</small></h3></div>

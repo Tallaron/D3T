@@ -8,6 +8,7 @@ class Profile {
     private $bTag;
     private $lastUpdate;
     private $heroes = [];
+    private $hero;
     private $clan;
     private $paragon;
     private $paragonHardcore;
@@ -31,16 +32,20 @@ class Profile {
         return $date->format($format);
     }
 
-        public function getNumHeroes() {
+    public function getNumHeroes() {
         return count($this->getHeroes());
     }
 
-        public function getRealm() {
+    public function getRealm() {
         return $this->realm;
     }
 
     public function getBTag() {
         return $this->bTag;
+    }
+    
+    public function getBTagMinus() {
+        return str_replace('#', '-', $this->getBTag());
     }
 
     public function setRealm($realm) {
@@ -122,6 +127,15 @@ class Profile {
 
     public function setSeasons($seasons) {
         $this->seasons = $seasons;
+        return $this;
+    }
+
+    public function getHero() {
+        return $this->hero;
+    }
+
+    public function setHero($hero) {
+        $this->hero = $hero;
         return $this;
     }
 

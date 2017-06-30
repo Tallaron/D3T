@@ -1,1 +1,0 @@
-<div class="page-header"><h2>Necromancer</h2></div>

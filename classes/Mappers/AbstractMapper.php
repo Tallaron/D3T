@@ -6,6 +6,7 @@ abstract class AbstractMapper {
 
     private static $token;
     private static $apiKey;
+    private static $settings;
     
     public static function setToken($token) {
         self::$token = $token;
@@ -22,7 +23,16 @@ abstract class AbstractMapper {
     public static function setApiKey($apiKey) {
         self::$apiKey = $apiKey;
     }
+    
+    public static function getSettings() {
+        return self::$settings;
+    }
 
+    public static function setSettings($settings) {
+        self::$settings = $settings;
+    }
+
+    
         
     protected static function getApiArrayWithToken($api) {
         if(substr_count($api, "?") > 0) {

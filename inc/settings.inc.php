@@ -22,6 +22,7 @@ define('MILLION', 1000000);
 define('BILLION', 1000000000);
 define('TRILLION', 1000000000000);
 
+define('BLIZZARD_D3_ITEM_BASE_PATH', 'http://media.blizzard.com/d3/icons/items/');
 
 $settings = new \Controllers\Settings();
 $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
@@ -58,5 +59,14 @@ $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
                     'wizard'    => 'Wizard',
                     'team-2'    => '2 Player',
                     'team-3'    => '3 Player',
-                    'team-4'    => '4 Player',));
-
+                    'team-4'    => '4 Player',))
+        ->addContext('SOCKETED_ITEMS', array(
+                    'neck',
+                    'leftFinger',
+                    'rightFinger',
+                    'head',
+                    'torso',
+                    'legs',
+                    'mainHand',
+                    'offHand',));
+\Mappers\AbstractMapper::setSettings($settings);

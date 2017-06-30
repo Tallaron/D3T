@@ -2,17 +2,13 @@
 
 namespace Entities;
 
-class Item {
+class Gem {
 
     private $id = 0;
     private $name = 'EMPTY';
     private $icon = false;
     private $displayColor = 'white';
     private $tooltipParams = '';
-    private $sockets = 0;
-    private $gems = [];
-
-
 
 
     public function getLargeIconUrl() {
@@ -24,14 +20,6 @@ class Item {
     }
 
     
-
-    public function addGem($gem) {
-        $this->gems[] = $gem;
-    }
-    
-    public function getGemAt($index) {
-        return array_key_exists($index, $this->getGems()) ? $this->gems[$index] : new \Entities\Item();
-    }
 
     
     public function getId() {
@@ -79,23 +67,6 @@ class Item {
         return $this;
     }
     
-    public function getGems() {
-        return $this->gems;
-    }
-
-    public function setGems($gems) {
-        $this->gems = $gems;
-        return $this;
-    }
-
-    public function getSockets() {
-        return $this->sockets;
-    }
-
-    public function setSockets($sockets) {
-        $this->sockets = $sockets;
-        return $this;
-    }
 
 
     

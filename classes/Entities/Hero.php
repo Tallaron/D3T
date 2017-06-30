@@ -15,6 +15,7 @@ class Hero {
     private $activeSkills = [];
     private $passiveSkills = [];
     private $inventory;
+    private $cube;
 
 
 
@@ -124,6 +125,15 @@ class Hero {
 
     public function setInventory($inventory) {
         $this->inventory = $inventory;
+        return $this;
+    }
+
+    public function getCube() {
+        return $this->cube;
+    }
+
+    public function setCube($cube) {
+        $this->cube = $cube;
         return $this;
     }
 

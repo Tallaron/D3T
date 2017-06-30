@@ -3,7 +3,7 @@
     <div class="panel-body">
         <div class="col-sm-8">
             {include file="profile/profile_hero_items.tpl"}
-            
+            {include file="profile/profile_hero_cube.tpl"}
         </div>
         <div class="col-sm-4">
             {include file="profile/profile_hero_active_skills.tpl"}

@@ -91,3 +91,7 @@ progress[value]::-moz-progress-bar {
 .custom-anchor {
     padding-top: 100px;
 }
+
+.custom-a-skill, .custom-p-skill {
+    padding: 0 7px 2px 0;
+}

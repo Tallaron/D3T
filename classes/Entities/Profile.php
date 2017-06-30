@@ -17,9 +17,12 @@ class Profile {
     private $seasons = [];
 
 
-
+    /**
+     * Creates an array key regarding to the season id by calling $season->getId(). If the array key allready exists its value will be overridden.
+     * @param type $season
+     */
     public function addSeason($season) {
-        $this->seasons[] = $season;
+        $this->seasons[$season->getId()] = $season;
     }
 
     public function addHero($hero) {
@@ -121,7 +124,13 @@ class Profile {
         return $this;
     }
 
-    public function getSeasons() {
+    /**
+     * If sort is true, the method returns the season array recursive sorted. If it is false, the array won't be sorted.
+     * @param type $sort
+     * @return type
+     */
+    public function getSeasons($sort = true) {
+        if($sort) { krsort($this->seasons); }
         return $this->seasons;
     }
 

@@ -49,7 +49,8 @@ class HeroMapper {
     }
 
     public function loadHeroCube($cubeItems) {
-        
+        $cm = new \Mappers\CubeMapper($cubeItems);
+        $this->getHero()->setCube($cm->getCube());
     }
 
     

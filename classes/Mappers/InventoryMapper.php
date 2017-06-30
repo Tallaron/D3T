@@ -2,7 +2,7 @@
 
 namespace Mappers;
 
-class InventoryMapper {
+class InventoryMapper extends AbstractMapper {
 
     private $inventory;
     
@@ -11,11 +11,11 @@ class InventoryMapper {
         foreach($data as $k => $v) {
             $method = 'set'.ucfirst($k);
             if(method_exists($this->getInventory(), $method)) {
-                $im = new \Mappers\ItemMapper($v);
+                $mayHaveSockets = in_array($k, self::getSettings()->get('SOCKETED_ITEMS'));
+                $im = new \Mappers\ItemMapper($v, $mayHaveSockets);
                 $this->getInventory()->$method($im->getItem());
             }
         }
-        
     }
 
     

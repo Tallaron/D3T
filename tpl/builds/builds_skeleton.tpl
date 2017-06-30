@@ -1,1 +1,0 @@
-{include file="builds/builds_header_`$cls`.tpl" once=true}

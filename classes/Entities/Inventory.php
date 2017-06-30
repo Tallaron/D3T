@@ -19,8 +19,24 @@ class Inventory {
     private $bracers;
     
     
-    
-    
+    public function __construct() {
+        $emptyItem = new \Entities\Item();
+        $this->mainHand = $emptyItem;
+        $this->offHand = $emptyItem;
+        $this->leftFinger = $emptyItem;
+        $this->rightFinger = $emptyItem;
+        $this->neck = $emptyItem;
+        $this->head = $emptyItem;
+        $this->torso = $emptyItem;
+        $this->waist = $emptyItem;
+        $this->legs = $emptyItem;
+        $this->feet = $emptyItem;
+        $this->shoulders = $emptyItem;
+        $this->hands = $emptyItem;
+        $this->bracers = $emptyItem;
+    }
+
+
     
     
     

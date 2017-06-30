@@ -7,8 +7,9 @@
         <link href="{BASE_DIR}/css/css.css" rel="stylesheet" type="text/css"/>
         <script src="{BASE_DIR}/js/js.js" type="text/javascript"></script>
         
-        <link title="Diablo® III - News" href="/d3/en/feed/news" type="application/atom+xml" rel="alternate" />
+        <link href="{BASE_DIR}/css/inventory.css" rel="stylesheet" type="text/css"/>
         
+        <link title="Diablo® III - News" href="/d3/en/feed/news" type="application/atom+xml" rel="alternate" />
     </head>
     <body>
         

@@ -12,7 +12,8 @@ class Player {
     private $clanShort;
     private $clan;
     private $paragon = 0;
-    private $class = false;
+    private $heroClass;
+    private $gender;
     private $unknown = false;
 
     /**
@@ -37,7 +38,11 @@ class Player {
         }
     }
     
-    /**
+    public function getIconFileName() {
+        return str_replace(' ', '-', $this->getHeroClass()).'-'.($this->getGender()=='m'?0:1);
+    }
+
+        /**
      * Returns true, if the player is unknown, false if there was a valid
      * Battle.Tag given.
      * @return boolean
@@ -95,14 +100,6 @@ class Player {
     }
 
     /**
-     * 
-     * @return String
-     */
-    public function getClass() {
-        return $this->class;
-    }
-
-    /**
      * Sets the Battle#Tag if it has a valid format.
      * @param type $bTag
      * @return \Entities\Player
@@ -147,16 +144,6 @@ class Player {
 
     /**
      * 
-     * @param String $class
-     * @return \Entities\Player
-     */
-    public function setClass($class) {
-        $this->class = $class;
-        return $this;
-    }
-    
-    /**
-     * 
      * @return int
      */
     public function getId() {
@@ -190,5 +177,42 @@ class Player {
         $this->unknown = $unknown;
         return $this;
     }
+
+    /**
+     * 
+     * @return String
+     */
+    public function getHeroClass() {
+        return $this->heroClass;
+    }
+
+    /**
+     * 
+     * @return String Returns 'm' or 'f'
+     */
+    public function getGender() {
+        return $this->gender;
+    }
+
+    /**
+     * 
+     * @param String $heroClass
+     * @return \Entities\Player
+     */
+    public function setHeroClass($heroClass) {
+        $this->heroClass = $heroClass;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param String $gender
+     * @return \Entities\Player
+     */
+    public function setGender($gender) {
+        $this->gender = $gender;
+        return $this;
+    }
+
 
 }

@@ -30,7 +30,11 @@
                             {$rank->getPos()}
                         </td>
                         <td>{$rank->getLevel()}</td>
-                        <td>{$player->getClass()}</td>
+                        <td>
+                            <span class="icon-frame">
+                                <img src="{BASE_DIR}/gfx/{$player->getIconFileName()}.png" />
+                            </span>
+                        </td>
                         <td>
                             {if $player->isUnknown()}
                                 <div class="custom-grey-name">{$player->getName()}</div>

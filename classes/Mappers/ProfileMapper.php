@@ -18,7 +18,7 @@ class ProfileMapper extends AbstractMapper {
     public static function createObj($realm, $bTag, $content, $contentId) {
         $profile = (new \Entities\Profile())
             ->setRealm($realm)
-            ->setBTag($bTag)
+//            ->setBTag($bTag)
             ->setContent($content)
             ->setContentId($contentId);
         $data = self::getApiDataWithKey(
@@ -36,7 +36,8 @@ class ProfileMapper extends AbstractMapper {
      * @param StdObject $data From json_decode
      */
     private static function loadProfileInformation(\Entities\Profile $profile, $data) {
-        $profile->setLastUpdate( $data->lastUpdated )
+        $profile->setBTag( $data->battleTag )
+            ->setLastUpdate( $data->lastUpdated )
             ->setClan( $data->guildName )
             ->setParagon( $data->paragonLevel )
             ->setParagonHardcore( $data->paragonLevelHardcore )

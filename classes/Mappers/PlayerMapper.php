@@ -20,7 +20,7 @@ abstract class PlayerMapper {
                     $player->setBTag($data->string);
                     break;
                 case 'HeroClass':
-                    $player->setClass($data->string);
+                    $player->setHeroClass($data->string);
                     break;
                 case 'ParagonLevel':
                     $player->setParagon($data->number);
@@ -33,6 +33,9 @@ abstract class PlayerMapper {
                     break;
                 case 'HeroId':
                     $player->setId($data->number);
+                    break;
+                case 'HeroGender':
+                    $player->setGender($data->string);
                     break;
                 default:
                     break;

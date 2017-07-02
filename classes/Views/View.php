@@ -7,7 +7,6 @@ class View {
     private static $instance;
     private $smarty;
 
-
     private function __construct() {
         $this->smarty = new \Smarty();
             $this->smarty->setTemplateDir(SMARTY_TPL_DIR);

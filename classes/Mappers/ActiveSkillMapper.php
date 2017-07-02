@@ -2,33 +2,40 @@
 
 namespace Mappers;
 
-class ActiveSkillMapper {
+/**
+ * Mapper for \Entities\ActiveSkill
+ */
+abstract class ActiveSkillMapper {
 
-    private $skill;
-
-    public function __construct($data) {
-        $this->setSkill(new \Entities\ActiveSkill());
-        $this->getSkill()->setSlug($data->slug);
-        $this->getSkill()->setName($data->name);
-        $this->getSkill()->setIcon($data->icon);
-        $this->getSkill()->setTooltipUrl($data->tooltipUrl);
-        $this->getSkill()->setDescription($data->description);
-        $this->getSkill()->setSimpleDescription($data->simpleDescription);
+    /**
+     * 
+     * @param StdObject $data From json_decode
+     * @return \Entities\ActiveSkill
+     */
+    public static function createObj($data) {
+        $skill = null;
+        if(property_exists($data, 'skill')) {
+            $skill = new \Entities\ActiveSkill();
+            self::setSkillData($skill, $data->skill);
+        }
+        if(property_exists($data, 'rune')) {
+            self::setSkillRune($skill, $data->rune);
+        }
+        return $skill;
     }
-
     
-    
-    
-    
-    
-    public function getSkill() {
-        return $this->skill;
+    private static function setSkillData(\Entities\ActiveSkill $skill, $data) {
+        $skill
+            ->setSlug($data->slug)
+            ->setName($data->name)
+            ->setIcon($data->icon)
+            ->setTooltipUrl($data->tooltipUrl)
+            ->setDescription($data->description)
+            ->setSimpleDescription($data->simpleDescription);
     }
-
-    public function setSkill($skill) {
-        $this->skill = $skill;
-        return $this;
+    
+    private static function setSkillRune(\Entities\ActiveSkill $skill, $data) {
+        $skill->setRune( \Mappers\RuneMapper::createObj($data) );
     }
-
     
 }

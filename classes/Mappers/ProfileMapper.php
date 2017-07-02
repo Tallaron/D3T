@@ -2,124 +2,83 @@
 
 namespace Mappers;
 
+/**
+ * Mapper for \Entities\Profile
+ */
 class ProfileMapper extends AbstractMapper {
 
-    private $data;
-    private $profile;
-    private $content;
-    private $contentId;
-
-    public function __construct() {
-        $this->setProfile(new \Entities\Profile());
+    /**
+     * 
+     * @param String $realm Short realm tag, e.g. 'eu' or 'us'
+     * @param String $bTag Battle#Tag
+     * @param String $content Content switch key, e.g. 'hero' or 'overview'
+     * @param type $contentId ContentId, e.g. heroId
+     * @return \Entities\Profile
+     */
+    public static function createObj($realm, $bTag, $content, $contentId) {
+        $profile = (new \Entities\Profile())
+            ->setRealm($realm)
+            ->setBTag($bTag)
+            ->setContent($content)
+            ->setContentId($contentId);
+        $data = self::getApiDataWithKey(
+                \Factories\BlizzardProfileApiUrlFactory::getUrl($realm, $bTag),
+                true);
+        self::loadProfileInformation($profile, $data);
+        self::loadHeroes($profile, $data);
+        self::loadSeasons($profile, $data);
+        return $profile;
     }
 
-    public function loadProfileData($settings) {
-        $bf = new \Factories\BlizzardProfileApiUrlFactory($settings);
-        $bf->setParams(
-                $this->getProfile()->getRealm(),
-                $this->getProfile()->getBTag());
-        $this->data = self::getApiArrayWithKey($bf->getProfileApiUrl());
-        $this->loadProfileInformation();
-        $this->loadHeroes();
-        $this->loadSeasons();
+    /**
+     * 
+     * @param \Entities\Profile $profile
+     * @param StdObject $data From json_decode
+     */
+    private static function loadProfileInformation(\Entities\Profile $profile, $data) {
+        $profile->setLastUpdate( $data->lastUpdated )
+            ->setClan( $data->guildName )
+            ->setParagon( $data->paragonLevel )
+            ->setParagonHardcore( $data->paragonLevelHardcore )
+            ->setParagonSeasonal( $data->paragonLevelSeason )
+            ->setParagonSeasonalHardcore( $data->paragonLevelSeasonHardcore );
     }
 
-    public function initProfile($realm, $bTag, $content, $contentId) {
-        $this->getProfile()->setRealm($realm);
-        $this->getProfile()->setBTag($bTag);
-        $this->setContent($content);
-        $this->setContentId($contentId);
-    }
-    
-    
-    private function loadProfileInformation() {
-        $this->getProfile()->setLastUpdate($this->getData()['lastUpdated']);
-        $this->getProfile()->setClan($this->getData()['guildName']);
-        $this->getProfile()->setParagon($this->getData()['paragonLevel']);
-        $this->getProfile()->setParagonHardcore($this->getData()['paragonLevelHardcore']);
-        $this->getProfile()->setParagonSeasonal($this->getData()['paragonLevelSeason']);
-        $this->getProfile()->setParagonSeasonalHardcore($this->getData()['paragonLevelSeasonHardcore']);
-    }
-
-    
-
-    private function loadHeroes() {
-        $bf = new \Factories\BlizzardHeroApiUrlFactory(null);
-        
-        foreach($this->getData()['heroes'] as $heroData) {
-            $hm = new \Mappers\HeroMapper($heroData);
-            $this->getProfile()->addHero($hm->getHero());
+    /**
+     * 
+     * @param \Entities\Profile $profile
+     * @param StdObject $data From json_decode
+     */
+    private static function loadHeroes(\Entities\Profile $profile, $data) {
+        foreach($data->heroes as $heroData) {
+            $hero = \Mappers\HeroMapper::createObj($heroData);
+            $profile->addHero( $hero );
             
-            if($this->getContent() == 'hero' && $hm->getHero()->getId() == $this->getContentId()) {
-                $bf->setParams(
-                        $this->getProfile()->getRealm(),
-                        $this->getProfile()->getBTag(),
-                        $hm->getHero()->getId());
-
-                $heroData = self::getApiObjWithKey($bf->getHeroApiUrl());
-
-                $hm->loadHeroActiveSkills($heroData->skills->active);
-                $hm->loadHeroPassiveSkills($heroData->skills->passive);
-                $hm->loadHeroItems($heroData->items);
-                $hm->loadHeroCube($heroData->legendaryPowers);
-                $this->getProfile()->setHero($hm->getHero());
-            }
-            
-            
-        }
-    }
-
-    
-    
-    private function loadSeasons() {
-        foreach($this->getData()['seasonalProfiles'] as $season) {
-            $sm = new \Mappers\SeasonMapper();
-            $sm->loadData($season);
-            if($sm->getSeason()->getId() > 0) {
-                $this->getProfile()->addSeason($sm->getSeason());
+            if($profile->getContent() == 'hero' && $hero->getId() == $profile->getContentId()) {
+                \Mappers\HeroMapper::addHeroDetails(
+                        $hero,
+                        self::getApiDataWithKey(
+                                \Factories\BlizzardHeroApiUrlFactory::getUrl(
+                                            $profile->getRealm(),
+                                            $profile->getBTagMinus(),
+                                            $hero->getId()),
+                                true));
+                $profile->setHero($hero);
             }
         }
     }
 
-    
-
-    public function getData() {
-        return $this->data;
+    /**
+     * 
+     * @param \Entities\Profile $profile
+     * @param StdObject $data From json_decode
+     */
+    private static function loadSeasons(\Entities\Profile $profile, $data) {
+        foreach($data->seasonalProfiles as $season) {
+            if($season->seasonId > 0) {
+                $profile->addSeason(\Mappers\SeasonMapper::createObj($season) );
+            }
+        }
     }
-
-    public function getProfile() {
-        return $this->profile;
-    }
-
-    public function setData($data) {
-        $this->data = $data;
-        return $this;
-    }
-
-    public function setProfile($profile) {
-        $this->profile = $profile;
-        return $this;
-    }
-
-    public function getContent() {
-        return $this->content;
-    }
-
-    public function setContent($content) {
-        $this->content = $content;
-        return $this;
-    }
-
-    public function getContentId() {
-        return $this->contentId;
-    }
-
-    public function setContentId($contentId) {
-        $this->contentId = $contentId;
-        return $this;
-    }
-
-
-    
     
 }

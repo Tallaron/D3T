@@ -1,9 +1,36 @@
+.paper-doll, .cube-doll {
+    background-color: #927354;
+    display: block;
+    position: relative;
+    border: 1px solid #000;
+    border-radius: 4px;
+}
+
 .paper-doll {
     width: 305px;
     height: 425px;
-    background-color: #bbbbbb;
-    display: block;
-    position: relative;
+    background-repeat: no-repeat;
+    background-position: -475px -155px;
+}
+
+.paper-doll-barbarian-0 { background-image: url("../gfx/inventory/barbarian-0.jpg"); }
+.paper-doll-barbarian-1 { background-image: url("../gfx/inventory/barbarian-1.jpg"); }
+.paper-doll-crusader-0 { background-image: url("../gfx/inventory/crusader-0.jpg"); }
+.paper-doll-crusader-1 { background-image: url("../gfx/inventory/crusader-1.jpg"); }
+.paper-doll-monk-0 { background-image: url("../gfx/inventory/monk-0.jpg"); }
+.paper-doll-monk-1 { background-image: url("../gfx/inventory/monk-1.jpg"); }
+.paper-doll-demon-hunter-0 { background-image: url("../gfx/inventory/demon-hunter-0.jpg"); }
+.paper-doll-demon-hunter-1 { background-image: url("../gfx/inventory/demon-hunter-1.jpg"); }
+.paper-doll-necromancer-0 { background-image: url("../gfx/inventory/necromancer-0.jpg"); }
+.paper-doll-necromancer-1 { background-image: url("../gfx/inventory/necromancer-1.jpg"); }
+.paper-doll-witch-doctor-0 { background-image: url("../gfx/inventory/witch-doctor-0.jpg"); }
+.paper-doll-witch-doctor-1 { background-image: url("../gfx/inventory/witch-doctor-1.jpg"); }
+.paper-doll-wizard-0 { background-image: url("../gfx/inventory/wizard-0.jpg"); }
+.paper-doll-wizard-1 { background-image: url("../gfx/inventory/wizard-1.jpg"); }
+
+.cube-doll {
+    width: 365px;
+    height: 200px;
 }
 
 .d3-item-icon {
@@ -495,4 +522,38 @@
 
 
 
-
+.cube-slot {
+    width: 115px;
+    height: 190px;
+    position: absolute;
+    z-index: 1;
+    top: 5px;
+}
+.cube-item-1 {
+    left: 5px;
+    background-image: url("../gfx/inventory/Weapon-Empty.png");
+}
+.cube-item-2 {
+    left: 125px;
+    background-image: url("../gfx/inventory/Armor-Empty.png");
+}
+.cube-item-3 {
+    left: 245px;
+    background-image: url("../gfx/inventory/Jewelry-Empty.png");
+}
+.cube-item-1.is-active,
+.cube-item-2.is-active,
+.cube-item-3.is-active {
+    background-image: url("../gfx/inventory/Active-Default.png");
+}
+.cube-item-container {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    width: 115px;
+    height: 190px;
+}
+.cube-item-align {
+    display: inline-block;
+    vertical-align: middle;
+}

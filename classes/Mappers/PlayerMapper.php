@@ -2,53 +2,43 @@
 
 namespace Mappers;
 
-class PlayerMapper {
+/**
+ * Mapper for \Entities\Player
+ */
+abstract class PlayerMapper {
 
-    private $player;
-    
-    public function __construct($playerData) {
-        $this->player = new \Entities\Player();
-        foreach($playerData['data'] as $data) {
-            switch($data['id']) {
+    /**
+     * 
+     * @param StdObject $playerData From json_decode
+     * @return \Entities\Player
+     */
+    public static function createobj($playerData) {
+        $player = new \Entities\Player();
+        foreach($playerData->data as $data) {
+            switch($data->id) {
                 case 'HeroBattleTag':
-                    $this->player->setBTag($data['string']);
+                    $player->setBTag($data->string);
                     break;
                 case 'HeroClass':
-                    $this->player->setClass($data['string']);
+                    $player->setClass($data->string);
                     break;
                 case 'ParagonLevel':
-                    $this->player->setParagon($data['number']);
+                    $player->setParagon($data->number);
                     break;
                 case 'HeroClanTag':
-                    $this->player->setClanShort($data['string']);
+                    $player->setClanShort($data->string);
                     break;
                 case 'ClanName':
-                    $this->player->setClan($data['string']);
+                    $player->setClan($data->string);
                     break;
                 case 'HeroId':
-                    $this->player->setId($data['number']);
+                    $player->setId($data->number);
                     break;
                 default:
                     break;
             }
         }
-        
+        return $player;
     }
-
-    
-    
-    
-
-
-
-    public function getPlayer() {
-        return $this->player;
-    }
-
-    public function setPlayer($player) {
-        $this->player = $player;
-        return $this;
-    }
-
     
 }

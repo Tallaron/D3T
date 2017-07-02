@@ -2,33 +2,22 @@
 
 namespace Mappers;
 
-class CubeMapper {
+/**
+ * Mapper for \Entities\Cube
+ */
+abstract class CubeMapper {
 
-    private $cube;
-    
-    public function __construct($data) {
-        $this->setCube(new \Entities\Cube());
-        foreach($data as $itemData) {
-            $im = new \Mappers\ItemMapper($itemData);
-            $this->getCube()->addItem($im->getItem());
+    /**
+     * 
+     * @param StdObject $data From json_decode
+     * @return \Entities\Cube
+     */
+    public static function createObj($data) {
+        $cube = new \Entities\Cube();
+        for($i = 0; $i < count($data); $i++) {
+            $cube->addItem( \Mappers\ItemMapper::createObj($data[$i]) , $i);
         }
-        
+        return $cube;
     }
 
-    
-
-    
-    
-    public function getCube() {
-        return $this->cube;
-    }
-
-    public function setCube($cube) {
-        $this->cube = $cube;
-        return $this;
-    }
-
-    
-
-    
 }

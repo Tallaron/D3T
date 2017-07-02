@@ -11,36 +11,41 @@
     <div class="panel-body">
 
         <table class="table table-hover ranking-list">
-            <tr>
-                <th>#</th>
-                <th>Level</th>
-                <th>Class</th>
-                <th>Name</th>
-                <th>Paragon</th>
-                <th>Time</th>
-            </tr>
-            {foreach from=$ladder->getRanks() key=$i item=$rank}
-                <tr{if $rank->isMatch()} class="custom-tr-green"{/if}>
-                    <td>
-                        {if $rank->isMatch()}<a class="custom-anchor" name="r{$rank->getPlayer()->getBTagMinus()}"></a>{/if}
-                        {$rank->getPos()}
-                    </td>
-                    <td>{$rank->getLevel()}</td>
-                    <td>{$rank->getPlayer()->getClass()}</td>
-                    <td>
-                        {if $rank->getPlayer()->isUnknown()}
-                            <div class="custom-grey-name">{$rank->getPlayer()->getName()}</div>
-                        {else}
-                            <a href="{$settings->get('BNET_PROFILE_URL', $ladder->getRealm())}{$rank->getPlayer()->getBTagMinus()}/" target="_blank">
-                                {if $rank->getPlayer()->hasClan()}<span class="small" title="{$rank->getPlayer()->getClan()}">&lt;{$rank->getPlayer()->getClanShort()}&gt;</span> {/if}
-                                {$rank->getPlayer()->getName()}
-                            </a>
-                        {/if}
-                    </td>
-                    <td>{number_format($rank->getPlayer()->getParagon())}</td>
-                    <td title="{$rank->getCompletionDate()}">{$rank->getTimeFormatted()}</td>
+            <thead
+                <tr>
+                    <th>#</th>
+                    <th>Level</th>
+                    <th>Class</th>
+                    <th>Name</th>
+                    <th>Paragon</th>
+                    <th>Time</th>
                 </tr>
-            {/foreach}
+            </thead>
+            <tbody
+                {foreach from=$ladder->getRanks() key=$i item=$rank}
+                    {$player = $rank->getPlayer()}
+                    <tr{if $rank->isMatch()} class="custom-tr-green"{/if}>
+                        <td>
+                            {if $rank->isMatch()}<a class="custom-anchor" name="r{$player->getBTagMinus()}"></a>{/if}
+                            {$rank->getPos()}
+                        </td>
+                        <td>{$rank->getLevel()}</td>
+                        <td>{$player->getClass()}</td>
+                        <td>
+                            {if $player->isUnknown()}
+                                <div class="custom-grey-name">{$player->getName()}</div>
+                            {else}
+                                <a href="{$settings->get('BNET_PROFILE_URL', $ladder->getRealm())}{$player->getBTagMinus()}/" target="_blank">
+                                    {if $player->hasClan()}<span class="small" title="{$player->getClan()}">&lt;{$player->getClanShort()}&gt;</span> {/if}
+                                    {$player->getName()}
+                                </a>
+                            {/if}
+                        </td>
+                        <td>{number_format($player->getParagon())}</td>
+                        <td title="{$rank->getCompletionDate()}">{$rank->getTimeFormatted()}</td>
+                    </tr>
+                {/foreach}
+            </tbody>
         </table>
 
     </div>

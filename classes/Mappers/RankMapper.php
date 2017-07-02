@@ -2,54 +2,37 @@
 
 namespace Mappers;
 
-class RankMapper {
+/**
+ * Mapper for \Entities\Rank
+ */
+abstract class RankMapper {
 
-    private $rank;
-
-
-    public function __construct($rankData) {
-        $this->rank = new \Entities\Rank();
-        foreach($rankData['data'] as $data) {
-            switch($data['id']) {
+    /**
+     * 
+     * @param StdObject $rankData From json_decode
+     * @return \Entities\Rank
+     */
+    public static function createObj($rankData) {
+        $rank = new \Entities\Rank();
+        foreach($rankData->data as $data) {
+            switch($data->id) {
                 case 'Rank':
-                    $this->rank->setPos($data['number']);
+                    $rank->setPos($data->number);
                     break;
                 case 'RiftLevel':
-                    $this->rank->setLevel($data['number']);
+                    $rank->setLevel($data->number);
                     break;
                 case 'RiftTime':
-                    $this->rank->setTime($data['timestamp']);
+                    $rank->setTime($data->timestamp);
                     break;
                 case 'CompletedTime':
-                    $this->rank->setCompletionTime($data['timestamp']);
+                    $rank->setCompletionTime($data->timestamp);
                     break;
                 default:
                     break;
             }
         }
-        $pm = new \Mappers\PlayerMapper($rankData['player'][0]);
-        $this->rank->setPlayer($pm->getPlayer());
+        return $rank->setPlayer( \Mappers\PlayerMapper::createobj( $rankData->player[0]) );
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    public function getRank() {
-        return $this->rank;
-    }
-
-    public function setRank($rank) {
-        $this->rank = $rank;
-        return $this;
-    }
-
-
     
 }

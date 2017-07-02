@@ -16,11 +16,16 @@
             <span>Heroes</span>
             <span class="badge pull-right">{$profile->getNumHeroes()}</span>
         </a>
-        <div class="collapse in" id="heroes">
+        <div class="collapse{if $content == 'hero'} in{/if}" id="heroes">
             
             <ul class="nav nav-pills nav-stacked">
                 {foreach from=$profile->getHeroes() item=$hero}
-                    <li class="bg-info"><a href="{BASE_DIR}/profile/show/{$profile->getRealm()}/{$profile->getBTagMinus()}/hero/{$hero->getId()}">{$hero->getName()}</a></li>
+                    <li class="bg-{if $profile->getHero() != null && $profile->getHero()->getId() == $hero->getId()}success{else}info{/if}">
+                        <a href="{BASE_DIR}/profile/show/{$profile->getRealm()}/{$profile->getBTagMinus()}/hero/{$hero->getId()}">
+                            <span class="icon-frame"><img src="{BASE_DIR}/gfx/{$hero->getClass()}-{$hero->getGender()}.png" /></span>
+                            <span>{$hero->getName()}</span>
+                        </a>
+                    </li>
                 {/foreach}
             </ul>
                 

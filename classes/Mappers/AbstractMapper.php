@@ -8,58 +8,77 @@ abstract class AbstractMapper {
     private static $apiKey;
     private static $settings;
     
+    
+    /**
+     * 
+     * @param String $token
+     */
     public static function setToken($token) {
         self::$token = $token;
     }
     
+    /**
+     * 
+     * @return String
+     */
     public static function getToken() {
         return self::$token;
     }
     
+    /**
+     * 
+     * @return String
+     */
     public static function getApiKey() {
         return self::$apiKey;
     }
 
+    /**
+     * 
+     * @param String $apiKey
+     */
     public static function setApiKey($apiKey) {
         self::$apiKey = $apiKey;
     }
     
+    /**
+     * 
+     * @return \Controllers\Settings
+     */
     public static function getSettings() {
         return self::$settings;
     }
 
-    public static function setSettings($settings) {
+    /**
+     * 
+     * @param \Controllers\Settings $settings
+     */
+    public static function setSettings(\Controllers\Settings $settings) {
         self::$settings = $settings;
     }
 
-    
-        
-    protected static function getApiArrayWithToken($api) {
-        if(substr_count($api, "?") > 0) {
-            return json_decode(file_get_contents($api.'&access_token='.self::getToken()), true);
-        } else {
-            return json_decode(file_get_contents($api.'?access_token='.self::getToken()), true);
-        }
+    /**
+     * Returns API data. If $obj is true return type is object, if not an
+     * associative array will be returned.
+     * @param String $api
+     * @param boolean $obj
+     * @return mixed
+     */
+    protected static function getApiDataWithToken($api, $obj = false) {
+        $concat = substr_count($api, "?") > 0 ? '&' : '?';
+        return json_decode(file_get_contents($api.$concat.'access_token='.self::getToken()), !$obj);
     }
 
-    protected static function getApiArrayWithKey($api) {
-        if(substr_count($api, "?") > 0) {
-            return json_decode(file_get_contents($api.'&apikey='.self::getApiKey()), true);
-        } else {
-            return json_decode(file_get_contents($api.'?apikey='.self::getApiKey()), true);
-        }
+    /**
+     * Returns API data. If $obj is true return type is object, if not an
+     * associative array will be returned.
+     * @param String $api
+     * @param boolean $obj
+     * @return mixed
+     */
+    protected static function getApiDataWithKey($api, $obj = false) {
+        $concat = substr_count($api, "?") > 0 ? '&' : '?';
+        return json_decode(file_get_contents($api.$concat.'apikey='.self::getApiKey()), !$obj);
     }
-
-    protected static function getApiObjWithKey($api) {
-        if(substr_count($api, "?") > 0) {
-            return json_decode(file_get_contents($api.'&apikey='.self::getApiKey()), false);
-        } else {
-            return json_decode(file_get_contents($api.'?apikey='.self::getApiKey()), false);
-        }
-    }
-
-    
-    
-    
     
 }

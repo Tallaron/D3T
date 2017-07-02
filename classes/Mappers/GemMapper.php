@@ -2,32 +2,25 @@
 
 namespace Mappers;
 
-class GemMapper {
+/**
+ * Mapper for \Entities\Gem
+ */
+abstract class GemMapper {
 
-    private $gem;
-    
-    public function __construct($data) {
-        $this->setGem(new \Entities\Gem());
-        
+    /**
+     * 
+     * @param StdObject $data From json_decode
+     * @return \Entities\Gem
+     */
+    public static function createObj($data) {
+        $gem = new \Entities\Gem();
         foreach($data as $k => $v) {
             $method = 'set'.ucfirst($k);
-            if(method_exists($this->getGem(), $method)) {
-                $this->getGem()->$method($v);
+            if(method_exists($gem, $method)) {
+                $gem->$method($v);
             }
         }
+        return $gem;
     }
 
-    
-    
-    public function getGem() {
-        return $this->gem;
-    }
-
-    public function setGem($gem) {
-        $this->gem = $gem;
-        return $this;
-    }
-
-
-    
 }

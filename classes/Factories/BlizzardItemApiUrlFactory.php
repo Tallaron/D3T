@@ -2,47 +2,19 @@
 
 namespace Factories;
 
-class BlizzardItemApiUrlFactory {
-
-    private $realm; //eu,us,kr
-    private $item;
-
-
-    public function setParams($realm, $item) {
-        $this->setRealm($realm);
-        $this->setItem($item);
-    }
-
-    public function getItemApiUrl() {
-        $baseStr = 'https://%s.api.battle.net/d3/data/item/%s?locale=en_GB';
-        return sprintf($baseStr, $this->getRealm(), $this->getItem());
+/**
+ * Factory that builds url strings with specified end points
+ * API: Blizzard - Diablo 3 - Item
+ * Requires: Realm, Item
+ * Item is represented by the slug or tooltipParams of the items
+ */
+abstract class BlizzardItemApiUrlFactory {
+    
+    public static function getUrl($realm, $item) {
+        return sprintf(
+                BLIZZARD_D3_ITEM_API_URL,
+                $realm,
+                str_replace('item/', '', $item));
     }
     
-
-    
-    
-    
-    
-    
-    public function getRealm() {
-        return $this->realm;
-    }
-
-    public function getItem() {
-        return $this->item;
-    }
-
-    public function setRealm($realm) {
-        $this->realm = $realm;
-        return $this;
-    }
-
-    public function setItem($item) {
-        $this->item = $item;
-        return $this;
-    }
-
-
-
-
 }

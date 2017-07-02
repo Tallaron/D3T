@@ -20,12 +20,8 @@ class LadderController extends AbstractController {
 
 
     public function showAction($realm, $season, $hardcore, $index, $class, $min, $max) {
-        $lm = new \Mappers\LadderMapper();
-        $lm->initLadder($realm, $season, $hardcore, $index, $class, $min, $max);
-        $lm->initSearch($_SESSION['search']);
-        $lm->loadLadderData(self::$settings);
-        
-        \Views\View::getInstance()->assign('ladder', $lm->getLadder());
+        $ladder = \Mappers\LadderMapper::createObj($realm, $season, $hardcore, $index, $class, $min, $max, $_SESSION['search']);
+        \Views\View::getInstance()->assign('ladder', $ladder);
         \Views\View::getInstance()->display('ladder/show_ladder.tpl');
     }
     

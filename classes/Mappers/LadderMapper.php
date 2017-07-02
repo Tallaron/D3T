@@ -2,155 +2,72 @@
 
 namespace Mappers;
 
-class LadderMapper extends AbstractMapper {
-
-    private $data;
-    private $ladder;
-
-    public function __construct() {
-        $this->setLadder(new \Entities\Ladder());
-    }
-
-    public function loadLadderData($settings) {
-        $bf = new \Factories\BlizzardLadderApiUrlFactory($settings);
-        $bf->setParams(
-                $this->getLadder()->getRealm(),
-                $this->getLadder()->getSeason(),
-                $this->getLadder()->getHardcore(),
-                $this->getLadder()->getIndex(),
-                $this->getLadder()->getClass());
-        $this->data = self::getApiArrayWithToken($bf->getLeaderboardApiUrl());
-        $this->getLadder()->setLastUpdate($this->getData()['last_update_time']);
-        $this->addRanks();
-    }
-
-    public function initLadder($realm, $season, $hardcore, $index, $class, $min, $max) {
-        $this->getLadder()->setRealm($realm);
-        $this->getLadder()->setSeason($season);
-        $this->getLadder()->setHardcore($hardcore);
-        $this->getLadder()->setIndex($index);
-        $this->getLadder()->setClass($class);
-        $this->getLadder()->setMin($min);
-        $this->getLadder()->setMax($max);
+/**
+ * Mapper for \Entities\Ladder
+ */
+abstract class LadderMapper extends AbstractMapper {
+    
+    /**
+     * 
+     * @param String $realm 'eu', 'us', ...
+     * @param int $season 0,1
+     * @param int $hardcore 0,1
+     * @param int $index 1..MAX
+     * @param String $class e.g. 'rift-barbarian'
+     * @param int $min 1..1000
+     * @param int $max 1..1000
+     * @param String $patterns csv string
+     * @return \Entities\Ladder
+     */
+    public static function createObj($realm, $season, $hardcore, $index, $class, $min, $max, $patterns) {
+        $ladder = (new \Entities\Ladder())
+            ->setRealm($realm)
+            ->setSeason($season)
+            ->setHardcore($hardcore)
+            ->setIndex($index)
+            ->setClass($class)
+            ->setMin($min)
+            ->setMax($max)
+            ->setPatterns($patterns);
+        $data = self::getApiDataWithToken(
+                \Factories\BlizzardLadderApiUrlFactory::getUrl($realm, $season, $hardcore, $index, $class),
+                true);
+        $ladder->setLastUpdate($data->last_update_time);
+        self::addRanks($ladder, $data->row);
+        return $ladder;
     }
     
-    
-    public function initSearch($patterns) {
-        $this->getLadder()->setPatterns($patterns);
-    }
-
-    
-    private function addRanks() {
+    /**
+     * 
+     * @param \Entities\Ladder $ladder
+     * @param StdObject $data From json_decode
+     */
+    private static function addRanks(\Entities\Ladder $ladder, $data) {
         $levelSum = 0;
-        $data = array_slice($this->data['row'], $this->getLadder()->getStartIndex(), $this->getLadder()->getLength());
+        $data = array_slice($data, $ladder->getStartIndex(), $ladder->getLength());
         foreach($data as $row) {
-            $rm = new \Mappers\RankMapper($row);
-            $this->getLadder()->addRank($rm->getRank());
-            $levelSum += $rm->getRank()->getLevel();
-            $this->search($rm->getRank());
+            $rank = \Mappers\RankMapper::createObj($row);
+            $ladder->addRank( $rank );
+            $levelSum += $rank->getLevel();
+            self::search($ladder, $rank);
         }
-        $this->getLadder()->setAvgLevel(number_format($levelSum / $this->getLadder()->getLength(), 2));
+        $ladder->setAvgLevel(number_format($levelSum / $ladder->getLength(), 2));
     }
     
-    
-    
-    private function search($rank) {
-        if($this->getLadder()->hasSearch()) {
-            foreach($this->getLadder()->getPatterns() as $pattern) {
+    /**
+     * Matches the rank to the search patterns
+     * @param \Entities\Ladder $ladder
+     * @param \Entities\Rank $rank
+     */
+    private static function search(\Entities\Ladder $ladder, \Entities\Rank $rank) {
+        if($ladder->hasSearch()) {
+            foreach($ladder->getPatterns() as $pattern) {
                 if(strpos(strtolower($rank->getPlayer()->getName()), strtolower($pattern)) !== false) {
                     $rank->setMatch(true);
-                    $this->getLadder()->addSearchResult($rank->getPlayer());
+                    $ladder->addSearchResult($rank->getPlayer());
                 }
             }
         }
     }
 
-        
-    
-    
-    public function getRealm() {
-        return $this->realm;
-    }
-
-    public function getSeason() {
-        return $this->season;
-    }
-
-    public function getHardcore() {
-        return $this->hardcore;
-    }
-
-    public function getIndex() {
-        return $this->index;
-    }
-
-    public function getClass() {
-        return $this->class;
-    }
-
-    public function setRealm($realm) {
-        $this->realm = $realm;
-        return $this;
-    }
-
-    public function setSeason($season) {
-        $this->season = $season;
-        return $this;
-    }
-
-    public function setHardcore($hardcore) {
-        $this->hardcore = $hardcore;
-        return $this;
-    }
-
-    public function setIndex($index) {
-        $this->index = $index;
-        return $this;
-    }
-
-    public function setClass($class) {
-        $this->class = $class;
-        return $this;
-    }
-
-    public function getMin() {
-        return $this->min;
-    }
-
-    public function getMax() {
-        return $this->max;
-    }
-
-    public function setMin($min) {
-        $this->min = $min;
-        return $this;
-    }
-
-    public function setMax($max) {
-        $this->max = $max;
-        return $this;
-    }
-
-    public function getData() {
-        return $this->data;
-    }
-
-    public function setData($data) {
-        $this->data = $data;
-        return $this;
-    }
-
-    public function getLadder() {
-        return $this->ladder;
-    }
-
-    public function setLadder($ladder) {
-        $this->ladder = $ladder;
-        return $this;
-    }
-
-
-    
-    
-    
 }

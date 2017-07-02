@@ -2,6 +2,10 @@
 
 namespace Entities;
 
+/**
+ * Data class for the hero's inventory, containing several \Entities\Item objects.
+ * The inventory is initialized with default \Entities\Item objects.
+ */
 class Inventory {
 
     private $mainHand;
@@ -35,128 +39,239 @@ class Inventory {
         $this->hands = $emptyItem;
         $this->bracers = $emptyItem;
     }
-
-
     
-    
-    
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getMainHand() {
         return $this->mainHand;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getOffHand() {
         return $this->offHand;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getLeftFinger() {
         return $this->leftFinger;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getRightFinger() {
         return $this->rightFinger;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getNeck() {
         return $this->neck;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getHead() {
         return $this->head;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getTorso() {
         return $this->torso;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getWaist() {
         return $this->waist;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getLegs() {
         return $this->legs;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getFeet() {
         return $this->feet;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getShoulders() {
         return $this->shoulders;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getHands() {
         return $this->hands;
     }
 
+    /**
+     * 
+     * @return \Entities\Item
+     */
     public function getBracers() {
         return $this->bracers;
     }
 
-    public function setMainHand($mainHand) {
+    /**
+     * 
+     * @param \Entities\Item $mainHand
+     * @return \Entities\Inventory
+     */
+    public function setMainHand(\Entities\Item $mainHand) {
         $this->mainHand = $mainHand;
         return $this;
     }
 
-    public function setOffHand($offHand) {
+    /**
+     * 
+     * @param \Entities\Item $offHand
+     * @return \Entities\Inventory
+     */
+    public function setOffHand(\Entities\Item $offHand) {
         $this->offHand = $offHand;
         return $this;
     }
 
-    public function setLeftFinger($leftFinger) {
+    /**
+     * 
+     * @param \Entities\Item $leftFinger
+     * @return \Entities\Inventory
+     */
+    public function setLeftFinger(\Entities\Item $leftFinger) {
         $this->leftFinger = $leftFinger;
         return $this;
     }
 
-    public function setRightFinger($rightFinger) {
+    /**
+     * 
+     * @param \Entities\Item $rightFinger
+     * @return \Entities\Inventory
+     */
+    public function setRightFinger(\Entities\Item $rightFinger) {
         $this->rightFinger = $rightFinger;
         return $this;
     }
 
-    public function setNeck($neck) {
+    /**
+     * 
+     * @param \Entities\Item $neck
+     * @return \Entities\Inventory
+     */
+    public function setNeck(\Entities\Item $neck) {
         $this->neck = $neck;
         return $this;
     }
 
-    public function setHead($head) {
+    /**
+     * 
+     * @param \Entities\Item $head
+     * @return \Entities\Inventory
+     */
+    public function setHead(\Entities\Item $head) {
         $this->head = $head;
         return $this;
     }
 
-    public function setTorso($torso) {
+    /**
+     * 
+     * @param \Entities\Item $torso
+     * @return \Entities\Inventory
+     */
+    public function setTorso(\Entities\Item $torso) {
         $this->torso = $torso;
         return $this;
     }
 
-    public function setWaist($waist) {
+    /**
+     * 
+     * @param \Entities\Item $waist
+     * @return \Entities\Inventory
+     */
+    public function setWaist(\Entities\Item $waist) {
         $this->waist = $waist;
         return $this;
     }
 
-    public function setLegs($legs) {
+    /**
+     * 
+     * @param \Entities\Item $legs
+     * @return \Entities\Inventory
+     */
+    public function setLegs(\Entities\Item $legs) {
         $this->legs = $legs;
         return $this;
     }
 
-    public function setFeet($feet) {
+    /**
+     * 
+     * @param \Entities\Item $feet
+     * @return \Entities\Inventory
+     */
+    public function setFeet(\Entities\Item $feet) {
         $this->feet = $feet;
         return $this;
     }
 
-    public function setShoulders($shoulders) {
+    /**
+     * 
+     * @param \Entities\Item $shoulders
+     * @return \Entities\Inventory
+     */
+    public function setShoulders(\Entities\Item $shoulders) {
         $this->shoulders = $shoulders;
         return $this;
     }
 
-    public function setHands($hands) {
+    /**
+     * 
+     * @param \Entities\Item $hands
+     * @return \Entities\Inventory
+     */
+    public function setHands(\Entities\Item $hands) {
         $this->hands = $hands;
         return $this;
     }
 
-    public function setBracers($bracers) {
+    /**
+     * 
+     * @param \Entities\Item $bracers
+     * @return \Entities\Inventory
+     */
+    public function setBracers(\Entities\Item $bracers) {
         $this->bracers = $bracers;
         return $this;
     }
-
-
     
 }

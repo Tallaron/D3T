@@ -6,8 +6,8 @@ class IndexController extends AbstractController {
 
     
     public function indexAction() {
-        $nfm = new \Mappers\newsFeedMapper('https://us.battle.net/d3/en/feed/news');
-        \Views\View::getInstance()->assign('newsFeed', $nfm->getNewsFeed());
+        $newsFeed = \Mappers\NewsFeedMapper::createObject('https://us.battle.net/d3/en/feed/news');
+        \Views\View::getInstance()->assign('newsFeed', $newsFeed);
         \Views\View::getInstance()->display('home.tpl');
     }
     

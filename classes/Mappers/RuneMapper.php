@@ -2,26 +2,23 @@
 
 namespace Mappers;
 
-class RuneMapper {
-    
-    private $rune;
-    
+/**
+ * Mapper for \Entities\Rune
+ */
+abstract class RuneMapper {
 
-    public function __construct($data) {
-        $this->setRune(new \Entities\Rune());
-        $this->getRune()->setSlug($data->slug);
-        $this->getRune()->setName($data->name);
-        $this->getRune()->setDescription($data->description);
-        $this->getRune()->setSimpleDescription($data->simpleDescription);
-        $this->getRune()->setTooltipParams($data->tooltipParams);
+    /**
+     * 
+     * @param StdObject $data From json_decode
+     * @return \Entities\Rune()
+     */
+    public static function createObj($data) {
+        return (new \Entities\Rune())
+            ->setSlug($data->slug)
+            ->setName($data->name)
+            ->setDescription($data->description)
+            ->setSimpleDescription($data->simpleDescription)
+            ->setTooltipParams($data->tooltipParams);
     }
     
-    public function getRune() {
-        return $this->rune;
-    }
-
-    public function setRune($rune) {
-        $this->rune = $rune;
-        return $this;
-    }
 }

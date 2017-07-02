@@ -95,3 +95,15 @@ progress[value]::-moz-progress-bar {
 .custom-a-skill, .custom-p-skill {
     padding: 0 7px 2px 0;
 }
+
+
+
+
+.icon-frame {
+    background-color: black;
+    border-left: 1px solid #3a2912;
+    border-right: 1px solid #59411c;
+    border-bottom: 1px solid #463419;
+    border-top: 1px solid #574320;
+    display: inline-block;
+}

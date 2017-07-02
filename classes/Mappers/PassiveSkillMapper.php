@@ -2,26 +2,32 @@
 
 namespace Mappers;
 
-class PassiveSkillMapper {
+/**
+ * Mapper for \Entities\PassiveSkill
+ */
+abstract class PassiveSkillMapper {
 
-    private $skill;
-
-    public function __construct($data) {
-        $this->setSkill(new \Entities\PasiveSkill());
-        $this->getSkill()->setSlug($data->slug);
-        $this->getSkill()->setName($data->name);
-        $this->getSkill()->setIcon($data->icon);
-        $this->getSkill()->setTooltipUrl($data->tooltipUrl);
-        $this->getSkill()->setDescription($data->description);
+    /**
+     * 
+     * @param StdObject $data From json_decode
+     * @return \Entities\PassiveSkill
+     */
+    public static function createObj($data) {
+        $skill = null;
+        if(property_exists($data, 'skill')) {
+            $skill = new \Entities\PassiveSkill();
+            self::setSkillData($skill, $data->skill);
+        }
+        return $skill;
     }
-
-    public function getSkill() {
-        return $this->skill;
-    }
-
-    public function setSkill($skill) {
-        $this->skill = $skill;
-        return $this;
+    
+    private static function setSkillData(\Entities\PassiveSkill $skill, $data) {
+        $skill
+            ->setSlug($data->slug)
+            ->setName($data->name)
+            ->setIcon($data->icon)
+            ->setTooltipUrl($data->tooltipUrl)
+            ->setDescription($data->description);
     }
 
 }

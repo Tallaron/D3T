@@ -2,66 +2,86 @@
 
 namespace Mappers;
 
+/**
+ * Mapper for \Entities\Hero
+ */
+abstract class HeroMapper {
 
-class HeroMapper {
-
-    private $hero;
-
-
-
-
-
-
-
-
-    public function __construct($heroData) {
-        $this->setHero( new \Entities\Hero() );
-        $this->getHero()->setId( $heroData['id'] );
-        $this->getHero()->setName( $heroData['name'] );
-        $this->getHero()->setClass( $heroData['class'] );
-        $this->getHero()->setGender( $heroData['gender'] );
-        $this->getHero()->setLevel( $heroData['level'] );
-        $this->getHero()->setEliteKills( $heroData['kills']['elites'] );
-        $this->getHero()->setSeasonal( isset($heroData['seasonal']) ? $heroData['seasonal'] : false );
-        $this->getHero()->setHardcore( isset($heroData['hardcore']) ? $heroData['hardcore'] : false );
-    }
-
-
-    public function loadHeroActiveSkills($activeSkills) {
-        foreach($activeSkills as $obj) {
-            $asm = new \Mappers\ActiveSkillMapper($obj->skill);
-            $rm = new \Mappers\RuneMapper($obj->rune);
-            $asm->getSkill()->setRune($rm->getRune());
-            $this->getHero()->addActiveSkill($asm->getSkill());
-        }
+    /**
+     * 
+     * @param StdObject $heroData From json_decode
+     * @return \Entities\Hero
+     */
+    public static function createObj($heroData) {
+        $hero = (new \Entities\Hero())
+            ->setId( $heroData->id )
+            ->setName( $heroData->name )
+            ->setClass( $heroData->class )
+            ->setGender( $heroData->gender )
+            ->setLevel( $heroData->level )
+            ->setEliteKills( $heroData->kills->elites )
+            ->setSeasonal( isset($heroData->seasonal) ? $heroData->seasonal : false )
+            ->setHardcore( isset($heroData->hardcore) ? $heroData->hardcore : false );
+        return $hero;
     }
     
-    public function loadHeroPassiveSkills($passiveSkills) {
-        foreach($passiveSkills as $obj) {
-            $psm = new \Mappers\PassiveSkillMapper($obj->skill);
-            $this->getHero()->addPassiveSkill($psm->getSkill());
+    
+    public static function addHeroDetails(\Entities\Hero $hero, $heroData) {
+        if(property_exists($heroData->skills, 'active')) {
+            self::loadHeroActiveSkills($hero, $heroData->skills->active);
         }
-    }
-
-    public function loadHeroItems($items) {
-        $invm = new \Mappers\InventoryMapper($items);
-        $this->getHero()->setInventory($invm->getInventory());
-    }
-
-    public function loadHeroCube($cubeItems) {
-        $cm = new \Mappers\CubeMapper($cubeItems);
-        $this->getHero()->setCube($cm->getCube());
+        if(property_exists($heroData->skills, 'passive')) {
+            self::loadHeroPassiveSkills($hero, $heroData->skills->passive);
+        }
+        if(property_exists($heroData, 'items')) {
+            self::loadHeroItems($hero, $heroData->items);
+        }
+        if(property_exists($heroData, 'legendaryPowers')) {
+            self::loadHeroCube($hero, $heroData->legendaryPowers);
+        }
     }
 
     
-    public function getHero() {
-        return $this->hero;
+
+
+    /**
+     * 
+     * @param \Entities\Hero $hero
+     * @param StdObject $activeSkills From json_decode (partial)
+     */
+    private static function loadHeroActiveSkills(\Entities\Hero $hero, $activeSkills) {
+        for($i=0; $i<count($activeSkills); $i++) {
+            $hero->addActiveSkill( \Mappers\ActiveSkillMapper::createObj($activeSkills[$i]), $i);
+        }
     }
 
-    public function setHero($hero) {
-        $this->hero = $hero;
-        return $this;
+    /**
+     * 
+     * @param \Entities\Hero $hero
+     * @param StdObject $passiveSkills From json_decode (partial)
+     */
+    private static function loadHeroPassiveSkills(\Entities\Hero $hero, $passiveSkills) {
+        for($i=0; $i<count($passiveSkills); $i++) {
+            $hero->addPassiveSkill( \Mappers\PassiveSkillMapper::createObj($passiveSkills[$i]), $i);
+        }
     }
 
+    /**
+     * 
+     * @param \Entities\Hero $hero
+     * @param StdObject $items From json_decode (partial)
+     */
+    private static function loadHeroItems(\Entities\Hero $hero, $items) {
+          $hero->setInventory( \Mappers\InventoryMapper::createObj($items) );
+    }
+
+    /**
+     * 
+     * @param \Entities\Hero $hero
+     * @param StdObject $cubeItems From json_decode (partial)
+     */
+    private static function loadHeroCube(\Entities\Hero $hero, $cubeItems) {
+        $hero->setCube( \Mappers\CubeMapper::createObj($cubeItems) );
+    }
 
 }

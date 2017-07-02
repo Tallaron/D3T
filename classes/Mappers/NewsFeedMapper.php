@@ -1,12 +1,9 @@
 <?php
-
 namespace Mappers;
-
 /**
  * Mapper for \Entities\NewsFeed
  */
 abstract class NewsFeedMapper {
-
     /**
      * 
      * @param String $url News Feed URL -  Should be a valid XML document
@@ -23,7 +20,6 @@ abstract class NewsFeedMapper {
         }
         return $newsFeed;
     }
-
     
     /**
      * 
@@ -35,5 +31,4 @@ abstract class NewsFeedMapper {
             $newsFeed->addNews( \Mappers\NewsMapper::createObj($entry) );
         }
     }
-
 }

@@ -1,188 +1,61 @@
-.paper-doll, .cube-doll {
-    background-color: #927354;
-    display: block;
-    position: relative;
-    border: 1px solid #000;
-    border-radius: 4px;
-}
-
 .paper-doll {
+    display: block;
     width: 305px;
     height: 425px;
+    border: 1px solid #000;
+    border-radius: 4px;
+    background-color: #927354;
     background-repeat: no-repeat;
     background-position: -475px -155px;
+    position: relative;
 }
 
-.paper-doll-barbarian-0 { background-image: url("../gfx/inventory/barbarian-0.jpg"); }
-.paper-doll-barbarian-1 { background-image: url("../gfx/inventory/barbarian-1.jpg"); }
-.paper-doll-crusader-0 { background-image: url("../gfx/inventory/crusader-0.jpg"); }
-.paper-doll-crusader-1 { background-image: url("../gfx/inventory/crusader-1.jpg"); }
-.paper-doll-monk-0 { background-image: url("../gfx/inventory/monk-0.jpg"); }
-.paper-doll-monk-1 { background-image: url("../gfx/inventory/monk-1.jpg"); }
-.paper-doll-demon-hunter-0 { background-image: url("../gfx/inventory/demon-hunter-0.jpg"); }
-.paper-doll-demon-hunter-1 { background-image: url("../gfx/inventory/demon-hunter-1.jpg"); }
-.paper-doll-necromancer-0 { background-image: url("../gfx/inventory/necromancer-0.jpg"); }
-.paper-doll-necromancer-1 { background-image: url("../gfx/inventory/necromancer-1.jpg"); }
-.paper-doll-witch-doctor-0 { background-image: url("../gfx/inventory/witch-doctor-0.jpg"); }
-.paper-doll-witch-doctor-1 { background-image: url("../gfx/inventory/witch-doctor-1.jpg"); }
-.paper-doll-wizard-0 { background-image: url("../gfx/inventory/wizard-0.jpg"); }
-.paper-doll-wizard-1 { background-image: url("../gfx/inventory/wizard-1.jpg"); }
+.paper-doll.barbarian-0 { background-image: url("../gfx/inventory/barbarian-0.jpg"); }
+.paper-doll.barbarian-1 { background-image: url("../gfx/inventory/barbarian-1.jpg"); }
+.paper-doll.crusader-0 { background-image: url("../gfx/inventory/crusader-0.jpg"); }
+.paper-doll.crusader-1 { background-image: url("../gfx/inventory/crusader-1.jpg"); }
+.paper-doll.monk-0 { background-image: url("../gfx/inventory/monk-0.jpg"); }
+.paper-doll.monk-1 { background-image: url("../gfx/inventory/monk-1.jpg"); }
+.paper-doll.demon-hunter-0 { background-image: url("../gfx/inventory/demon-hunter-0.jpg"); }
+.paper-doll.demon-hunter-1 { background-image: url("../gfx/inventory/demon-hunter-1.jpg"); }
+.paper-doll.necromancer-0 { background-image: url("../gfx/inventory/necromancer-0.jpg"); }
+.paper-doll.necromancer-1 { background-image: url("../gfx/inventory/necromancer-1.jpg"); }
+.paper-doll.witch-doctor-0 { background-image: url("../gfx/inventory/witch-doctor-0.jpg"); }
+.paper-doll.witch-doctor-1 { background-image: url("../gfx/inventory/witch-doctor-1.jpg"); }
+.paper-doll.wizard-0 { background-image: url("../gfx/inventory/wizard-0.jpg"); }
+.paper-doll.wizard-1 { background-image: url("../gfx/inventory/wizard-1.jpg"); }
 
-.cube-doll {
-    width: 365px;
-    height: 200px;
-}
 
-.d3-item-icon {
-    box-shadow: 0 0 9px rgba(0,0,0,0.09), 0 2px 5px rgba(0,0,0,0.5);
-    display: block;
-    border: 1px solid black;
-    background: no-repeat 50% 100%;
-    border-radius: 4px;
-    overflow: hidden;
-    font-size: 1px;
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
-
-.d3-item-icon-white {
+.item-white {
     border-color: #6091a6;
     background-color: #232227;
     background-image: url("../gfx/inventory/brown.png");
 }
 
-.d3-item-icon-blue {
+.item-blue {
     border-color: #513f2e;
     background-color: #2a2017;
     background-image: url("../gfx/inventory/blue.png");
 }
 
-.d3-item-icon-yellow {
+.item-yellow {
     border-color: #9b8e3c;
     background-color: #322914;
     background-image: url("../gfx/inventory/yellow.png");
 }
 
-.d3-item-icon-orange {
+.item-orange {
     border-color: #b07b38;
     background-color: #332314;
     background-image: url("../gfx/inventory/orange.png");
 }
 
-.d3-item-icon-green {
+.item-green {
     border-color: #748e3d;
     background-color: #262f14;
     background-image: url("../gfx/inventory/green.png");
-}
-
-
-.d3-item-icon-gradient {
-    background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
-    background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
-    background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
-    background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
-    background-image: linear-gradient(top, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));    
-    display: block;
-    border-radius: 4px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-}
-
-.d3-item-icon-inner {
-    display: block;
-    padding: 1px;
-    background: no-repeat center center;
-    font-size: 1px;
-    line-height: normal;
-    text-align: center;
-    border-radius: 4px;
-    overflow: hidden;
-    margin: 0;
-    border: 0;
-    outline: 0;
-}
-
-
-.gear-slot-link {
-    margin: 1px;
-    display: block;
-    color: #ad835a;
-    outline: 0;
-    text-decoration: none;
-    cursor: auto;
-}
-
-.d3-item-sockets-wrapper {
-    width: 100%;
-    height: 100%;
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0.8;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
     
 }
-
-.sockets-align {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.socket {
-    display: inline-block;
-    vertical-align: middle;
-    width: 32px;
-    height: 32px;
-    background: url(../gfx/inventory/skill-overlays.png) 0 -71px no-repeat;
-    text-align: center;
-    position: relative;
-    left: 1px;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-}
-
-.gear-slot .d3-item-sockets-wrapper {
-    display: table-cell;
-    vertical-align: middle;
-}
-
-.socket img {
-    margin: 6px auto 0;
-    width: 20px;
-    height: 20px;
-}
-
-
-
-
-
-
-.d3-item-icon-image {
-    overflow: visible;
-    display: block;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: 0;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
-
 
 
 
@@ -191,369 +64,93 @@
 
 .gear-slot {
     display: block;
-    outline: none;
-    text-align: center;
+    box-shadow: 0 0 9px rgba(0,0,0,0.09), 0 2px 5px rgba(0,0,0,0.5);
     margin: 0;
     padding: 0;
-    border: 0;
-    color: #a99877;
+    outline: none;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
     position: absolute;
 }
 
 
-
-
-
-
-.gear-slot-head {
-    width: 66px;
-    height: 66px;
-    z-index: 12;
-    top: 4px;
-    left: 121px;
-}
-.gear-slot-head .gear-slot-link {
-    width: 64px;
-    height: 64px;
-}
-.gear-slot-head .d3-item-icon-inner {
-    width: 62px;
-    height: 62px;
-}
-.gear-slot-head .d3-item-icon-image img {
-    position: relative;
-    top: -31px;
-}
-.gear-slot-head .sockets-align {
-    width: 66px;
-    height: 66px;
-}
-
-
-
-.gear-slot-torso {
-    width: 82px;
-    height: 115px;
-    z-index: 13;
-    top: 74px;
-    left: 113px;
-}
-.gear-slot-torso .gear-slot-link {
-    width: 80px;
-    height: 113px;
-}
-.gear-slot-torso .d3-item-icon-inner {
-    width: 78px;
-    height: 111px;
-}
-.gear-slot-torso .d3-item-icon-image img {
-    position: relative;
-    top: -25px;
-    left: -1px;
-}
-.gear-slot-torso .sockets-align {
-    width: 82px;
-    height: 115px;
-}
-
-
-.gear-slot-feet {
-    width: 66px;
-    height: 88px;
-    z-index: 8;
-    bottom: 14px;
-    left: 121px;
-}
-.gear-slot-feet .gear-slot-link {
-    width: 64px;
-    height: 86px;
-}
-.gear-slot-feet .d3-item-icon-inner {
-    width: 62px;
-    height: 84px;
-}
-.gear-slot-feet .d3-item-icon-image img {
-    position: relative;
-    top: -20px;
-}
-
-
-
-.gear-slot-hands {
-    width: 66px;
-    height: 88px;
-    z-index: 9;
-    top: 127px;
-    left: 13px;
-}
-.gear-slot-hands .gear-slot-link {
-    width: 64px;
-    height: 86px;
-}
-.gear-slot-hands .d3-item-icon-inner {
-    width: 62px;
-    height: 84px;
-}
-.gear-slot-hands .d3-item-icon-image img {
-    position: relative;
-    top: -20px;
-}
-
-
-
-.gear-slot-shoulders {
-    width: 66px;
-    height: 88px;
-    z-index: 10;
-    top: 28px;
-    left: 39px;
-}
-.gear-slot-shoulders .gear-slot-link {
-    width: 64px;
-    height: 86px;
-}
-.gear-slot-shoulders .d3-item-icon-inner {
-    width: 62px;
-    height: 84px;
-}
-.gear-slot-shoulders .d3-item-icon-image img {
-    position: relative;
-    top: -20px;
-}
-
-
-
-.gear-slot-legs {
-    width: 66px;
-    height: 88px;
-    z-index: 11;
-    bottom: 106px;
-    left: 121px;
-}
-.gear-slot-legs .gear-slot-link {
-    width: 64px;
-    height: 86px;
-}
-.gear-slot-legs .d3-item-icon-inner {
-    width: 62px;
-    height: 84px;
-}
-.gear-slot-legs .d3-item-icon-image img {
-    position: relative;
-    top: -20px;
-}
-.gear-slot-legs .sockets-align {
-    width: 66px;
-    height: 88px;
-}
-
-
-.gear-slot-bracers {
-    width: 66px;
-    height: 88px;
-    z-index: 3;
-    top: 127px;
-    right: 10px;
-}
-.gear-slot-bracers .gear-slot-link {
-    width: 64px;
-    height: 86px;
-}
-.gear-slot-bracers .d3-item-icon-inner {
-    width: 62px;
-    height: 84px;
-}
-.gear-slot-bracers .d3-item-icon-image img {
-    position: relative;
-    top: -20px;
-}
-
-
-
-.gear-slot-mainHand {
-    width: 66px;
-    height: 130px;
-    z-index: 6;
-    bottom: 13px;
-    left: 13px;
-}
-.gear-slot-mainHand .gear-slot-link {
-    width: 64px;
-    height: 128px;
-}
-.gear-slot-mainHand .d3-item-icon-inner {
-    width: 62px;
-    height: 126px;
-}
-.gear-slot-mainHand .d3-item-icon-image img {
-    position: relative;
-}
-.gear-slot-mainHand .sockets-align {
-    width: 66px;
-    height: 130px;
-}
-
-
-.gear-slot-offHand {
-    width: 66px;
-    height: 130px;
-    z-index: 5;
-    bottom: 13px;
-    right: 10px;
-}
-.gear-slot-offHand .gear-slot-link {
-    width: 64px;
-    height: 128px;
-}
-.gear-slot-offHand .d3-item-icon-inner {
-    width: 62px;
-    height: 126px;
-}
-.gear-slot-offHand .d3-item-icon-image img {
-    position: relative;
-}
-.gear-slot-offHand .sockets-align {
-    width: 66px;
-    height: 130px;
-}
-
-
-
-.gear-slot-waist {
-    width: 82px;
-    height: 34px;
-    z-index: 4;
-    top: 193px;
-    left: 113px;
-}
-.gear-slot-waist .gear-slot-link {
-    width: 80px;
-    height: 32px;
-}
-.gear-slot-waist .d3-item-icon-inner {
-    width: 78px;
-    height: 30px;
-}
-.gear-slot-waist .d3-item-icon-image img {
-    position: relative;
-    top: -15px;
-}
-
-
-
-.gear-slot-rightFinger {
-    width: 42px;
-    height: 42px;
-    z-index: 7;
-    bottom: 156px;
-    right: 22px;
-}
-.gear-slot-rightFinger .gear-slot-link {
-    width: 40px;
-    height: 40px;
-}
-.gear-slot-rightFinger .d3-item-icon-inner {
-    width: 38px;
-    height: 38px;
-}
-.gear-slot-rightFinger .d3-item-icon-image img {
-    position: relative;
-    top: -12px;
-    left: -12px;
-}
-.gear-slot-rightFinger .sockets-align {
-    width: 42px;
-    height: 42px;
-}
-
-
-
-.gear-slot-leftFinger {
-    width: 42px;
-    height: 42px;
-    z-index: 2;
-    bottom: 156px;
-    left: 25px;
-}
-.gear-slot-leftFinger .gear-slot-link {
-    width: 40px;
-    height: 40px;
-}
-.gear-slot-leftFinger .d3-item-icon-inner {
-    width: 38px;
-    height: 38px;
-}
-.gear-slot-leftFinger .d3-item-icon-image img {
-    position: relative;
-    top: -12px;
-    left: -12px;
-}
-.gear-slot-leftFinger .sockets-align {
-    width: 42px;
-    height: 42px;
-}
-
-
-
-.gear-slot-neck {
-    width: 56px;
-    height: 56px;
-    z-index: 1;
-    top: 48px;
-    right: 44px;
-}
-.gear-slot-neck .gear-slot-link {
-    width: 54px;
-    height: 54px;
-}
-.gear-slot-neck .d3-item-icon-inner {
-    width: 52px;
-    height: 52px;
-}
-.gear-slot-neck .d3-item-icon-image img {
-    position: relative;
-    width: 52px;
-    height: 52px;
-}
-.gear-slot-neck .sockets-align {
-    width: 56px;
-    height: 56px;
-}
-
-
-
-.cube-slot {
-    width: 115px;
-    height: 190px;
+.center-frame {
+    display: block;
     position: absolute;
-    z-index: 1;
-    top: 5px;
 }
-.cube-item-1 {
-    left: 5px;
-    background-image: url("../gfx/inventory/Weapon-Empty.png");
-}
-.cube-item-2 {
-    left: 125px;
-    background-image: url("../gfx/inventory/Armor-Empty.png");
-}
-.cube-item-3 {
-    left: 245px;
-    background-image: url("../gfx/inventory/Jewelry-Empty.png");
-}
-.cube-item-1.is-active,
-.cube-item-2.is-active,
-.cube-item-3.is-active {
-    background-image: url("../gfx/inventory/Active-Default.png");
-}
-.cube-item-container {
+
+.item-content-cell {
     display: table-cell;
-    vertical-align: middle;
     text-align: center;
-    width: 115px;
-    height: 190px;
-}
-.cube-item-align {
-    display: inline-block;
     vertical-align: middle;
 }
+
+.item-content {
+    display: block;
+}
+
+
+/*center frame and its child needs dimensions 3 times of the parent - 3px*/
+.gear-slot.gear-slot-head {   width: 66px;    height: 66px;   top: 4px;    left: 120px; }
+.gear-slot-head .center-frame {   width: 195px;   height: 195px;  margin-left: -66px;  margin-top: -66px; }
+.gear-slot-head .item-content-cell {   width: 195px;   height: 195px; }
+
+.gear-slot.gear-slot-torso           {   width: 82px;    height: 115px;   top: 74px;    left: 112px; }
+.gear-slot-torso .center-frame       {   width: 243px;   height: 342px;   margin-left: -82px;  margin-top: -115px; }
+.gear-slot-torso .item-content-cell  {   width: 243px;   height: 342px; }
+
+.gear-slot.gear-slot-feet           {   width: 66px;    height: 88px;   top: 323px;    left: 120px; }
+.gear-slot-feet .center-frame       {   width: 195px;   height: 261px;  margin-left: -66px;  margin-top: -88px; }
+.gear-slot-feet .item-content-cell  {   width: 195px;   height: 261px; }
+
+.gear-slot.gear-slot-hands           {   width: 66px;    height: 88px;   top: 127px;    left: 12px; }
+.gear-slot-hands .center-frame       {   width: 195px;   height: 261px;  margin-left: -66px;  margin-top: -88px; }
+.gear-slot-hands .item-content-cell  {   width: 195px;   height: 261px; }
+
+.gear-slot.gear-slot-shoulders           {   width: 66px;    height: 88px;   top: 28px;    left: 38px; }
+.gear-slot-shoulders .center-frame       {   width: 195px;   height: 261px;  margin-left: -66px;  margin-top: -88px; }
+.gear-slot-shoulders .item-content-cell  {   width: 195px;   height: 261px; }
+
+.gear-slot.gear-slot-legs           {   width: 66px;    height: 88px;   top: 231px;    left: 120px; }
+.gear-slot-legs .center-frame       {   width: 195px;   height: 261px;  margin-left: -66px;  margin-top: -88px; }
+.gear-slot-legs .item-content-cell  {   width: 195px;   height: 261px; }
+
+.gear-slot.gear-slot-bracers           {   width: 66px;    height: 88px;   top: 127px;    left: 228px; }
+.gear-slot-bracers .center-frame       {   width: 195px;   height: 261px;  margin-left: -66px;  margin-top: -88px; }
+.gear-slot-bracers .item-content-cell  {   width: 195px;   height: 261px; }
+
+.gear-slot.gear-slot-mainHand           {   width: 66px;    height: 130px;   top: 282px;    left: 12px; }
+.gear-slot-mainHand .center-frame       {   width: 195px;   height: 387px;  margin-left: -66px;  margin-top: -130px; }
+.gear-slot-mainHand .item-content-cell  {   width: 195px;   height: 387px; }
+
+.gear-slot.gear-slot-offHand           {   width: 66px;    height: 130px;   top: 282px;    left: 228px; }
+.gear-slot-offHand .center-frame       {   width: 195px;   height: 387px;  margin-left: -66px;  margin-top: -130px; }
+.gear-slot-offHand .item-content-cell  {   width: 195px;   height: 387px; }
+
+.gear-slot.gear-slot-waist           {   width: 82px;    height: 34px;   top: 193px;    left: 112px; }
+.gear-slot-waist .center-frame       {   width: 243px;   height: 99px;  margin-left: -82px;  margin-top: -34px; }
+.gear-slot-waist .item-content-cell  {   width: 243px;   height: 99px; }
+
+.gear-slot.gear-slot-rightFinger           {   width: 42px;    height: 42px;   top: 227px;    left: 240px; }
+.gear-slot-rightFinger .center-frame       {   width: 123px;   height: 123px;  margin-left: -42px;  margin-top: -42px; }
+.gear-slot-rightFinger .item-content-cell  {   width: 123px;   height: 123px; }
+
+.gear-slot.gear-slot-leftFinger           {   width: 42px;    height: 42px;   top: 227px;    left: 24px; }
+.gear-slot-leftFinger .center-frame       {   width: 123px;   height: 123px;  margin-left: -42px;  margin-top: -42px; }
+.gear-slot-leftFinger .item-content-cell  {   width: 123px;   height: 123px; }
+
+.gear-slot.gear-slot-neck           {   width: 56px;    height: 56px;   top: 48px;    left:204px; }
+.gear-slot-neck .center-frame       {   width: 165px;   height: 165px;  margin-left: -56px;  margin-top: -56px; }
+.gear-slot-neck .item-content-cell  {   width: 165px;   height: 165px; }
+
+
+
+
+
+
+
+

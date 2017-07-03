@@ -2,6 +2,10 @@ body {
     padding-top: 70px;
 }
 
+img {
+    vertical-align: middle;
+}
+
 .paragon-summary th {
     text-align: right;
 }

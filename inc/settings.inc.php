@@ -1,7 +1,6 @@
 <?php
 
-
-define('DEBUG_MODE', false);
+define('DEBUG_MODE', true);
 define('BASE_DIR', '/D3T'); // '' if live!
 
 define('SMARTY_TPL_DIR', 'tpl/');

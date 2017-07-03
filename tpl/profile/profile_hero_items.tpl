@@ -15,11 +15,12 @@
                         <div class="center-frame">
 
                             {include file="profile/inventory/item_icon.tpl"}
-                            {*                            {if $item->getSockets() > 0}
+                            {*                            {if $item->hasSockets()}
                             {include file="profile/inventory/item_sockets.tpl"}
                             {/if}
                             *} 
                         </div>
+                        <div class="gear-slot-gradient"></div>
                     </div>
 
 

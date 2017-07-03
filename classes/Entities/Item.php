@@ -32,6 +32,14 @@ class Item {
     }
     
     /**
+     * 
+     * @return boolean
+     */
+    public function hasSockets() {
+        return $this->getSockets() > 0 ? true : false;
+    }
+
+        /**
      * Puts a gem object into the gem's array
      * @param \Entities\Gem $gem
      */

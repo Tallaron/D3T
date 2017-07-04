@@ -18,8 +18,13 @@ abstract class InventoryMapper extends AbstractMapper {
             $method = 'set'.ucfirst($k);
             if(method_exists($inventory, $method)) {
                 $mayHaveSockets = in_array($k, self::getSettings()->get('SOCKETED_ITEMS'));
-                $inventory->$method( \Mappers\ItemMapper::createObj($v, $mayHaveSockets) );
+                $item = \Mappers\ItemMapper::createObj($v, $mayHaveSockets);
+                $inventory->$method( $item );
             }
+        }
+        if($inventory->getMainHand()->isTwohand()) {
+            $inventory->setOffHand(\Mappers\ItemMapper::createShadowItem(
+                    $inventory->getMainHand()) );
         }
         return $inventory;
     }

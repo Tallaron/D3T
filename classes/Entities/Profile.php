@@ -13,8 +13,10 @@ class Profile {
     private $contentId;
     private $lastUpdate;
     private $heroes = [];
-    private $hero;
+    private $hero = false;
     private $clan;
+    private $lifeTimeKills;
+    private $eliteKills;
     private $paragon;
     private $paragonHardcore;
     private $paragonSeasonal;
@@ -301,5 +303,40 @@ class Profile {
         return $this;
     }
 
+    /**
+     * 
+     * @return int
+     */
+    public function getLifeTimeKills() {
+        return $this->lifeTimeKills;
+    }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getEliteKills() {
+        return $this->eliteKills;
+    }
+
+    /**
+     * 
+     * @param int $lifeTimeKills
+     * @return \Entities\Profile
+     */
+    public function setLifeTimeKills($lifeTimeKills) {
+        $this->lifeTimeKills = $lifeTimeKills;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param int $eliteKills
+     * @return \Entities\Profile
+     */
+    public function setEliteKills($eliteKills) {
+        $this->eliteKills = $eliteKills;
+        return $this;
+    }
 
 }

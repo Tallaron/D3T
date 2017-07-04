@@ -5,25 +5,15 @@
 
             <div class="paper-doll {$profile->getHero()->getPaperDoll()}">
 
-
-
-
-
                 {foreach from=$settings->get('ITEM_SLOTS') key=$slot item=$func}
                     {$item = $profile->getHero()->getInventory()->$func()}
-                    <div class="gear-slot gear-slot-{$slot} item-{$item->getDisplayColor()}">
-                        <div class="center-frame">
-
+                    {if $item->getIcon() != false}
+                        <div class="gear-slot gear-slot-{$slot} item-{$item->getDisplayColor()}">
                             {include file="profile/inventory/item_icon.tpl"}
-                            {*                            {if $item->hasSockets()}
+                            {include file="profile/inventory/item_link.tpl"}
                             {include file="profile/inventory/item_sockets.tpl"}
-                            {/if}
-                            *} 
                         </div>
-                        <div class="gear-slot-gradient"></div>
-                    </div>
-
-
+                    {/if}
                 {/foreach}
 
             </div>

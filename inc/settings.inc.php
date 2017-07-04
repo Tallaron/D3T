@@ -21,6 +21,9 @@ define('MILLION', 1000000);
 define('BILLION', 1000000000);
 define('TRILLION', 1000000000000);
 
+define('D3_GAME_GUIDE_ITEM_BASE_URL', 'https://eu.battle.net/d3/en/item/');
+define('D3_GAME_GUIDE_SKILL_BASE_URL', 'https://eu.battle.net/d3/en/class/');
+
 define('BLIZZARD_D3_ITEM_BASE_PATH', 'http://media.blizzard.com/d3/icons/items/');
 define('BLIZZARD_D3_SKILL_BASE_PATH', 'http://media.blizzard.com/d3/icons/skills/');
 define('BLIZZARD_D3_PORTRAIT_BASE_PATH', 'http://media.blizzard.com/d3/icons/portraits/');

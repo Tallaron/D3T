@@ -32,6 +32,27 @@ class Item {
     }
     
     /**
+     * Check the item's icon string for occurance of '2h' to determine if it is a two-handed weapon or not
+     * @return boolean
+     */
+    public function isTwohand() {
+        if($this->getIcon() != false) {
+            return substr_count(strtolower($this->getIcon()), '2h') > 0 ? true : false;
+        } return false;
+    }
+
+        /**
+     * Returns link for the item leading to the official game guide
+     * @return String
+     */
+    public function getLink() {
+        return D3_GAME_GUIDE_ITEM_BASE_URL.strtolower( 
+                str_replace(' ', '-', 
+                        str_replace('\'', '', 
+                                $this->getName() ) ) );
+    }
+
+        /**
      * 
      * @return boolean
      */

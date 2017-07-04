@@ -11,3 +11,5 @@
 
 
 </div>
+
+{*                                <a href="{$settings->get('BNET_PROFILE_URL', $ladder->getRealm())}{$player->getBTagMinus()}/" target="_blank">*}

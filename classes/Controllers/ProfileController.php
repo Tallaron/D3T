@@ -42,13 +42,13 @@ class ProfileController extends AbstractController {
 
 
     private function isValidBTag($bTag) {
-        if(substr_count($bTag, '#') != 1) {
+        if(substr_count($bTag, '#') != 1 && substr_count($bTag, '-') != 1) {
             return false;
         }
-        if(strpos($bTag, '#') == 0) {
+        if(strpos($bTag, '#') == 0 && strpos($bTag, '-') == 0) {
             return false;
         }
-        if(strpos($bTag, '#') >= strlen($bTag)-1) {
+        if(strpos($bTag, '#') >= strlen($bTag)-1 && strpos($bTag, '-') >= strlen($bTag)-1) {
             return false;
         }
         return true;

@@ -4,12 +4,27 @@
         <div class="panel-body">
             {foreach from=$profile->getHero()->getPassiveSkills() item=$skill}
                 {if $skill != null}
-                    <div class="row col-sm-12">
-                        <div class="pull-left custom-a-skill"><img src="{$skill->getLargeIconUrl()}" /></div>
-                        <div class="pull-left">{$skill->getName()}</div>
-                    </div>
-                {/if}
-            {/foreach}
-        </div>
+
+
+                <div class="skill">
+                    <a href="{D3_GAME_GUIDE_SKILL_BASE_URL}{$profile->getHero()->getClass()}/passive/{$skill->getSlug()}" target="_blank">
+                        <div class="p-skill-frame">
+                            <img src="{$skill->getLargeIconUrl()}" />
+                        </div>
+                        <div class="p-skill-name">{$skill->getName()}</div>
+                        <div class="skill-title" title="{$skill->getName()}"></div>
+                    </a>
+                </div>
+
+
+
+
+
+
+
+
+            {/if}
+        {/foreach}
     </div>
+</div>
 </div>

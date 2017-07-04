@@ -42,7 +42,9 @@ class ProfileMapper extends AbstractMapper {
             ->setParagon( $data->paragonLevel )
             ->setParagonHardcore( $data->paragonLevelHardcore )
             ->setParagonSeasonal( $data->paragonLevelSeason )
-            ->setParagonSeasonalHardcore( $data->paragonLevelSeasonHardcore );
+            ->setParagonSeasonalHardcore( $data->paragonLevelSeasonHardcore )
+            ->setLifeTimeKills( $data->kills->monsters )
+            ->setEliteKills( $data->kills->elites );
     }
 
     /**

@@ -30,6 +30,17 @@ class Gem {
     }
 
     /**
+     * Returns link for the item leading to the official game guide
+     * @return String
+     */
+    public function getLink() {
+        return D3_GAME_GUIDE_ITEM_BASE_URL.strtolower( 
+                str_replace(' ', '-', 
+                        str_replace('\'', '', 
+                                $this->getName() ) ) );
+    }
+
+    /**
      * 
      * @return String Defaults to 0.
      */

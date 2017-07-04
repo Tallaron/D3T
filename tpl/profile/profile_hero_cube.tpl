@@ -11,11 +11,13 @@
 
         <div class="cube-slot cube-item-{$i+1}{if $item->getIcon() != false} is-active{/if}" title="{$item->getName()}">
             {if $item->getIcon() != false}
-                <span class="cube-item-container">
-                    <span class="cube-item-align">
-                        <img src="{$item->getLargeIconUrl()}" />
+                <a href="{$item->getLink()}" target="_blank">
+                    <span class="cube-item-container">
+                        <span class="cube-item-align">
+                            <img src="{$item->getLargeIconUrl()}" />
+                        </span>
                     </span>
-                </span>
+                </a>
             {/if}
         </div>
 

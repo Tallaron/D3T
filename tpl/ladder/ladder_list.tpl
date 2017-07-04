@@ -31,15 +31,21 @@
                         </td>
                         <td>{$rank->getLevel()}</td>
                         <td>
-                            <span class="icon-frame">
-                                <img src="{BASE_DIR}/gfx/{$player->getIconFileName()}.png" />
-                            </span>
+                            {if $player->isUnknown() != true}
+                                <a href="{BASE_DIR}/profile/show/{$ladder->getRealm()}/{$player->getBTagMinus()}/hero/{$player->getId()}" target="_blank">
+                            {/if}
+                                <span class="icon-frame">
+                                    <img src="{BASE_DIR}/gfx/{$player->getIconFileName()}.png" />
+                                </span>
+                            {if $player->isUnknown() != true}
+                                </a>
+                            {/if}
                         </td>
                         <td>
                             {if $player->isUnknown()}
                                 <div class="custom-grey-name">{$player->getName()}</div>
                             {else}
-                                <a href="{$settings->get('BNET_PROFILE_URL', $ladder->getRealm())}{$player->getBTagMinus()}/" target="_blank">
+                                <a href="{BASE_DIR}/profile/show/{$ladder->getRealm()}/{$player->getBTagMinus()}" target="_blank">
                                     {if $player->hasClan()}<span class="small" title="{$player->getClan()}">&lt;{$player->getClanShort()}&gt;</span> {/if}
                                     {$player->getName()}
                                 </a>

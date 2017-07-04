@@ -49,4 +49,15 @@ abstract class ItemMapper extends AbstractMapper {
         }
     }
     
+    
+    
+    public static function createShadowItem(\Entities\Item $item) {
+        return (new \Entities\Item())
+            ->setId( $item->getId() )
+            ->setName( $item->getName() )
+            ->setIcon( $item->getIcon() )
+            ->setDisplayColor( 'disabled-2h' )
+            ->setTooltipParams( $item->getTooltipParams() );
+    }
+    
 }

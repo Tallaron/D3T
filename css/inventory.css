@@ -57,6 +57,17 @@
     
 }
 
+.item-disabled-2h {
+/*    border-color: #748e3d;
+    background-color: #262f14;*/
+    border: none !important;
+    box-shadow: none !important;
+    background-image: url("../gfx/inventory/disabled-offhand.gif");
+    
+}
+.item-disabled-2h img {
+    opacity: 0.3;
+}
 
 
 
@@ -107,11 +118,24 @@
     display: block;
 }
 
+.item-title {
+    border-radius: 4px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 50;    
+}
+
+
 
 /*center frame and its child needs dimensions 3 times of the parent - 3px*/
 .gear-slot.gear-slot-head {   width: 66px;    height: 66px;   top: 4px;    left: 120px; }
 .gear-slot-head .center-frame {   width: 195px;   height: 195px;  margin-left: -66px;  margin-top: -66px; }
 .gear-slot-head .item-content-cell {   width: 195px;   height: 195px; }
+.gear-slot-head .item-title {   width: 66px;    height: 66px; }
 
 .gear-slot.gear-slot-torso           {   width: 82px;    height: 115px;   top: 74px;    left: 112px; }
 .gear-slot-torso .center-frame       {   width: 243px;   height: 342px;   margin-left: -82px;  margin-top: -115px; }
@@ -164,7 +188,19 @@
 
 
 
+.socket {
+    position: relative;
+    z-index: 100;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    background: url(../gfx/inventory/skill-overlays.png) 0 -71px no-repeat;
+    opacity: 0.8;
+}
 
-
-
+.socket img {
+    margin: 6px auto 0;
+    width: 20px;
+    height: 20px;
+}
 

@@ -45,6 +45,10 @@ class ProfileMapper extends AbstractMapper {
             ->setParagonSeasonalHardcore( $data->paragonLevelSeasonHardcore )
             ->setLifeTimeKills( $data->kills->monsters )
             ->setEliteKills( $data->kills->elites );
+        foreach($data->timePlayed as $key => $playedValue) {
+            $profile->setPlayed($key, $playedValue);
+            $profile->addPlayed($playedValue);
+         }
     }
 
     /**

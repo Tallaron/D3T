@@ -1,0 +1,70 @@
+.played-bars {
+    position: relative;
+    height: 95px;
+    background-color: rgba(200,200,0,0.7);
+    padding: 5px;
+    display: inline-block;
+    background-color: #927354;
+    border: 1px solid #000;
+    border-radius: 4px;
+}
+
+.played-bar-container {
+    width: 35px;
+    height: 93px;
+    position: relative;
+    display: block;
+    margin: 1px;
+    float: left;
+}
+
+.played-bar-bg, .played-bar {
+    width: 35px;
+    height: 73px;
+    background-image: url(../gfx/classes_played.png);
+    position: absolute;
+    display: block;
+}
+.played-bar-bg {
+    opacity: 0.7;
+}
+
+.played-bar-limiter {
+    position: absolute;
+    height: 73px;
+}
+
+.played-bar {
+    bottom: 0px;
+}
+.played-bar-text {
+    width: 35px;
+    text-align: center;
+    font-size: 10px;
+    position: absolute;
+    top: 72px;
+    display: block;
+}
+
+
+
+.played-barbarian-bg { background-position: 0px 0px; }
+.played-barbarian { background-position: -245px 100%; }
+
+.played-crusader-bg { background-position: -35px 0px; }
+.played-crusader { background-position: -280px 100%; }
+
+.played-demon-hunter-bg { background-position: -70px 0px; }
+.played-demon-hunter { background-position: -315px 100%; }
+
+.played-monk-bg { background-position: -105px 0px; }
+.played-monk { background-position: -350px 100%; }
+
+.played-necromancer-bg { background-position: -140px 0px; }
+.played-necromancer { background-position: -385px 100%; }
+
+.played-witch-doctor-bg { background-position: -175px 0px; }
+.played-witch-doctor { background-position: -420px 100%; }
+
+.played-wizard-bg { background-position: -210px 0px; }
+.played-wizard { background-position: -455px 100%; }

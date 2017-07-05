@@ -19,10 +19,10 @@
                 {foreach from=$profile->getSeasons() item=$season}
                 <tr>
                     <td>{$season->getId()}</td>
-                    <td>{$season->getParagon()}</td>
-                    <td>{$season->getParagonHardcore()}</td>
-                    <td>{$season->getKilledMonsters()}</td>
-                    <td>{$season->getKilledElites()}</td>
+                    <td>{n($season->getParagon())}</td>
+                    <td>{n($season->getParagonHardcore())}</td>
+                    <td>{n($season->getKilledMonsters())}</td>
+                    <td>{n($season->getKilledElites())}</td>
                 </tr>
                 {/foreach}
             </tbody>

@@ -77,6 +77,14 @@ $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
                     'team-2'        => '2 Player',
                     'team-3'        => '3 Player',
                     'team-4'        => '4 Player',))
+        ->addContext('BNET_CLASSES_SHORT', array(
+                    'barbarian'     => 'Barb.',
+                    'crusader'      => 'Crus.',
+                    'demon-hunter'  => 'DH',
+                    'monk'          => 'Monk',
+                    'necromancer'   => 'Nec.',
+                    'witch-doctor'  => 'WD',
+                    'wizard'        => 'Wiz.',))
         ->addContext('ITEM_SLOTS', array(
                     'head' => 'getHead',
                     'torso' => 'getTorso',

@@ -10,6 +10,7 @@
         <link href="{BASE_DIR}/css/inventory.css" rel="stylesheet" type="text/css"/>
         <link href="{BASE_DIR}/css/cube.css" rel="stylesheet" type="text/css"/>
         <link href="{BASE_DIR}/css/skills.css" rel="stylesheet" type="text/css"/>
+        <link href="{BASE_DIR}/css/profile.css" rel="stylesheet" type="text/css"/>
         
         <link title="Diablo® III - News" href="/d3/en/feed/news" type="application/atom+xml" rel="alternate" />
     </head>

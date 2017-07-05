@@ -55,7 +55,11 @@ class Hero {
         $this->passiveSkills[$index] = $skill;
     }
     
-    
+    /**
+     * Returns the image string for the paper dolls background according
+     * to the heroes class.
+     * @return String
+     */
     public function getPaperDoll() {
         return $this->getClass().'-'.$this->getGender();
     }
@@ -68,6 +72,22 @@ class Hero {
         return strtolower($this->getClass()).'-'.$this->getGender()?'female':'male';
     }
     
+    /**
+     * 
+     * @return boolean
+     */
+    public function isSeasonal() {
+        return $this->getSeasonal();
+    }
+    
+    /**
+     * 
+     * @return boolean
+     */
+    public function isHardcore() {
+        return $this->getHardcore();
+    }
+
     /**
      * 
      * @return int

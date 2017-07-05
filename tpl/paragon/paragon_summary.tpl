@@ -15,18 +15,18 @@
                 <tbody>
                     <tr>
                         <td>Non Season</td>
-                        <td class="text-right">{$paragon->getNonSeason()->getLevel()}</td>
-                        <td class="text-right">{$paragon->getNonSeason()->getXpFormated()}</td>
+                        <td class="text-right">{n($paragon->getNonSeason()->getLevel())}</td>
+                        <td class="text-right">{n($paragon->getNonSeason()->getXp())}</td>
                     </tr>
                     <tr>
                         <td>Season</td>
-                        <td class="text-right">{$paragon->getSeason()->getLevel()}</td>
-                        <td class="text-right">{$paragon->getSeason()->getXpFormated()}</td>
+                        <td class="text-right">{n($paragon->getSeason()->getLevel())}</td>
+                        <td class="text-right">{n($paragon->getSeason()->getXp())}</td>
                     </tr>
                     <tr>
                         <td><strong>Overall</strong></td>
-                        <td class="text-right"><strong>{$paragon->getOverall()->getLevel()}</strong></td>
-                        <td class="text-right"><strong>{$paragon->getOverall()->getXpFormated()}</strong></td>
+                        <td class="text-right"><strong>{n($paragon->getOverall()->getLevel())}</strong></td>
+                        <td class="text-right"><strong>{n($paragon->getOverall()->getXp())}</strong></td>
                     </tr>
                 </tbody>
             </table>

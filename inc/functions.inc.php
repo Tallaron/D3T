@@ -22,3 +22,7 @@ function shutdown() {
     }
 
 }
+
+function n($n) {
+    return number_format($n,0,'.',',');
+}

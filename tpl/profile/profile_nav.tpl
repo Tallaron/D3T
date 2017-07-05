@@ -23,7 +23,9 @@
                     <li class="bg-{if $profile->getHero() != null && $profile->getHero()->getId() == $hero->getId()}success{else}info{/if}">
                         <a href="{BASE_DIR}/profile/show/{$profile->getRealm()}/{$profile->getBTagMinus()}/hero/{$hero->getId()}">
                             <span class="icon-frame"><img src="{BASE_DIR}/gfx/{$hero->getClass()}-{$hero->getGender()}.png" /></span>
-                            <span>{$hero->getName()}</span>
+                            <span class="nav-item-name">{$hero->getName()}</span>
+                            {if $hero->isSeasonal()}<span class="is-season pull-right"><img src="{BASE_DIR}/gfx/season_icon.png" /></span>{/if}
+                            {if $hero->isHardcore()}<span class="is-hardcore pull-right"><img src="{BASE_DIR}/gfx/hc_icon.png" /></span>{/if}
                         </a>
                     </li>
                 {/foreach}

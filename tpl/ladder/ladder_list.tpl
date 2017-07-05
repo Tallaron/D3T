@@ -51,7 +51,7 @@
                                 </a>
                             {/if}
                         </td>
-                        <td>{number_format($player->getParagon())}</td>
+                        <td>{n($player->getParagon())}</td>
                         <td title="{$rank->getCompletionDate()}">{$rank->getTimeFormatted()}</td>
                     </tr>
                 {/foreach}

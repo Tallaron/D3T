@@ -6,6 +6,10 @@ img {
     vertical-align: middle;
 }
 
+td {
+    cursor: default;
+}
+
 .paragon-summary th {
     text-align: right;
 }
@@ -114,4 +118,8 @@ progress[value]::-moz-progress-bar {
 
 .is-hardcore, .is-season {
     display: inline-block;
+}
+
+.season-played {
+    text-align: center;
 }

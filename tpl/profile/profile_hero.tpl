@@ -1,10 +1,10 @@
 {if $profile->getHero() != false}
     <div class="panel panel-info">
         <div class="panel-heading">
-            {$profile->getHero()->getName()} - {$settings->get('BNET_CLASSES', $profile->getHero()->getClass())}
+            {$profile->getHero()->getName()} - {$settings->get('BNET_CLASSES_LONG', $profile->getHero()->getClass())}
             {if $profile->getHero()->isSeasonal()}<span class="is-season"><img src="{BASE_DIR}/gfx/season_icon.png" /></span>{/if}
             {if $profile->getHero()->isHardcore()}<span class="is-hardcore"><img src="{BASE_DIR}/gfx/hc_icon.png" /></span>{/if}
-            <a href="{$settings->get('BNET_PROFILE_URL', $profile->getRealm())}{$profile->getBTagMinus()}/hero/{$profile->getHero()->getId()}" target="_blank" class="btn btn-xs btn-primary pull-right">B.Net Hero Profile</a>
+            <a href="{$settings->get('BLIZZARD_D3_PROFILE_URL', $profile->getRealm())}{$profile->getBTagMinus()}/{if $profile->getRealm() != 'cn'}hero/{/if}{$profile->getHero()->getId()}" target="_blank" class="btn btn-xs btn-primary pull-right">B.Net Hero Profile</a>
         </div>
         <div class="panel-body">
             <div class="col-sm-7">

@@ -81,19 +81,8 @@
         <div class="panel panel-info">
             <div class="panel-heading">Classes</div>
             <div class="panel-body text-center">
-
-                <div class="played-bars">
-                    {foreach from=$profile->getPlayed() key=$key item=$played}
-                        <div class="played-bar-container" title="{$profile->getPlayedPercentage($key)}%">
-                            <div class="played-bar-limiter">
-                                <div class="played-bar-bg played-{$key}-bg"></div>
-                                <div class="played-bar played-{$key}" style="height: {$profile->getPlayedNormalized($key)}{'%'};"></div>
-                            </div>
-                            <div class="played-bar-text">{$settings->get('BNET_CLASSES_SHORT', $key)}</div>
-                        </div>
-                    {/foreach}
-                </div>
-
+                {$obj = $profile}
+                {include file="profile/profile_played.tpl"}
             </div>
         </div>
 

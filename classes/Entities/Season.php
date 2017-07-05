@@ -5,20 +5,13 @@ namespace Entities;
 /**
  * Data class for a Diablo 3 season.
  */
-class Season {
+class Season extends PlayedTime {
 
     private $id;
     private $paragon;
     private $paragonHardcore;
     private $killedMonsters;
     private $killedElites;
-    private $timeBarb;
-    private $timeCrus;
-    private $timeDh;
-    private $timeMonk;
-    private $timeWd;
-    private $timeWiz;
-    private $timeNecro;
     
     /**
      * 

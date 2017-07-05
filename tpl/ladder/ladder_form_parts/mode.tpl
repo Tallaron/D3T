@@ -17,18 +17,21 @@
     </div>
 
     <div class="col-sm-4">
+
         <select size="1" name="index" class="form-control">
             {for $i=1 to 10}
                 {if isset($ladder) && $i == $ladder->getIndex()}
                     <option value="{$i}" selected>{$i}</option>
-                {elseif !isset($ladder) && $i == $settings->get('RANKING_DEFAULT_INDEX')}
+                {elseif !isset($ladder) && $i == $settings->get('RANKING_DEFAULT_INDEX', 'eu')}
                     <option value="{$i}" selected>{$i}</option>
                 {else}
                     <option value="{$i}">{$i}</option>
                 {/if}
             {/for}
         </select>
+
     </div>
+
 </div>
 
 

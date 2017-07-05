@@ -11,16 +11,22 @@ abstract class BlizzardLadderApiUrlFactory extends AbstractFactory {
 
     public static function getUrl($realm, $season, $hardcore, $index, $class) {
         return sprintf(
-                BLIZZARD_D3_LADDER_API_URL,
+                self::getSettings()->get('BLIZZARD_D3_LADDER_API_URL', $realm),
                 $realm,
-                $season == 1 ? 'season' : 'era',
-                $season == 1 
-                    ? 
-                    max(self::getSettings()->get('RANKING_MIN_SEASON_INDEX'), min(self::getSettings()->get('RANKING_MAX_SEASON_INDEX'), $index)) 
-                    :
-                    max(self::getSettings()->get('RANKING_MIN_ERA_INDEX'), min(self::getSettings()->get('RANKING_MAX_ERA_INDEX'), $index)),
+                self::determineMode($season),
+                self::determineIndex($realm, $season, $index),
                 $hardcore == 1 ? 'hardcore-' : '',
                 $class);
+    }
+    
+    private static function determineMode($seasonalNumFlag) {
+        return $seasonalNumFlag == 1 ? 'season' : 'era';
+    }
+    
+    private static function determineIndex($realm, $seasonalNumFlag, $index) {
+        return $seasonalNumFlag == 1
+            ? max(self::getSettings()->get('RANKING_MIN_SEASON_INDEX', $realm), min(self::getSettings()->get('RANKING_MAX_SEASON_INDEX', $realm), $index))
+            : max(self::getSettings()->get('RANKING_MIN_ERA_INDEX', $realm), min(self::getSettings()->get('RANKING_MAX_ERA_INDEX', $realm), $index));
     }
 
 }

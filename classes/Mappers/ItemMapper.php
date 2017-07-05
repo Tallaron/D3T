@@ -22,10 +22,7 @@ abstract class ItemMapper extends AbstractMapper {
                                 ITEM_API_DEFAULT_REALM,
                                 $data->tooltipParams),
                         true);
-                if(property_exists($itemData->attributesRaw, 'Sockets')) {
-                    $item->setSockets($itemData->attributesRaw->Sockets->min);
-                    self::addSockets($item, $itemData->gems);
-                }
+                self::addSockets($item, $itemData);
             }
 
             foreach($data as $k => $v) {
@@ -41,16 +38,26 @@ abstract class ItemMapper extends AbstractMapper {
     /**
      * Creates \Entities\Gem objects and puts them into the \Entities\Item object
      * @param \Entities\Item $item
-     * @param StdObject $socketData
+     * @param StdObject $itemData
      */
-    private static function addSockets($item, $socketData) {
-        foreach($socketData as $gemData) {
-            $item->addGem( \Mappers\GemMapper::createObj($gemData->item) );
+    private static function addSockets(\Entities\Item $item, $itemData) {
+        $socketsRaw = max(
+                (property_exists($itemData->attributesRaw, 'Sockets') ? $itemData->attributesRaw->Sockets->min : 0),
+                count($itemData->gems));
+        $item->setSockets($socketsRaw);
+        if($socketsRaw) {
+            foreach($itemData->gems as $gemData) {
+                $item->addGem( \Mappers\GemMapper::createObj($gemData->item) );
+            }
         }
     }
     
-    
-    
+    /**
+     * Creates a placeholder shadowed item for displaying in the inventory, e.g.
+     * unused offhand slot if wielding a two-handed weapon
+     * @param \Entities\Item $item
+     * @return \Entities\Item
+     */
     public static function createShadowItem(\Entities\Item $item) {
         return (new \Entities\Item())
             ->setId( $item->getId() )

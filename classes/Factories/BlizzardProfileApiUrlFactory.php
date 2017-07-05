@@ -7,11 +7,11 @@ namespace Factories;
  * API: Blizzard - Diablo 3 - Profile
  * Requires: Realm, Battle#Tag
  */
-abstract class BlizzardProfileApiUrlFactory {
+abstract class BlizzardProfileApiUrlFactory extends AbstractFactory {
 
     public static function getUrl($realm, $bTag) {
         return sprintf(
-                BLIZZARD_D3_PROFILE_API_URL,
+                self::getSettings()->get('BLIZZARD_D3_PROFILE_API_URL', $realm),
                 $realm,
                 str_replace('#', '-', $bTag));
     }

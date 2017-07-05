@@ -7,11 +7,11 @@ namespace Factories;
  * API: Blizzard - Diablo 3 - Hero
  * Requires: Realm, Battle#Tag, HeroId
  */
-abstract class BlizzardHeroApiUrlFactory {
+abstract class BlizzardHeroApiUrlFactory extends AbstractFactory {
 
     public static function getUrl($realm, $bTag, $heroId) {
         return sprintf(
-                BLIZZARD_D3_HERO_API_URL,
+                self::getSettings()->get('BLIZZARD_D3_HERO_API_URL', $realm),
                 $realm,
                 str_replace('#', '-', $bTag),
                 $heroId);

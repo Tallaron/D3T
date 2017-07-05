@@ -13,19 +13,17 @@ abstract class SeasonMapper {
      * @return \Entities\Season
      */
     public static function createObj($rawData) {
-        return (new \Entities\Season())
+        $season = (new \Entities\Season())
             ->setId( $rawData->seasonId )
             ->setParagon( $rawData->paragonLevel )
             ->setParagonHardcore( $rawData->paragonLevelHardcore )
             ->setKilledMonsters( $rawData->kills->monsters )
-            ->setKilledElites( $rawData->kills->elites )
-            ->setTimeBarb( $rawData->timePlayed->barbarian )
-            ->setTimeCrus( $rawData->timePlayed->crusader )
-            ->setTimeDh( $rawData->timePlayed->{'demon-hunter'} )
-            ->setTimeMonk( $rawData->timePlayed->monk )
-            ->setTimeNecro( $rawData->timePlayed->necromancer )
-            ->setTimeWd( $rawData->timePlayed->{'witch-doctor'} )
-            ->setTimeWiz( $rawData->timePlayed->wizard );
+            ->setKilledElites( $rawData->kills->elites );
+        foreach($rawData->timePlayed as $key => $playedValue) {
+            $season->setPlayed($key, $playedValue);
+            $season->addPlayed($playedValue);
+         }
+         return $season;
     }
 
 }

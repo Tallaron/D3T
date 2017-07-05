@@ -17,12 +17,18 @@
             </thead>
             <tbody>
                 {foreach from=$profile->getSeasons() item=$season}
-                <tr>
+                <tr data-toggle="collapse" data-target="#s{$season->getId()}">
                     <td>{$season->getId()}</td>
                     <td>{n($season->getParagon())}</td>
                     <td>{n($season->getParagonHardcore())}</td>
                     <td>{n($season->getKilledMonsters())}</td>
                     <td>{n($season->getKilledElites())}</td>
+                </tr>
+                <tr class="collapse" id="s{$season->getId()}">
+                    <td colspan="5" class="season-played">
+                        {$obj = $season}
+                        {include file="profile/profile_played.tpl"}
+                    </td>
                 </tr>
                 {/foreach}
             </tbody>

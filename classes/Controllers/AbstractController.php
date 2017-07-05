@@ -4,9 +4,9 @@ namespace Controllers;
 
 abstract class AbstractController {
     
-    protected static $em;
-    protected static $settings;
-    protected $context = array();
+    private static $em; //not used at this moment
+    private static $settings;
+    private $context = array();
 
 
     public static function setEntityManager($em) {
@@ -15,6 +15,14 @@ abstract class AbstractController {
     
     public static function setSettings($settings) {
         self::$settings = $settings;
+    }
+    
+    public static function getEm() {
+        return self::$em;
+    }
+
+    public static function getSettings() {
+        return self::$settings;
     }
 
     public function redirect($location = 'home') {

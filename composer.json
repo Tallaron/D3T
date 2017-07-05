@@ -5,7 +5,8 @@
             "Controllers": "./classes",
             "Views": "./classes",
             "Factories": "./classes",
-            "Mappers": "./classes"
+            "Mappers": "./classes",
+            "Validators": "./classes"
         }
     },
     "require": {

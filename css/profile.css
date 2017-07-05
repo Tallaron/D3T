@@ -68,3 +68,23 @@
 
 .played-wizard-bg { background-position: -210px 0px; }
 .played-wizard { background-position: -455px 100%; }
+
+.hero-nav-level-outer {
+    background-color: #000;
+    display: inline-block;
+    border: 2px solid #666;
+    border-radius: 11px;
+    box-shadow: 0 0 9px rgba(0,0,0,0.09), 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.hero-nav-level {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    padding-top: 2px;
+    vertical-align: middle;
+    color: #808000;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 900;
+}

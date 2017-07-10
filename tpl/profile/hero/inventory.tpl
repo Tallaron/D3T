@@ -9,9 +9,9 @@
                     {$item = $profile->getHero()->getInventory()->$func()}
                     {if $item->getIcon() != false}
                         <div class="gear-slot gear-slot-{$slot} item-{$item->getDisplayColor()}">
-                            {include file="profile/inventory/item_icon.tpl"}
-                            {include file="profile/inventory/item_link.tpl"}
-                            {include file="profile/inventory/item_sockets.tpl"}
+                            {include file="profile/hero/item_icon.tpl"}
+                            {include file="profile/hero/item_link.tpl"}
+                            {include file="profile/hero/item_sockets.tpl"}
                         </div>
                     {/if}
                 {/foreach}

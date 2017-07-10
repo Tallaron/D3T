@@ -18,12 +18,12 @@ class ProfileMapper extends AbstractMapper {
     public static function createObj($realm, $bTag, $content, $contentId) {
         $profile = (new \Entities\Profile())
             ->setRealm($realm)
-//            ->setBTag($bTag)
             ->setContent($content)
             ->setContentId($contentId);
         $data = self::getApiDataWithKey(
                 \Factories\BlizzardProfileApiUrlFactory::getUrl($realm, $bTag),
-                true);
+                true,
+                SYS_PROFILE_CACHE_LIFETIME);
         self::loadProfileInformation($profile, $data);
         self::loadHeroes($profile, $data);
         self::loadSeasons($profile, $data);
@@ -69,7 +69,8 @@ class ProfileMapper extends AbstractMapper {
                                             $profile->getRealm(),
                                             $profile->getBTagMinus(),
                                             $hero->getId()),
-                                true));
+                                true,
+                                SYS_HERO_CACHE_LIFETIME));
                 $profile->setHero($hero);
             }
         }

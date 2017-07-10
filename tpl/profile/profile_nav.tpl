@@ -2,8 +2,8 @@
     
     <li class="active">
         <a href="{BASE_DIR}/profile/show/{$profile->getRealm()}/{$profile->getBTagMinus()}/overview" data-toggle="collapse" data-target="#profile-overview">
-            <span class="glyphicon glyphicon-eye-open"></span>
-            <span>Overview</span>
+            <small><span class="glyphicon glyphicon-eye-open"></span></small> 
+            Overview
         </a>
     </li>
 
@@ -12,8 +12,8 @@
            data-target="#heroes"
            aria-expanded="false"
            aria-controls="heroes">
-            <span class="glyphicon glyphicon-pawn"></span>
-            <span>Heroes</span>
+            <small><span class="glyphicon glyphicon-pawn"></span></small> 
+            Heroes
             <span class="badge pull-right">{$profile->getNumHeroes()}</span>
         </a>
         <div class="collapse{if $content == 'hero'} in{/if}" id="heroes">
@@ -37,8 +37,8 @@
     
     <li class="active">
         <a href="{BASE_DIR}/profile/show/{$profile->getRealm()}/{$profile->getBTagMinus()}/seasons" data-toggle="collapse" data-target="#profile-seasons">
-            <span class="glyphicon glyphicon-leaf"></span>
-            <span>Seasons</span>
+            <small><span class="glyphicon glyphicon-leaf"></span></small> 
+            Seasons
         </a>
     </li>
     

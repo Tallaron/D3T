@@ -2,12 +2,22 @@
 
 define('DEBUG_MODE', true);
 define('BASE_DIR', '/D3T'); // '' if live!
+define('DEFAULT_CACHE_DIR', 'cached_data');
+
+define('TWITCH_DEFAULT_CHANNEL', 'tallaron');
 
 define('SMARTY_TPL_DIR', 'tpl/');
 define('SMARTY_COMP_DIR', 'tpl_c/');
 define('SMARTY_CACHE_DIR', 'cache/');
 define('SMARTY_CACHE', false);
 define('SMARTY_CACHE_LIFETIME', 60);
+
+define('SYS_DEFAULT_CACHE_LIFETIME', 3600);
+define('SYS_NEWSFEED_CACHE_LIFETIME', 3600);
+define('SYS_LADDER_CACHE_LIFETIME', 3600);
+define('SYS_PROFILE_CACHE_LIFETIME', 3600*1);
+define('SYS_HERO_CACHE_LIFETIME', 3600*1);
+define('SYS_ITEM_CACHE_LIFETIME', 3600*1);
 
 define('D3_CURRENT_ERA_EU', 8);
 define('D3_CURRENT_ERA_US', 8);
@@ -37,11 +47,7 @@ define('BLIZZARD_D3_ITEM_BASE_PATH', 'http://media.blizzard.com/d3/icons/items/'
 define('BLIZZARD_D3_SKILL_BASE_PATH', 'http://media.blizzard.com/d3/icons/skills/');
 define('BLIZZARD_D3_PORTRAIT_BASE_PATH', 'http://media.blizzard.com/d3/icons/portraits/');
 
-//define('BLIZZARD_D3_HERO_API_URL', 'https://%s.api.battle.net/d3/profile/%s/hero/%d?locale=en_GB');
 define('BLIZZARD_D3_ITEM_API_URL', 'https://%s.api.battle.net/d3/data/item/%s?locale=en_GB');
-//define('BLIZZARD_D3_PROFILE_API_URL', 'https://%s.api.battle.net/d3/profile/%s/?locale=en_GB');
-//define('BLIZZARD_D3_LADDER_API_URL', 'https://%s.api.battle.net/data/d3/%s/%d/leaderboard/rift-%s%s');
-//define('BLIZZARD_D3_LADDER_API_URL_CN', 'https://api.battlenet.com.%s/data/d3/%s/%d/leaderboard/rift-%s%s');
 
 define('ITEM_API_DEFAULT_REALM', 'eu');
 define('EMPTY_ITEM_DEFAULT_NAME', 'EMPTY');

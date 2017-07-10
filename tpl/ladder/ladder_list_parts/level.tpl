@@ -1,0 +1,1 @@
+<td>{$rank->getLevel()}</td>

@@ -31,7 +31,8 @@ abstract class LadderMapper extends AbstractMapper {
             ->setPatterns($patterns);
         $data = self::getApiDataWithToken(
                 \Factories\BlizzardLadderApiUrlFactory::getUrl($realm, $season, $hardcore, $index, $class),
-                true);
+                true,
+                SYS_LADDER_CACHE_LIFETIME);
         $ladder->setLastUpdate($data->last_update_time);
         self::addRanks($ladder, $data->row);
         return $ladder;

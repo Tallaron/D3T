@@ -25,34 +25,12 @@
                 {foreach from=$ladder->getRanks() key=$i item=$rank}
                     {$player = $rank->getPlayer()}
                     <tr{if $rank->isMatch()} class="custom-tr-green"{/if}>
-                        <td>
-                            {if $rank->isMatch()}<a class="custom-anchor" name="r{$player->getBTagMinus()}"></a>{/if}
-                            {$rank->getPos()}
-                        </td>
-                        <td>{$rank->getLevel()}</td>
-                        <td>
-                            {if $player->isUnknown() != true}
-                                <a href="{BASE_DIR}/profile/show/{$ladder->getRealm()}/{$player->getBTagMinus()}/hero/{$player->getId()}" target="_blank">
-                            {/if}
-                                <span class="icon-frame">
-                                    <img src="{BASE_DIR}/gfx/{$player->getIconFileName()}.png" />
-                                </span>
-                            {if $player->isUnknown() != true}
-                                </a>
-                            {/if}
-                        </td>
-                        <td>
-                            {if $player->isUnknown()}
-                                <div class="custom-grey-name">{$player->getName()}</div>
-                            {else}
-                                <a href="{BASE_DIR}/profile/show/{$ladder->getRealm()}/{$player->getBTagMinus()}" target="_blank">
-                                    {if $player->hasClan()}<span class="small" title="{$player->getClan()}">&lt;{$player->getClanShort()}&gt;</span> {/if}
-                                    {$player->getName()}
-                                </a>
-                            {/if}
-                        </td>
-                        <td>{n($player->getParagon())}</td>
-                        <td title="{$rank->getCompletionDate()}">{$rank->getTimeFormatted()}</td>
+                        {include file="ladder/ladder_list_parts/position.tpl"}
+                        {include file="ladder/ladder_list_parts/level.tpl"}
+                        {include file="ladder/ladder_list_parts/class.tpl"}
+                        {include file="ladder/ladder_list_parts/name.tpl"}
+                        {include file="ladder/ladder_list_parts/paragon.tpl"}
+                        {include file="ladder/ladder_list_parts/time.tpl"}
                     </tr>
                 {/foreach}
             </tbody>

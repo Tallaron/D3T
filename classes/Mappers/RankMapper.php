@@ -14,6 +14,7 @@ abstract class RankMapper {
      */
     public static function createObj($rankData) {
         $rank = new \Entities\Rank();
+        $rank->setOrder($rankData->order);
         foreach($rankData->data as $data) {
             switch($data->id) {
                 case 'Rank':

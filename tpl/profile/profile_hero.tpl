@@ -1,19 +1,24 @@
 {if $profile->getHero() != false}
     <div class="panel panel-info">
         <div class="panel-heading">
-            {$profile->getHero()->getName()} - {$settings->get('BNET_CLASSES_LONG', $profile->getHero()->getClass())}
+            <strong>{$profile->getHero()->getName()}</strong> - {$settings->get('BNET_CLASSES_LONG', $profile->getHero()->getClass())}
             {if $profile->getHero()->isSeasonal()}<span class="is-season"><img src="{BASE_DIR}/gfx/season_icon.png" /></span>{/if}
             {if $profile->getHero()->isHardcore()}<span class="is-hardcore"><img src="{BASE_DIR}/gfx/hc_icon.png" /></span>{/if}
-            <a href="{$settings->get('BLIZZARD_D3_PROFILE_URL', $profile->getRealm())}{$profile->getBTagMinus()}/{if $profile->getRealm() != 'cn'}hero/{/if}{$profile->getHero()->getId()}" target="_blank" class="btn btn-xs btn-primary pull-right">B.Net Hero Profile</a>
+            <a href="{$settings->get('BLIZZARD_D3_PROFILE_URL', $profile->getRealm())}{$profile->getBTagMinus()}/{if $profile->getRealm() != 'cn'}hero/{/if}{$profile->getHero()->getId()}" 
+               target="_blank" 
+               class="btn btn-xs btn-primary pull-right">
+                <small><span class="glyphicon glyphicon-link"></span></small> 
+                B.Net Hero Profile
+            </a>
         </div>
         <div class="panel-body">
             <div class="col-sm-7">
-                {include file="profile/profile_hero_items.tpl"}
-                {include file="profile/profile_hero_cube.tpl"}
+                {include file="profile/hero/inventory.tpl"}
+                {include file="profile/hero/cube.tpl"}
             </div>
             <div class="col-sm-5">
-                {include file="profile/profile_hero_active_skills.tpl"}
-                {include file="profile/profile_hero_passive_skills.tpl"}
+                {include file="profile/hero/active_skills.tpl"}
+                {include file="profile/hero/passive_skills.tpl"}
             </div>
         </div>
     </div>

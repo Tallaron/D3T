@@ -12,11 +12,18 @@
 
         <div class="navbar-form navbar-left">
             <div class="btn-group" role="group" aria-label="...">
-                <a href="{BASE_DIR}/ladder" class="btn btn-primary">Ladder</a>
-                <a href="{BASE_DIR}/paragon" class="btn btn-primary">Paragon</a>
-                <a href="{BASE_DIR}/profile" class="btn btn-primary">Profile</a>
+                <a href="{BASE_DIR}/ladder" class="btn btn-primary"><small><span class="glyphicon glyphicon-list"></span></small> Ladder</a>
+                <a href="{BASE_DIR}/paragon" class="btn btn-primary"><small><span class="glyphicon glyphicon-upload"></span></small> Paragon</a>
+                <a href="{BASE_DIR}/profile" class="btn btn-primary"><small><span class="glyphicon glyphicon-user"></span></small> Profile</a>
 {*                <a href="{BASE_DIR}/build" class="btn btn-primary">Builds</a>*}
             </div>
         </div>
+
+        <div class="navbar-form navbar-right">
+            <div class="btn-group" role="group" aria-label="...">
+                <a href="{BASE_DIR}/twitch" class="btn btn-primary"><small><span class="glyphicon glyphicon-facetime-video"></span></small> Twitch</a>
+            </div>
+        </div>
+
     </div>
 </nav>        

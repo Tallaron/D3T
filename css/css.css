@@ -100,6 +100,9 @@ progress[value]::-moz-progress-bar {
     padding-top: 100px;
 }
 
+.custom-news {
+    margin-bottom: 5px;
+}
 
 .nav-item-name {
     margin-left: 5px;

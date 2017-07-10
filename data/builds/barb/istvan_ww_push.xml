@@ -1,25 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
     <name>Istvan WW Push</name>
+    <version>2.6.0</version>
+    <bounty>
+        <solo>2</solo>
+        <team>2</team>
+    </bounty>
+    <rift>
+        <solo>2</solo>
+        <team>1</team>
+    </rift>
+    <grift>
+        <solo>5</solo>
+        <team>1</team>
+    </grift>
     <items>
-        <head>helm-of-the-wastes</head>
-        <body>cuirass-of-the-wastes</body>
-        <waist>pride-of-cassius</waist>
-        <pants>tasset-of-the-wastes</pants>
-        <boots>sabaton-of-the-wastes</boots>
-        <shoulders>pauldrons-of-the-wastes</shoulders>
-        <wrists>gauntlet-of-the-wastes</wrists>
-        <bracers>strongarm-bracers</bracers>
-        <mainhand>little-rogue</mainhand>
-        <offhand>the-slanderer</offhand>
-        <necklace>hellfire-amulet</necklace>
-        <ring1>convention-of-elements</ring1>
-        <ring2>obsidian-ring-of-the-zodiac</ring3>
+        <head>
+            <item>helm-of-the-wastes</item>
+            <socket>flawless-royal-diamond</socket>
+        </head>
+        <torso>
+            <item>cuirass-of-the-wastes</item>
+            <socket>flawless-royal-diamond</socket>
+            <socket>flawless-royal-diamond</socket>
+            <socket>flawless-royal-diamond</socket>
+        </torso>
+        <waist>
+            <item>pride-of-cassius</item>
+        </waist>
+        <legs>
+            <item>tasset-of-the-wastes</item>
+            <socket>flawless-royal-diamond</socket>
+            <socket>flawless-royal-diamond</socket>
+        </legs>
+        <feet>
+            <item>sabaton-of-the-wastes</item>
+        </feet>
+        <shoulders>
+            <item>pauldrons-of-the-wastes</item>
+        </shoulders>
+        <hands>
+            <item>gauntlet-of-the-wastes</item>
+        </hands>
+        <bracers>
+            <item>strongarm-bracers</item>
+        </bracers>
+        <mainHand>
+            <item>little-rogue</item>
+            <socket>flawless-royal-emerald</socket>
+        </mainHand>
+        <offHand>
+            <item>the-slanderer</item>
+            <socket>flawless-royal-emerald</socket>
+        </offHand>
+        <neck>
+            <item>hellfire-amulet</item>
+            <socket>pain-enhancer</socket>
+        </neck>
+        <leftFinger>
+            <item>convention-of-elements</item>
+            <socket>taeguk</socket>
+        </leftFinger>
+        <rightFinger>
+            <item>obsidian-ring-of-the-zodiac</item>
+            <socket>bane-of-the-stricken</socket>
+        </rightFinger>
     </items>
     <cube>
-        <a>the-furnace</a>
-        <b>mantle-of-channeling</b>
-        <c>skull-grasp</c>
+        <weapon>the-furnace</weapon>
+        <armor>mantle-of-channeling</armor>
+        <jewelry>skull-grasp</jewelry>
     </cube>
     <active>
         <a>battle-rage</a>
@@ -35,9 +85,4 @@
         <c>ruthless</c>
         <d>rampage</d>
     </passive>
-    <gems>
-        <a>pain-enhancer</a>
-        <b>taeguk</b>
-        <c>bane-of-the-stricken</c>
-    </gems>
 </root>

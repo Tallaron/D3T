@@ -21,7 +21,8 @@ abstract class ItemMapper extends AbstractMapper {
                         \Factories\BlizzardItemApiUrlFactory::getUrl(
                                 ITEM_API_DEFAULT_REALM,
                                 $data->tooltipParams),
-                        true);
+                        true,
+                        SYS_ITEM_CACHE_LIFETIME);
                 self::addSockets($item, $itemData);
             }
 

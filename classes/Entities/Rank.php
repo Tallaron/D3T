@@ -7,7 +7,8 @@ namespace Entities;
  */
 class Rank {
 
-    private $pos;
+    private $pos = false;
+    private $order;
     private $level;
     private $time;
     private $completionTime;
@@ -161,5 +162,25 @@ class Rank {
         $this->setMatch($isMatch);
         return $this;
     }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getOrder() {
+        return $this->order;
+    }
+
+    /**
+     * 
+     * @param int $order
+     * @return \Entities\Rank
+     */
+    public function setOrder($order) {
+        $this->order = $order;
+        return $this;
+    }
+
+
 
 }

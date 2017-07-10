@@ -3,7 +3,7 @@ namespace Mappers;
 /**
  * Mapper for \Entities\NewsFeed
  */
-abstract class NewsFeedMapper {
+abstract class NewsFeedMapper extends AbstractMapper {
     /**
      * 
      * @param String $url News Feed URL -  Should be a valid XML document
@@ -13,7 +13,7 @@ abstract class NewsFeedMapper {
         $newsFeed = new \Entities\NewsFeed();
         try {
             $domObj = new \DOMDocument();
-            $domObj->loadXML(file_get_contents($url));
+            $domObj->loadXML( self::getDataFromCache($url, SYS_NEWSFEED_CACHE_LIFETIME) );
             self::createNews( $domObj->getElementsByTagName('entry'), $newsFeed );
         } catch(\Exception $e) {
             self::createNews( new \DOMNodeList(), $newsFeed );
@@ -31,4 +31,5 @@ abstract class NewsFeedMapper {
             $newsFeed->addNews( \Mappers\NewsMapper::createObj($entry) );
         }
     }
+    
 }

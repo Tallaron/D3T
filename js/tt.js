@@ -195,6 +195,9 @@ if (typeof Bnet.D3.Tooltips == 'undefined')
         }
 
         function linkMouseOut(link) {
+                if(document.getElementById('custom-tooltip-js') !== null) {
+                    document.body.removeChild( document.getElementById('custom-tooltip-js') );
+                }
 
             if (link != currentLink) {
                 return;
@@ -353,14 +356,18 @@ if (typeof Bnet.D3.Tooltips == 'undefined')
             },
 
             getScript: function (url) {
+                if(document.getElementById('custom-tooltip-js') !== null) {
+                    document.body.removeChild( document.getElementById('custom-tooltip-js') );
+                }
 
                 var script = $.create('script');
+                script.id = 'custom-tooltip-js';
                 script.type = 'text/javascript';
                 script.src = url;
 
                 document.body.appendChild(script);
             },
-
+            
             getStyle: function (url) {
 
                 var link = $.create('link');

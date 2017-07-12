@@ -3,6 +3,7 @@
 define('DEBUG_MODE', true);
 define('BASE_DIR', '/D3T'); // '' if live!
 define('DEFAULT_CACHE_DIR', 'cached_data');
+define('BUILDS_DATA_BASE_DIR', 'data/builds');
 
 define('TWITCH_DEFAULT_CHANNEL', 'tallaron');
 
@@ -168,6 +169,8 @@ $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
                     'torso',
                     'legs',
                     'mainHand',
-                    'offHand',));
+                    'offHand',))
+        ->addContext('RANKING_DEFAULT_MIN_PARAGON', 1)
+        ->addContext('RANKING_DEFAULT_MAX_PARAGON', 10000);
 
 

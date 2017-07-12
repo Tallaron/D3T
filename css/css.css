@@ -84,7 +84,7 @@ progress[value]::-moz-progress-bar {
     box-shadow: none;
 }
 
-.custom-grey-name {
+.custom-grey-name, .custom-grey-text {
     color: #999999;
 }
 

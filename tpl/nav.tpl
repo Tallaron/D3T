@@ -15,7 +15,7 @@
                 <a href="{BASE_DIR}/ladder" class="btn btn-primary"><small><span class="glyphicon glyphicon-list"></span></small> Ladder</a>
                 <a href="{BASE_DIR}/paragon" class="btn btn-primary"><small><span class="glyphicon glyphicon-upload"></span></small> Paragon</a>
                 <a href="{BASE_DIR}/profile" class="btn btn-primary"><small><span class="glyphicon glyphicon-user"></span></small> Profile</a>
-{*                <a href="{BASE_DIR}/build" class="btn btn-primary">Builds</a>*}
+{*                <a href="{BASE_DIR}/build" class="btn btn-primary"><small><span class="glyphicon glyphicon-wrench"></span></small> Builds</a>*}
             </div>
         </div>
 

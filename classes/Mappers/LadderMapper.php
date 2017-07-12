@@ -16,10 +16,12 @@ abstract class LadderMapper extends AbstractMapper {
      * @param String $class e.g. 'rift-barbarian'
      * @param int $min 1..1000
      * @param int $max 1..1000
+     * @param int $minPara 1..10000
+     * @param int $maxPara 1..10000
      * @param String $patterns csv string
      * @return \Entities\Ladder
      */
-    public static function createObj($realm, $season, $hardcore, $index, $class, $min, $max, $patterns) {
+    public static function createObj($realm, $season, $hardcore, $index, $class, $min, $max, $minPara, $maxPara, $patterns) {
         $ladder = (new \Entities\Ladder())
             ->setRealm($realm)
             ->setSeason($season)
@@ -28,6 +30,8 @@ abstract class LadderMapper extends AbstractMapper {
             ->setClass($class)
             ->setMin($min)
             ->setMax($max)
+            ->setMinPara($minPara)
+            ->setMaxPara($maxPara)
             ->setPatterns($patterns);
         $data = self::getApiDataWithToken(
                 \Factories\BlizzardLadderApiUrlFactory::getUrl($realm, $season, $hardcore, $index, $class),
@@ -41,18 +45,29 @@ abstract class LadderMapper extends AbstractMapper {
     /**
      * 
      * @param \Entities\Ladder $ladder
-     * @param StdObject $data From json_decode
+     * @param StdObject $dataAll From json_decode
      */
-    private static function addRanks(\Entities\Ladder $ladder, $data) {
-        $levelSum = 0;
-        $data = array_slice($data, $ladder->getStartIndex(), $ladder->getLength());
+    private static function addRanks(\Entities\Ladder $ladder, $dataAll) {
+        $levelSum = 0; $pos = $ladder->getMin();
+        $data = array_slice($dataAll, $ladder->getStartIndex(), $ladder->getLength());
         foreach($data as $row) {
-            $rank = \Mappers\RankMapper::createObj($row);
-            $ladder->addRank( $rank );
-            $levelSum += $rank->getLevel();
-            self::search($ladder, $rank);
+            $rank = \Mappers\RankMapper::createObj($row); //create rank
+
+            if($rank->getPos() != false) {  //fix empty position
+                $pos = $rank->getPos();
+            } else {
+                $rank->setPos($pos);
+            }
+            
+            // filter rank by paragon level
+            if(\Validators\AbstractBattleNetValidator::validateInt($rank->getPlayer()->getParagon(),
+                    $ladder->getMinPara(), $ladder->getMaxPara())) {
+                $ladder->addRank( $rank );
+                $levelSum += $rank->getLevel();
+                self::search($ladder, $rank);
+            }
         }
-        $ladder->setAvgLevel(number_format($levelSum / $ladder->getLength(), 2));
+        $ladder->setAvgLevel($ladder->getCount() > 0 ? number_format($levelSum / $ladder->getCount(), 2) : 0);
     }
     
     /**

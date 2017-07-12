@@ -21,7 +21,9 @@
                     <th>Time</th>
                 </tr>
             </thead>
-            <tbody
+            <tbody>
+{*                {$ladder->setSmarty(0)}*}
+                {$pos = '0'}
                 {foreach from=$ladder->getRanks() key=$i item=$rank}
                     {$player = $rank->getPlayer()}
                     <tr{if $rank->isMatch()} class="custom-tr-green"{/if}>

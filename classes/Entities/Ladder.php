@@ -15,6 +15,8 @@ class Ladder {
     private $class = false;
     private $min;
     private $max;
+    private $minPara;
+    private $maxPara;
     private $ranks = [];
     private $avgLevel = -1;
     private $patterns = [];
@@ -54,6 +56,14 @@ class Ladder {
      */
     public function getLength() {
         return min(1000, $this->getMax() - $this->getMin() + 1);
+    }
+    
+    /**
+     * Returns the number of Ranks the ladder contains.
+     * @return int
+     */
+    public function getCount() {
+        return count($this->getRanks());
     }
 
     /**
@@ -304,6 +314,52 @@ class Ladder {
     public function setLastUpdate($lastUpdate) {
         $this->lastUpdate = $lastUpdate;
         return $this;
+    }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getMinPara() {
+        return $this->minPara;
+    }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getMaxPara() {
+        return $this->maxPara;
+    }
+
+    /**
+     * 
+     * @param int $minPara
+     * @return \Entities\Ladder
+     */
+    public function setMinPara($minPara) {
+        $this->minPara = $minPara;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param int $maxPara
+     * @return \Entities\Ladder
+     */
+    public function setMaxPara($maxPara) {
+        $this->maxPara = $maxPara;
+        return $this;
+    }
+
+    
+    
+    private $smarty;
+    public function getSmarty() {
+        return $this->smarty;
+    }
+    public function setSmarty($smarty) {
+        $this->smarty = $smarty;
     }
 
 

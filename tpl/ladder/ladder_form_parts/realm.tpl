@@ -1,6 +1,6 @@
 <div class="form-group clearfix">
     <lable for="realm" class="col-sm-2 control-label">Realm</lable>
-    <div class="col-sm-6">
+    <div class="col-sm-7">
         <select size="1" id="realm" name="realm" class="form-control">
             {foreach from=$settings->get('BNET_REALM_NAME') key=$key item=$realm}
                 {if isset($ladder)}
@@ -19,5 +19,5 @@
             {/foreach}
         </select>
     </div>
-    <div class="col-sm-4"></div>
+    <div class="col-sm-3"></div>
 </div>

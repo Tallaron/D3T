@@ -11,6 +11,7 @@
                 {include file="ladder/ladder_form_parts/class.tpl"}
                 {include file="ladder/ladder_form_parts/minmax.tpl"}
                 {include file="ladder/ladder_form_parts/search.tpl"}
+                {include file="ladder/ladder_form_parts/paragon.tpl"}
             </form>
         </div>
             

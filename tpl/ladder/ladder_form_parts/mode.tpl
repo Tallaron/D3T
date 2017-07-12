@@ -1,7 +1,7 @@
 <div class="form-group clearfix">
     <div class="col-sm-2"></div>
 
-    <div class="col-sm-6">
+    <div class="col-sm-7">
         <div class="col-sm-6">
             <div class="checkbox">
                 <input type="hidden" name="season" value="0">
@@ -16,7 +16,7 @@
         </div>
     </div>
 
-    <div class="col-sm-4">
+    <div class="col-sm-3">
 
         <select size="1" name="index" class="form-control">
             {for $i=1 to 10}

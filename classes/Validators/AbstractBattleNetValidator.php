@@ -67,16 +67,54 @@ abstract class AbstractBattleNetValidator extends \Controllers\AbstractControlle
      * @param int $max
      * @return boolean
      */
-    public static function validateMinMax($min, $max) {
+    public static function validateMinMaxPosition($min, $max) {
+        return self::validateMinMax($min, $max, MIN_LADDER_POSITION, MAX_LADDER_POSITION);
+    }
+    
+    /**
+     * Returns true if $minPara and $maxPara are within the constant given limits...
+     * - RANKING_DEFAULT_MIN_PARAGON
+     * - RANKING_DEFAULT_MAX_PARAGON
+     * ... and if $min <= $max.
+     * @param int $min
+     * @param int $max
+     * @return boolean
+     */
+    public static function validateMinMaxParagon($min, $max) {
+        return self::validateMinMax($min, $max,
+                self::getSettings()->get('RANKING_DEFAULT_MIN_PARAGON'),
+                self::getSettings()->get('RANKING_DEFAULT_MAX_PARAGON'));
+    }
+
+    /**
+     * Checks if $min and $max are within the given limits ($minLimit, $maxLimit).
+     * @param int $min
+     * @param int $max
+     * @param int $minLimit
+     * @param int $maxLimit
+     * @return boolean
+     */
+    private static function validateMinMax($min, $max, $minLimit, $maxLimit) {
         if($min > $max) {
             return false;
         }
-        if($min < MIN_LADDER_POSITION || $min > MAX_LADDER_POSITION) {
+        if($min < $minLimit || $min > $maxLimit) {
             return false;
         }
-        if($max < MIN_LADDER_POSITION || $max > MAX_LADDER_POSITION) {
+        if($max < $minLimit || $max > $maxLimit) {
             return false;
         } return true;
+    }
+    
+    /**
+     * Checks if $value is valid between the given limits ($min, $max)
+     * @param int $value
+     * @param int $min
+     * @param int $max
+     * @return boolean
+     */
+    public static function validateInt($value, $min, $max) {
+        return ($value >= $min && $value <= $max);
     }
     
 }

@@ -21,7 +21,7 @@ abstract class LadderMapper extends AbstractMapper {
      * @param String $patterns csv string
      * @return \Entities\Ladder
      */
-    public static function createObj($realm, $season, $hardcore, $index, $class, $min, $max, $minPara, $maxPara, $patterns) {
+    public static function createObj($realm, $season, $hardcore, $index, $class, $min, $max, $minPara, $maxPara, $mark, $patterns, $patternsClanTag, $patternsClan) {
         $ladder = (new \Entities\Ladder())
             ->setRealm($realm)
             ->setSeason($season)
@@ -32,7 +32,10 @@ abstract class LadderMapper extends AbstractMapper {
             ->setMax($max)
             ->setMinPara($minPara)
             ->setMaxPara($maxPara)
-            ->setPatterns($patterns);
+            ->setSearchMode($mark)
+            ->setPatterns($patterns)
+            ->setPatternsClanTag($patternsClanTag)
+            ->setPatternsClan($patternsClan);
         $data = self::getApiDataWithToken(
                 \Factories\BlizzardLadderApiUrlFactory::getUrl($realm, $season, $hardcore, $index, $class),
                 true,
@@ -65,6 +68,8 @@ abstract class LadderMapper extends AbstractMapper {
                 $ladder->addRank( $rank );
                 $levelSum += $rank->getLevel();
                 self::search($ladder, $rank);
+                self::searchClanTag($ladder, $rank);
+                self::searchClan($ladder, $rank);
             }
         }
         $ladder->setAvgLevel($ladder->getCount() > 0 ? number_format($levelSum / $ladder->getCount(), 2) : 0);
@@ -81,6 +86,38 @@ abstract class LadderMapper extends AbstractMapper {
                 if(strpos(strtolower($rank->getPlayer()->getName()), strtolower($pattern)) !== false) {
                     $rank->setMatch(true);
                     $ladder->addSearchResult($rank->getPlayer());
+                }
+            }
+        }
+    }
+
+    /**
+     * Matches the rank to the search patterns
+     * @param \Entities\Ladder $ladder
+     * @param \Entities\Rank $rank
+     */
+    private static function searchClanTag(\Entities\Ladder $ladder, \Entities\Rank $rank) {
+        if($ladder->hasSearchClanTag()) {
+            foreach($ladder->getPatternsClanTag() as $pattern) {
+                if(strpos(strtolower($rank->getPlayer()->getClanShort()), strtolower($pattern)) !== false) {
+                    $rank->setMatch(true);
+                    $ladder->addSearchResultClanTag($rank->getPlayer());
+                }
+            }
+        }
+    }
+
+    /**
+     * Matches the rank to the search patterns
+     * @param \Entities\Ladder $ladder
+     * @param \Entities\Rank $rank
+     */
+    private static function searchClan(\Entities\Ladder $ladder, \Entities\Rank $rank) {
+        if($ladder->hasSearchClan()) {
+            foreach($ladder->getPatternsClan() as $pattern) {
+                if(strpos(strtolower($rank->getPlayer()->getClan()), strtolower($pattern)) !== false) {
+                    $rank->setMatch(true);
+                    $ladder->addSearchResultClan($rank->getPlayer());
                 }
             }
         }

@@ -32,6 +32,21 @@ abstract class AbstractBattleNetValidator extends \Controllers\AbstractControlle
     }
     
     /**
+     * Returns a valid index based on determined limits
+     * @param String $realm
+     * @param boolVal $season
+     * @param int $index
+     * @return int
+     */
+    public static function getValidatedIndex($realm, $season, $index) {
+        if(self::validateIndex($realm, $season, $index)) {
+           return $index; 
+        } return boolval($season) 
+                ? self::getSettings()->get('RANKING_MAX_SEASON_INDEX', $realm) 
+                : self::getSettings()->get('RANKING_MAX_ERA_INDEX', $realm);
+    }
+
+    /**
      * Returns true if the index is within or equals to the min/max values
      * determined by the given realm and seasonal mode.
      * The $season parameter will be used as boolval($season)!

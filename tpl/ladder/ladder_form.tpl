@@ -4,20 +4,22 @@
     </div>
     <div class="panel-body">
 
-        <div class="col-sm-6">
-            <form method="post" action="{BASE_DIR}/ladder/load">
+        <form method="post" action="{BASE_DIR}/ladder/load">
+            <div class="col-sm-6">
                 {include file="ladder/ladder_form_parts/realm.tpl"}
                 {include file="ladder/ladder_form_parts/mode.tpl"}
                 {include file="ladder/ladder_form_parts/class.tpl"}
                 {include file="ladder/ladder_form_parts/minmax.tpl"}
-                {include file="ladder/ladder_form_parts/search.tpl"}
                 {include file="ladder/ladder_form_parts/paragon.tpl"}
-            </form>
-        </div>
+            </div>
             
-        <div class="col-sm-6">
-            {include file="ladder/ladder_form_parts/info.tpl"}
-        </div>
+            <div class="col-sm-6">
+                {include file="ladder/ladder_form_parts/spacer_search.tpl"}
+                {include file="ladder/ladder_form_parts/search_name.tpl"}
+                {include file="ladder/ladder_form_parts/search_clan_tag.tpl"}
+                {include file="ladder/ladder_form_parts/search_clan_name.tpl"}
+            </div>
+        </form>
 
     </div>
 </div>

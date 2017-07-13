@@ -26,6 +26,7 @@
                 {$pos = '0'}
                 {foreach from=$ladder->getRanks() key=$i item=$rank}
                     {$player = $rank->getPlayer()}
+                    {if $ladder->getSearchMode() != 0 || $rank->isMatch()}
                     <tr{if $rank->isMatch()} class="custom-tr-green"{/if}>
                         {include file="ladder/ladder_list_parts/position.tpl"}
                         {include file="ladder/ladder_list_parts/level.tpl"}
@@ -34,6 +35,7 @@
                         {include file="ladder/ladder_list_parts/paragon.tpl"}
                         {include file="ladder/ladder_list_parts/time.tpl"}
                     </tr>
+                    {/if}
                 {/foreach}
             </tbody>
         </table>

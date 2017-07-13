@@ -17,10 +17,15 @@ class Ladder {
     private $max;
     private $minPara;
     private $maxPara;
+    private $searchMode;
     private $ranks = [];
     private $avgLevel = -1;
     private $patterns = [];
+    private $patternsClanTag = [];
+    private $patternsClan = [];
     private $results = [];
+    private $resultsClanTag = [];
+    private $resultsClan = [];
     private $lastUpdate;
 
     /**
@@ -30,6 +35,24 @@ class Ladder {
      */
     public function addSearchResult(\Entities\Player $player) {
         $this->results[] = $player;
+    }
+
+    /**
+     * If a search pattern match the clan tag, the player objects will
+     * be put into the results collection.
+     * @param \Entities\Player $player
+     */
+    public function addSearchResultClanTag(\Entities\Player $player) {
+        $this->resultsClanTag[] = $player;
+    }
+
+    /**
+     * If a search pattern match the clan name, the player objects will
+     * be put into the results collection.
+     * @param \Entities\Player $player
+     */
+    public function addSearchResultClan(\Entities\Player $player) {
+        $this->resultsClan[] = $player;
     }
 
     /**
@@ -76,6 +99,24 @@ class Ladder {
     }
 
     /**
+     * Adds a search pattern string to the search pattern collection. The
+     * collection array will be iterated later for in_array() searches.
+     * @param String $pattern
+     */
+    public function addPatternClanTag($pattern) {
+        $this->patternsClanTag[] = $pattern;
+    }
+
+    /**
+     * Adds a search pattern string to the search pattern collection. The
+     * collection array will be iterated later for in_array() searches.
+     * @param String $pattern
+     */
+    public function addPatternClan($pattern) {
+        $this->patternsClan[] = $pattern;
+    }
+
+    /**
      * Implodes the search pattern array into a csv string.
      * @return String
      */
@@ -84,11 +125,43 @@ class Ladder {
     }
     
     /**
+     * Implodes the search pattern array into a csv string.
+     * @return String
+     */
+    public function getSearchStringClanTag() {
+        return implode('; ', $this->getPatternsClanTag());
+    }
+    
+    /**
+     * Implodes the search pattern array into a csv string.
+     * @return String
+     */
+    public function getSearchStringClan() {
+        return implode('; ', $this->getPatternsClan());
+    }
+    
+    /**
      * Returns true if there were search patterns given to the ladder.
      * @return boolean
      */
     public function hasSearch() {
         return count($this->getPatterns()) > 0 ? true : false;
+    }
+
+    /**
+     * Returns true if there were search patterns given to the ladder.
+     * @return boolean
+     */
+    public function hasSearchClanTag() {
+        return count($this->getPatternsClanTag()) > 0 ? true : false;
+    }
+
+    /**
+     * Returns true if there were search patterns given to the ladder.
+     * @return boolean
+     */
+    public function hasSearchClan() {
+        return count($this->getPatternsClan()) > 0 ? true : false;
     }
 
     /**
@@ -164,6 +237,22 @@ class Ladder {
      */
     public function getPatterns() {
         return $this->patterns;
+    }
+
+    /**
+     * Returns the array of (String) patterns
+     * @return array
+     */
+    public function getPatternsClanTag() {
+        return $this->patternsClanTag;
+    }
+
+    /**
+     * Returns the array of (String) patterns
+     * @return array
+     */
+    public function getPatternsClan() {
+        return $this->patternsClan;
     }
 
     /**
@@ -261,6 +350,33 @@ class Ladder {
     }
 
     /**
+     * Explodes and trims the raw patterns into patterns array.
+     * @param String $patterns The raw patterns string.
+     * @return \Entities\Ladder
+     */
+    public function setPatternsClanTag($patterns) {
+        $filtered = trim(str_replace(' ', '', $patterns), ';');
+        if(strlen($filtered) > 0) {
+            $this->patternsClanTag = explode(';', $filtered);
+        }
+        return $this;
+    }
+
+    /**
+     * Explodes and trims the raw patterns into patterns array.
+     * @param String $patterns The raw patterns string.
+     * @return \Entities\Ladder
+     */
+    public function setPatternsClan($patterns) {
+        $filtered = trim($patterns, ';');
+//        $filtered = trim(str_replace(' ', '', $patterns), ';');
+        if(strlen($filtered) > 0) {
+            $this->patternsClan = explode(';', $filtered);
+        }
+        return $this;
+    }
+
+    /**
      * Returns the average rift level that was reached in this ladder. Defaults
      * to -1.
      * @return double
@@ -285,6 +401,42 @@ class Ladder {
      */
     public function getResults() {
         return $this->results;
+    }
+
+    /**
+     * Returns the results array, even it is filled or empty.
+     * @return array
+     */
+    public function getResultsClanTag() {
+        return $this->resultsClanTag;
+    }
+
+    /**
+     * Returns the results array, even it is filled or empty.
+     * @return array
+     */
+    public function getResultsClan() {
+        return $this->resultsClan;
+    }
+
+    /**
+     * Sets the results array by overriding it.
+     * @param array $results
+     * @return \Entities\Ladder
+     */
+    public function setResultsClanTag($results) {
+        $this->resultsClanTag = $results;
+        return $this;
+    }
+
+    /**
+     * Sets the results array by overriding it.
+     * @param array $results
+     * @return \Entities\Ladder
+     */
+    public function setResultsClan($results) {
+        $this->resultsClan = $results;
+        return $this;
     }
 
     /**
@@ -352,15 +504,24 @@ class Ladder {
         return $this;
     }
 
-    
-    
-    private $smarty;
-    public function getSmarty() {
-        return $this->smarty;
+    /**
+     * 
+     * @return int
+     */
+    public function getSearchMode() {
+        return $this->searchMode;
     }
-    public function setSmarty($smarty) {
-        $this->smarty = $smarty;
+
+    /**
+     * 
+     * @param int $searchMode
+     * @return \Entities\Ladder
+     */
+    public function setSearchMode($searchMode) {
+        $this->searchMode = $searchMode;
+        return $this;
     }
+
 
 
     

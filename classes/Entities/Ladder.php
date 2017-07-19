@@ -163,6 +163,25 @@ class Ladder {
     public function hasSearchClan() {
         return count($this->getPatternsClan()) > 0 ? true : false;
     }
+    
+    /**
+     * Returns j JSON String representing the ranks of this ladder. The
+     * containing data is reduced. See fields below.
+     * @return String
+     */
+    public function getJson() {
+        $jArr = [];
+        foreach($this->getRanks() as $rank) {
+            $jArr[] = [
+                'pos' => $rank->getPos(),
+                'level' => $rank->getLevel(),
+                'class' => $rank->getPlayer()->getHeroClass(),
+                'name' => $rank->getPlayer()->getName(),
+                'time' => $rank->getTimeFormatted(),
+            ];
+        }
+        return json_encode($jArr);
+    }
 
     /**
      * Returns the short version of the realm.

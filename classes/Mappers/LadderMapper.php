@@ -21,7 +21,7 @@ abstract class LadderMapper extends AbstractMapper {
      * @param String $patterns csv string
      * @return \Entities\Ladder
      */
-    public static function createObj($realm, $season, $hardcore, $index, $class, $min, $max, $minPara, $maxPara, $mark, $patterns, $patternsClanTag, $patternsClan) {
+    public static function createObj($realm, $season, $hardcore, $index, $class, $min, $max, $minPara, $maxPara, $mark, $patterns = '', $patternsClanTag = '', $patternsClan = '') {
         $ladder = (new \Entities\Ladder())
             ->setRealm($realm)
             ->setSeason($season)

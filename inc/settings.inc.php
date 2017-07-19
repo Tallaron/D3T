@@ -1,7 +1,8 @@
 <?php
 
 define('DEBUG_MODE', false);
-define('BASE_DIR', ''); // '' if live!
+define('BASE_DIR', '/D3T'); // '' if live!
+define('IS_API', false);
 define('DEFAULT_CACHE_DIR', 'cached_data');
 define('BUILDS_DATA_BASE_DIR', 'data/builds');
 

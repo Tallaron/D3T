@@ -70,7 +70,6 @@ class LadderController extends AbstractController {
                 $minPara,
                 $maxPara,
                 $mark);
-            \Views\View::deleteInstance();
             \Views\View::getInstance()->assign('ladder', $ladder);
             \Views\View::getInstance()->display('ladder/json/show_json.tpl');
         } else {

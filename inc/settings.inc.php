@@ -1,6 +1,6 @@
 <?php
 
-define('DEBUG_MODE', false);
+define('DEBUG_MODE', true);
 define('BASE_DIR', '/D3T'); // '' if live!
 define('IS_API', false);
 define('DEFAULT_CACHE_DIR', 'cached_data');

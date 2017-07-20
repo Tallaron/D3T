@@ -175,7 +175,7 @@ class Ladder {
             $jArr[] = [
                 'pos' => $rank->getPos(),
                 'level' => $rank->getLevel(),
-                'class' => $rank->getPlayer()->getHeroClass(),
+                'class' => $rank->getPlayer()->getIconFileName(),
                 'name' => $rank->getPlayer()->getName(),
                 'time' => $rank->getTimeFormatted(),
             ];

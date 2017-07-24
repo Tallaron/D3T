@@ -176,6 +176,7 @@ class Ladder {
                 'pos' => $rank->getPos(),
                 'level' => $rank->getLevel(),
                 'class' => $rank->getPlayer()->getIconFileName(),
+                'clan' => $rank->getPlayer()->getClanShort(),
                 'name' => $rank->getPlayer()->getName(),
                 'time' => $rank->getTimeFormatted(),
             ];

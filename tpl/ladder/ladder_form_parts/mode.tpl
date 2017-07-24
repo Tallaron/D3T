@@ -19,7 +19,7 @@
     <div class="col-sm-3">
 
         <select size="1" name="index" class="form-control">
-            {for $i=1 to 10}
+            {for $i=1 to 11}
                 {if isset($ladder) && $i == $ladder->getIndex()}
                     <option value="{$i}" selected>{$i}</option>
                 {elseif !isset($ladder) && $i == $settings->get('RANKING_DEFAULT_INDEX', 'eu')}

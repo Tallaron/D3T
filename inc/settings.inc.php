@@ -25,10 +25,10 @@ define('D3_CURRENT_ERA_EU', 8);
 define('D3_CURRENT_ERA_US', 8);
 define('D3_CURRENT_ERA_KR', 8);
 define('D3_CURRENT_ERA_CN', 6);
-define('D3_CURRENT_SEASON_EU', 10);
-define('D3_CURRENT_SEASON_US', 10);
-define('D3_CURRENT_SEASON_KR', 10);
-define('D3_CURRENT_SEASON_CN', 10);
+define('D3_CURRENT_SEASON_EU', 11);
+define('D3_CURRENT_SEASON_US', 11);
+define('D3_CURRENT_SEASON_KR', 11);
+define('D3_CURRENT_SEASON_CN', 11);
 
 define('MAX_PARAGON', 10000);
 define('MIN_PARAGON', 0);
@@ -76,10 +76,10 @@ $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
                             'kr' => 1,
                             'cn' => 1,))
         ->addContext('RANKING_MAX_SEASON_INDEX', array(
-                            'eu' => 10,
-                            'us' => 10,
-                            'kr' => 10,
-                            'cn' => 10,))
+                            'eu' => 11,
+                            'us' => 11,
+                            'kr' => 11,
+                            'cn' => 11,))
         ->addContext('RANKING_MIN_ERA_INDEX', array(
                             'eu' => 1,
                             'us' => 1,

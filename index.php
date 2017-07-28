@@ -5,6 +5,7 @@ require_once 'inc/errors.inc.php';
 require_once 'inc/bootstrap.inc.php';
 require_once 'inc/credentials.inc.php';
 require_once 'inc/settings.inc.php';
+require_once 'inc/db_con.inc.php';
 
 //$p = new Controllers\ParagonCalculator();
 //$p->generateData('_external/Paragon10000.csv');

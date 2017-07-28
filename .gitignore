@@ -8,3 +8,5 @@
 /inc/credentials.inc.php
 /__old/
 /cached_data/
+/inc/db_con.inc.php
+/data_import/

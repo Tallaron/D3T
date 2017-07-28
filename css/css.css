@@ -126,3 +126,19 @@ progress[value]::-moz-progress-bar {
 .season-played {
     text-align: center;
 }
+
+.custom-text-center {
+    text-align: center;
+}
+
+.custom-select-legendary {
+    background-color: #000;
+    color: #bf642f;
+}
+
+.custom-select-set {
+    background-color: #000;
+    color: #8bd442;
+}
+
+

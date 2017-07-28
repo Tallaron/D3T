@@ -1,7 +1,8 @@
 <?php
 
-define('DEBUG_MODE', false);
-define('BASE_DIR', ''); // '' if live!
+define('DEBUG_MODE', true);
+define('IMPORT_ENABLED', true); //false for live systems
+define('BASE_DIR', '/D3T'); // '' if live!
 define('IS_API', false);
 define('DEFAULT_CACHE_DIR', 'cached_data');
 define('BUILDS_DATA_BASE_DIR', 'data/builds');
@@ -57,6 +58,8 @@ define('EMPTY_ITEM_DEFAULT_DISPLAY_COLOR', 'white');
 define('EMPTY_ITEM_DEFAULT_TOOLTIP_PARAMS', '');
 
 define('EMPTY_SKILL_DEFAULT_NAME', 'EMPTY');
+
+define('ACTIVE_SKILL_IMPORT_URL', 'https://eu.battle.net/d3/en/class/%s/active/');
 
 $settings = new \Controllers\Settings();
 $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
@@ -172,6 +175,124 @@ $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
                     'mainHand',
                     'offHand',))
         ->addContext('RANKING_DEFAULT_MIN_PARAGON', 1)
-        ->addContext('RANKING_DEFAULT_MAX_PARAGON', 10000);
+        ->addContext('RANKING_DEFAULT_MAX_PARAGON', 10000)
+        ->addContext('D3_GEMS', array(
+            array(
+                'name' => 'no-socket',
+                'type' => 'all',
+            ),
+            array(
+                'name' => 'empty',
+                'type' => 'all',
+            ),
+            array(
+                'name' => 'flawless-royal-amethyst',
+                'type' => 'all',
+            ),
+            array(
+                'name' => 'flawless-royal-diamond',
+                'type' => 'all',
+            ),
+            array(
+                'name' => 'flawless-royal-emerald',
+                'type' => 'all',
+            ),
+            array(
+                'name' => 'flawless-royal-ruby',
+                'type' => 'all',
+            ),
+            array(
+                'name' => 'flawless-royal-topaz',
+                'type' => 'all',
+            ),
+            array(
+                'name' => 'bane-of-the-powerful',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'bane-of-the-stricken',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'bane-of-the-trapped',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'boon-of-the-hoarder',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'boyarskys-chip',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'enforcer',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'esoteric-alteration',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'gem-of-ease',
+                'type' => 'weapon',
+            ),
+            array(
+                'name' => 'gem-of-efficacious-toxin',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'gogok-of-swiftness',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'iceblink',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'invigorating-gemstone',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'mirinae-teardrop-of-the-starweaver',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'molten-wildebeests-gizzard',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'moratorium',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'mutilation-guard',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'pain-enhancer',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'red-soul-shard',
+                'type' => 'helm',
+            ),
+            array(
+                'name' => 'simplicitys-strength',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'taeguk',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'wreath-of-lightning',
+                'type' => 'jewelry',
+            ),
+            array(
+                'name' => 'zeis-stone-of-vengeance',
+                'type' => 'jewelry',
+            ),
+        ));
 
 

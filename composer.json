@@ -6,7 +6,8 @@
             "Views": "./classes",
             "Factories": "./classes",
             "Mappers": "./classes",
-            "Validators": "./classes"
+            "Validators": "./classes",
+            "Helper": "./classes"
         }
     },
     "require": {

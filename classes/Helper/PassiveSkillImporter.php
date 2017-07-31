@@ -2,7 +2,7 @@
 
 namespace Helper;
 
-class ActiveSkillImporter extends AbstractImporter {
+class PassiveSkillImporter extends AbstractImporter {
 
     private $url;
     private $heroClass;
@@ -19,30 +19,15 @@ class ActiveSkillImporter extends AbstractImporter {
     public function proceed() {
         $finder = new \DomXPath( $this->getDom() );
         $skillData = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' skill-details ')]");
-        $runeData = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' rune-list ')]");
 
         foreach($skillData as $data) {
-            $skill = new \Entities\ImportActiveSkill();
+            $skill = new \Entities\ImportPassiveSkill();
             $skill
                 ->setHeroClass( $this->getHeroClass() )
                 ->setSlug( $this->parseSkillSlug($data) )
                 ->setName( $this->parseSkillName($data) )
                 ->setIcon( $this->parseSkillIcon($data) );
             $this->addSkill($skill);
-        }
-
-        $i=0;
-        foreach($runeData as $data) {
-            foreach($data->getElementsByTagName('li') as $li) {
-                $rune = new \Entities\ImportRune();
-                $rune
-                    ->setSkillId(false)
-                    ->setSlug($this->parseRuneSlug( $this->getSkill($i), $li ) )
-                    ->setName( $this->parseRuneName($li) )
-                    ->setType( $this->parseRuneType($li) );
-                $this->getSkill($i)->addRune($rune);
-            }
-            $i++;
         }
         
     }
@@ -72,28 +57,6 @@ class ActiveSkillImporter extends AbstractImporter {
                                         ->getAttribute('style'))[0]);
     }
 
-    private function parseRuneSlug($skill, $data) {
-        return $skill->getSlug() . '-' . self::getLastElement( $data
-                                            ->getElementsByTagName('span')[2]
-                                            ->getAttribute('data-d3tooltip'));
-    }
-
-    private function parseRuneName($data) {
-        return trim( $data
-                        ->getElementsByTagName('span')[2]
-                        ->nodeValue);
-    }
-
-    private function parseRuneType($data) {
-        return self::getLastElement( $data
-                        ->getElementsByTagName('span')[2]
-                        ->getAttribute('data-d3tooltip') );
-    }
-
-    
-    
-    
-    
     
 
     private function addSkill($skill) {

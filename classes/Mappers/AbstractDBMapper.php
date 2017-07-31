@@ -1,8 +1,8 @@
 <?php
 
-namespace Controllers;
+namespace Mappers;
 
-abstract class AbstractDBController {
+abstract class AbstractDBMapper {
     private static $pdo;
     
     

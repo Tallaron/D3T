@@ -2,25 +2,14 @@
 
 namespace Entities;
 
-class ImportActiveSkill {
+class ImportPassiveSkill {
     
-    private $id;
     private $heroClass;
     private $slug;
     private $name;
     private $icon;
-    private $runes = [];
     
     
-    
-    
-    
-    
-    
-    public function addRune($rune) {
-        $this->runes[] = $rune;
-    }
-
     
 
     public function getHeroClass() {
@@ -37,10 +26,6 @@ class ImportActiveSkill {
 
     public function getIcon() {
         return $this->icon;
-    }
-
-    public function getRunes() {
-        return $this->runes;
     }
 
     public function setHeroClass($heroClass) {
@@ -63,21 +48,6 @@ class ImportActiveSkill {
         return $this;
     }
 
-    public function setRunes($runes) {
-        $this->runes = $runes;
-        return $this;
-    }
 
-    public function getId() {
-        return $this->id;
-    }
-
-    public function setId($id) {
-        $this->id = $id;
-        foreach($this->getRunes() as $rune) {
-            $rune->setSkillId($id);
-        }
-        return $this;
-    }
-
+    
 }

@@ -2,13 +2,25 @@
 
 namespace Entities;
 
-class ImportRune {
+class ImportItem {
     
-    private $skillId;
     private $slug;
     private $name;
-    private $type;
+    private $icon;
     private $level;
+    private $quality;
+    private $type;
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -21,8 +33,8 @@ class ImportRune {
         return $this->name;
     }
 
-    public function getType() {
-        return $this->type;
+    public function getIcon() {
+        return $this->icon;
     }
 
     public function setSlug($slug) {
@@ -35,17 +47,8 @@ class ImportRune {
         return $this;
     }
 
-    public function setType($type) {
-        $this->type = $type;
-        return $this;
-    }
-
-    public function getSkillId() {
-        return $this->skillId;
-    }
-
-    public function setSkillId($skillId) {
-        $this->skillId = $skillId;
+    public function setIcon($icon) {
+        $this->icon = $icon;
         return $this;
     }
 
@@ -53,12 +56,27 @@ class ImportRune {
         return $this->level;
     }
 
+    public function getQuality() {
+        return $this->quality;
+    }
+
     public function setLevel($level) {
         $this->level = $level;
         return $this;
     }
 
+    public function setQuality($quality) {
+        $this->quality = $quality;
+        return $this;
+    }
 
+    public function getType() {
+        return $this->type;
+    }
 
+    public function setType($type) {
+        $this->type = $type;
+        return $this;
+    }
 
 }

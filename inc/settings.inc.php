@@ -60,6 +60,8 @@ define('EMPTY_ITEM_DEFAULT_TOOLTIP_PARAMS', '');
 define('EMPTY_SKILL_DEFAULT_NAME', 'EMPTY');
 
 define('ACTIVE_SKILL_IMPORT_URL', 'https://eu.battle.net/d3/en/class/%s/active/');
+define('PASSIVE_SKILL_IMPORT_URL', 'https://eu.battle.net/d3/en/class/%s/passive/');
+define('ITEM_IMPORT_URL', 'https://eu.battle.net/d3/en/item/%s/');
 
 $settings = new \Controllers\Settings();
 $settings->addContext('RANKING_DEFAULT_REALM', 'eu')

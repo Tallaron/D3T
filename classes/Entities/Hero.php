@@ -20,6 +20,7 @@ class Hero {
     private $passiveSkills = [null, null, null, null];
     private $inventory;
     private $cube;
+    private $stats;
 
     /**
      * returns Blizzard cdn image url for large icon
@@ -307,5 +308,25 @@ class Hero {
         $this->cube = $cube;
         return $this;
     }
+
+    /**
+     * 
+     * @return \Entities\HeroStats
+     */
+    public function getStats() {
+        return $this->stats;
+    }
+
+    /**
+     * 
+     * @param \Entities\HeroStats $stats
+     * @return \Entities\Hero
+     */
+    public function setStats(\Entities\HeroStats $stats) {
+        $this->stats = $stats;
+        return $this;
+    }
+
+
 
 }

@@ -9,22 +9,55 @@ class BuildController extends AbstractController {
         \Views\View::getInstance()->display('builds/builds.tpl');
     }
     
-
-    public function addAction() {
-        $content = 'addNewBuild';
-        $itemTypes = ['head','torso','waist','legs','feet','shoulders',
-                    'hands','leftFinger','mainHand','offHand','bracers','neck'];
-        $items = [];
-        $dbc = new \Controllers\DBController();
-        
-        foreach($itemTypes as $itemType) {
-            $items[$itemType] = $dbc->findAllBySlotKey($itemType);
-        }
-        
-        \Views\View::getInstance()->assign('items', $items);
-        \Views\View::getInstance()->assign('content', $content);
-        \Views\View::getInstance()->display('builds/builds.tpl');
+    
+    
+    public function newAction() {
+        $date = new \DateTime();
+        \Views\View::getInstance()->assign('defaultName', 'build_'.$date->format('d-m-y_H-i'));
+        \Views\View::getInstance()->assign('heroClasses', \Mappers\DBMapper::findAllHeroClasses());
+        \Views\View::getInstance()->display('builds/new_build_form.tpl');
     }
+
+    public function createAction() {
+        $post = filter_input_array(INPUT_POST);
+        $bId = \Mappers\DBMapper::createBuild($post['class'], $post['name'], $post['version']);
+        $this->redirect('build/edit/'.$bId);
+    }
+
+    public function editAction($buildId) {
+        $build = \Mappers\BuildMapper::createObject(
+                                    \Mappers\DBMapper::findBuildById($buildId));
+        
+        $activeSkills = \Mappers\DBMapper::findAllActiveSkillsByClassId( $build->getClassId() );
+        $passiveSkills = \Mappers\DBMapper::findAllPassiveSkillsByClassId( $build->getClassId() );
+        
+        
+        
+        \Views\View::getInstance()->assign('heroClasses', \Mappers\DBMapper::findAllHeroClasses());
+        \Views\View::getInstance()->assign('activeSkills', $activeSkills);
+        \Views\View::getInstance()->assign('passiveSkills', $passiveSkills);
+        \Views\View::getInstance()->assign('build', $build);
+        \Views\View::getInstance()->display('builds/edit_build_form.tpl');
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
     
     
     public function saveAction() {

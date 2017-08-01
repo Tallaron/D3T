@@ -39,6 +39,9 @@ abstract class HeroMapper {
         if(property_exists($heroData, 'legendaryPowers')) {
             self::loadHeroCube($hero, $heroData->legendaryPowers);
         }
+        if(property_exists($heroData, 'stats')) {
+            self::loadHeroStats($hero, $heroData->stats);
+        }
     }
 
     
@@ -83,5 +86,14 @@ abstract class HeroMapper {
     private static function loadHeroCube(\Entities\Hero $hero, $cubeItems) {
         $hero->setCube( \Mappers\CubeMapper::createObj($cubeItems) );
     }
-
+    
+    /**
+     * 
+     * @param \Entities\Hero $hero
+     * @param StdObject $heroStats
+     */
+    private static function loadHeroStats(\Entities\Hero $hero, $heroStats) {
+        $hero->setStats( \Mappers\HeroStatsMapper::createObj($heroStats) );
+    }
+    
 }

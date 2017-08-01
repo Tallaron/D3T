@@ -1,6 +1,6 @@
 <div>
 
-    <form method="post" action="{BASE_DIR}/build/create">
+    <form method="post" action="{BASE_DIR}/build/save">
 
         <div class="form-group clearfix">
             {include file="builds/form_parts/class.tpl" once=true}
@@ -14,6 +14,10 @@
             </div>
         </div>
 
+        {include file="builds/form_parts/items.tpl" once=true}
+        {include file="builds/form_parts/cube.tpl" once=true}
+        {include file="builds/form_parts/skills_a.tpl" once=true}
+        {include file="builds/form_parts/skills_p.tpl" once=true}
     </form>
 
 </div>

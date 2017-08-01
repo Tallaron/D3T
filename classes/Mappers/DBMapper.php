@@ -134,4 +134,56 @@ class DBMapper extends \Mappers\AbstractDBMapper {
     
     
     
+    
+    
+    public static function createBuild($classId, $name, $version) {
+        $sql = 'INSERT INTO builds (`name`, `class_id`, `version`) VALUES (:name, :classId, :version)';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute([
+            ':name' => $name,
+            ':classId' => $classId,
+            ':version' => $version,
+            ]);
+        return self::findBuildIdByName($name);
+    }
+    
+    public static function findBuildIdByName($name) {
+        $sql = 'SELECT id FROM builds WHERE name LIKE "'.$name.'";';
+        $stmt = self::getPDO()->query($sql);
+        return $stmt->fetchColumn();
+    }
+    
+    public static function  findBuildById($id) {
+        $sql = 'SELECT * FROM builds WHERE id = :id;';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute([
+            ':id' => $id,
+            ]);
+        return $stmt->fetch(\PDO::FETCH_OBJ);
+    }
+    
+    
+    
+    
+    
+    public static function findAllActiveSkillsByClassId($id) {
+        $sql = 'SELECT * FROM raw_data_skills_a WHERE class_id = :id;';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute([
+            ':id' => $id,
+            ]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+    
+    public static function findAllPassiveSkillsByClassId($id) {
+        $sql = 'SELECT * FROM raw_data_skills_p WHERE class_id = :id;';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute([
+            ':id' => $id,
+            ]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+    
+    
+    
 }

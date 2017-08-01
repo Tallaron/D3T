@@ -2,20 +2,66 @@
 
 namespace Controllers;
 
-class ImportController {
+class ImportController extends AbstractController {
 
     public function indexAction() {
-//        if(IMPORT_ENABLED) {
-//
-//            foreach(\Mappers\DBMapper::findAllHeroClasses() as $heroClass) {
-//                echo '<h2>'.$heroClass->name.'</h2>';
-//                echo '<pre>';
-//                print_r($this->importActiveSkill($heroClass));
-//                echo '</pre>';
-//            }
-//            
-//        }        
+        if(!isset($_SESSION['imports_done'])) {
+            $_SESSION['imports_done'] = [];
+        }
         
+        echo '<pre>';
+        print_r($_SESSION['imports_done']);
+        echo '</pre>';
+        
+        if(IMPORT_ENABLED) {
+            
+            /* Import items */
+            foreach(\Mappers\DBMapper::findAllItemTypes() as $itemType) {
+                try {
+                    if(!$this->isDone('item', $itemType->key)) {
+                        $this->itemAction($itemType->key);
+                        $_SESSION['imports_done'][] = 'item:'.$itemType->key;
+                        echo 'importItem: '. $itemType->name . ': done<br>';
+                    } else {
+                        echo 'importItem: '. $itemType->name . ': allready done<br>';
+                    }
+                } catch(\Exception $e) {
+                    echo 'importItem: '. $itemType->name . ': failed<br>';
+                }
+            }
+            
+            /* Import active skills and runes */
+            foreach(\Mappers\DBMapper::findAllHeroClasses() as $heroClass) {
+                try {
+                    if(!$this->isDone('aSkill', $heroClass->key)) {
+                        $this->activeAction($heroClass->key);
+                        $_SESSION['imports_done'][] = 'aSkill:'.$heroClass->key;
+                        echo 'importASkill: '. $heroClass->name . ': done<br>';
+                    } else {
+                        echo 'importASkill: '. $heroClass->name . ': allready done<br>';
+                    }
+                } catch(\Exception $e) {
+                    echo 'importASkill: '. $heroClass->name . ': failed<br>';
+                }
+            }
+            
+            /* Import passive skills */
+            foreach(\Mappers\DBMapper::findAllHeroClasses() as $heroClass) {
+                try {
+                    if(!$this->isDone('pSkill', $heroClass->key)) {
+                        $this->passiveAction($heroClass->key);
+                        $_SESSION['imports_done'][] = 'pSkill:'.$heroClass->key;
+                        echo 'importPSkill: '. $heroClass->name . ': done<br>';
+                    } else {
+                        echo 'importPSkill: '. $heroClass->name . ': allready done<br>';
+                    }
+                } catch(\Exception $e) {
+                    echo 'importPSkill: '. $heroClass->name . ': failed<br>';
+                }
+            }
+
+        }        
+        $this->redirect();
     }
     
     
@@ -88,6 +134,16 @@ class ImportController {
                 ->proceed();
         return $importer->getItems();
     }
+    
+    
+    
+    
+    
+    
+    private function isDone($actionType, $key) {
+        return in_array($actionType.':'.$key, $_SESSION['imports_done']);
+    }
+    
     
     
     

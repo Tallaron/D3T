@@ -7,6 +7,8 @@ define('IS_API', false);
 define('DEFAULT_CACHE_DIR', 'cached_data');
 define('BUILDS_DATA_BASE_DIR', 'data/builds');
 
+define('CURRENT_D3_VERSION', '2.6.0');
+
 define('TWITCH_DEFAULT_CHANNEL', 'tallaron');
 
 define('SMARTY_TPL_DIR', 'tpl/');

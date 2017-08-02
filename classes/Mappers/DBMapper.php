@@ -130,6 +130,19 @@ class DBMapper extends \Mappers\AbstractDBMapper {
         self::getPDO()->query($sql);
     }
     
+    public static function saveGem(\Entities\ImportGem $gem) {
+        $sql = 'INSERT INTO raw_data_gems (`slug`, `name`, `icon`, `type`, `level`) '
+                . 'VALUES ("'.$gem->getSlug().'", "'.$gem->getName().'", "'.$gem->getIcon().'", "'.$gem->getType().'", '.$gem->getLevel().') '
+                . 'ON DUPLICATE KEY UPDATE '
+                . 'id=id, '
+                . '`slug`="'.$gem->getSlug().'", '
+                . '`name`="'.$gem->getName().'", '
+                . '`icon`="'.$gem->getIcon().'", '
+                . '`type`="'.$gem->getType().'", '
+                . '`level`="'.$gem->getLevel().'";';
+        self::getPDO()->query($sql);
+    }
+    
     
     
     
@@ -184,6 +197,32 @@ class DBMapper extends \Mappers\AbstractDBMapper {
         return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
     
+
+
+    public static function findAllGems(array $types = [], array $levels = []) {
+        $sql = 'SELECT * FROM raw_data_gems '
+                . 'WHERE `type` IN('.implode(',', array_fill(0, count($types), '?')).') '
+                . 'AND `level` IN('.implode(',', array_fill(0, count($levels), '?')).');';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute(array_merge($types, $levels) );
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    
+    public static function findAllItems(array $classes = [], array $slots = []) {
+        $sql = 'SELECT i.*
+                    FROM raw_data_items i 
+                    JOIN item_types t ON(i.`type`=t.id) 
+                    JOIN classes c ON(t.class=c.id)
+                    JOIN slots s ON(t.slot=s.id)
+                        WHERE c.`id` IN('.implode(',', array_fill(0, count($classes), '?')).')
+                        AND s.`key` IN('.implode(',', array_fill(0, count($slots), '?')).')
+                            ORDER BY i.name ASC;';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute(array_merge($classes, $slots) );
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
     
     
 }

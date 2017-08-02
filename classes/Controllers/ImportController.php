@@ -87,8 +87,6 @@ class ImportController extends AbstractController {
         }
     }
 
-    
-    
     public function itemAction($type) {
         if(IMPORT_ENABLED) {
             $itemType = \Mappers\DBMapper::findItemTypeByKey($type);
@@ -99,10 +97,17 @@ class ImportController extends AbstractController {
         }
     }
     
+    public function gemAction() {
+        if(IMPORT_ENABLED) {
+            $gems = $this->importGems();
+            foreach($gems as $gem) {
+                \Mappers\DBMapper::saveGem($gem);
+            }
+        }
+        
+    }
 
-
-
-
+    
 
 
 
@@ -133,6 +138,14 @@ class ImportController extends AbstractController {
                 ->setItemType($itemType->id)
                 ->proceed();
         return $importer->getItems();
+    }
+    
+    private function importGems() {
+        $url = sprintf(GEM_IMPORT_URL);
+        $importer = new \Helper\GemImporter($url);
+        $importer
+                ->proceed();
+        return $importer->getGems();
     }
     
     

@@ -1,12 +1,15 @@
 
 <div class="row">
 <div class="col-sm-12">
-    <select size="1" name="sockets[]" class="form-control">
-        {foreach from=$settings->get('D3_GEMS') key=$key item=$gem}
-            {if $gem['type'] == $gemType || $gem['type'] == 'all'}
-                <option value="{$key}">{$gem['name']}</option>
-            {/if}
-        {/foreach}
-    </select>
+    <div class="col-sm-3"><small>Socket</small></div>
+    <div class="col-sm-9">
+        <select size="1" name="{$itemType}[socket][]" class="form-control custom-select-untouched">
+{*        <select size="1" name="sockets[]" class="form-control custom-select-untouched">*}
+            <option value="-1">EMPTY</option>
+            {foreach from=$gems item=$gem}
+                <option value="{$gem->id}" class="custom-select-{$gem->type}">{$gem->name}</option>
+            {/foreach}
+        </select>
+    </div>
 </div>
 </div>

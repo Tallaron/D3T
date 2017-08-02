@@ -131,6 +131,13 @@ progress[value]::-moz-progress-bar {
     text-align: center;
 }
 
+
+
+.custom-select-default {
+    background-color: #000;
+    color: #d8d8d8;
+}
+
 .custom-select-legendary {
     background-color: #000;
     color: #bf642f;
@@ -141,4 +148,7 @@ progress[value]::-moz-progress-bar {
     color: #8bd442;
 }
 
-
+.custom-select-untouched {
+    background-color: #bbb;
+    color: #333;
+}

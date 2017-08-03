@@ -7,6 +7,7 @@ namespace Entities;
  */
 class Rune {
 
+    private $id;
     private $slug;
     private $name;
     private $description;
@@ -100,6 +101,24 @@ class Rune {
      */
     public function setTooltipParams($tooltipParams) {
         $this->tooltipParams = $tooltipParams;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return \Entities\Rune
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * 
+     * @param int $id
+     * @return \Entities\Rune
+     */
+    public function setId($id) {
+        $this->id = $id;
         return $this;
     }
 

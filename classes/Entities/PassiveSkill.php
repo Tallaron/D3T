@@ -7,6 +7,7 @@ namespace Entities;
  */
 class PassiveSkill {
 
+    private $id;
     private $slug;
     private $name = 'EMPTY';
     private $icon;
@@ -116,6 +117,24 @@ class PassiveSkill {
      */
     public function setDescription($description) {
         $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return \Entities\PassiveSkill
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * 
+     * @param int $id
+     * @return \Entities\PassiveSkill
+     */
+    public function setId($id) {
+        $this->id = $id;
         return $this;
     }
 

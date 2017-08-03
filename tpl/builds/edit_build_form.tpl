@@ -1,6 +1,7 @@
 <div>
 
     <form method="post" action="{BASE_DIR}/build/save">
+        {include file="builds/form_parts/hidden_id.tpl" once=true}
 
         <div class="form-group clearfix">
             {include file="builds/form_parts/class.tpl" once=true}

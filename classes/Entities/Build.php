@@ -8,7 +8,6 @@ class Build {
     private $classId;
     private $name;
     private $version;
-    private $hero;
 
 
     public function getId() {
@@ -47,13 +46,4 @@ class Build {
         return $this;
     }
     
-    public function getHero() {
-        return $this->hero;
-    }
-
-    public function setHero($hero) {
-        $this->hero = $hero;
-        return $this;
-    }
-
 }

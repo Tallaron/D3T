@@ -8,6 +8,7 @@ namespace Entities;
 class Gem {
 
     private $id = 0;
+    private $type;
     private $name = EMPTY_ITEM_DEFAULT_NAME;
     private $icon = false;
     private $displayColor = EMPTY_ITEM_DEFAULT_DISPLAY_COLOR;
@@ -130,7 +131,22 @@ class Gem {
         return $this;
     }
     
+    /**
+     * 
+     * @return \Entities\Gem
+     */
+    public function getType() {
+        return $this->type;
+    }
 
-
+    /**
+     * 
+     * @param String $type
+     * @return \Entities\Gem
+     */
+    public function setType($type) {
+        $this->type = $type;
+        return $this;
+    }
     
 }

@@ -7,6 +7,7 @@ namespace Entities;
  */
 class ActiveSkill {
 
+    private $id;
     private $slug;
     private $name;
     private $icon; //filename w/o extention and path
@@ -156,5 +157,25 @@ class ActiveSkill {
         $this->rune = $rune;
         return $this;
     }
+
+    /**
+     * 
+     * @return \Entities\ActiveSkill
+     */
+    public function getId() {
+        return $this->id;
+    }
+
+    /**
+     * 
+     * @param int $id
+     * @return \Entities\ActiveSkill
+     */
+    public function setId($id) {
+        $this->id = $id;
+        return $this;
+    }
+
+
 
 }

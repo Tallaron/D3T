@@ -4,52 +4,39 @@ namespace Helper;
 
 class ItemImporter extends AbstractImporter {
 
-    private $itemType;
+    private $itemTypeId;
     private $url;
     private $dom;
     private $items = [];
 
-    public function __construct($url) {
-        $this->setUrl($url);
+    public function __construct($itemType) {
+        $this->setItemTypeId($itemType->id);
+        $this->setUrl( sprintf(ITEM_IMPORT_URL, $itemType->key) );
         $this->setDom( self::loadDomData( $this->getUrl() ) );
     }
     
-    
-    
     public function proceed() {
         $finder = new \DomXPath( $this->getDom() );
-        $legendaryData = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' legendary ')]");
-        $setData = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' set ')]");
-        
-        foreach($legendaryData as $data) {
-            $item = new \Entities\ImportItem();
-            $item
-                ->setSlug( $this->parseItemSlug($data) )
-                ->setName( $this->parseItemName($data) )
-                ->setIcon( $this->parseItemIcon($data) )
-                ->setLevel( $this->parseItemLevel($data) )
-                ->setType( $this->getItemType() )
-                ->setQuality( 'legendary' );
-            $this->addItem($item);
-        }
-
-        foreach($setData as $data) {
-            $item = new \Entities\ImportItem();
-            $item
-                ->setSlug( $this->parseItemSlug($data) )
-                ->setName( $this->parseItemName($data) )
-                ->setIcon( $this->parseItemIcon($data) )
-                ->setLevel( $this->parseItemLevel($data) )
-                ->setType( $this->getItemType() )
-                ->setQuality( 'set' );
-            $this->addItem($item);
+        $itemData = [
+            'legendary' => $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' legendary ')]"),
+            'set' => $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' set ')]"),
+        ];
+          
+        foreach($itemData as $itemType => $subData) {
+            foreach($subData as $data) {
+                $item = new \Entities\ImportItem();
+                $item
+                    ->setSlug( $this->parseItemSlug($data) )
+                    ->setName( $this->parseItemName($data) )
+                    ->setIcon( $this->parseItemIcon($data) )
+                    ->setLevel( $this->parseItemLevel($data) )
+                    ->setType( $this->getItemTypeId() )
+                    ->setQuality( $itemType );
+                $this->addItem($item);
+            }
         }
         
     }
-
-    
-
-    
     
     private function parseItemSlug($data) {
         return self::getLastElement( $data
@@ -78,20 +65,16 @@ class ItemImporter extends AbstractImporter {
                 ->nodeValue;
     }
 
-    
-    
     private function addItem($item) {
         $this->items[] = $item;
     }
 
-    
-
-    public function getItemType() {
-        return $this->itemType;
+    public function getItemTypeId() {
+        return $this->itemTypeId;
     }
 
-    public function setItemType($itemType) {
-        $this->itemType = $itemType;
+    public function setItemTypeId($itemTypeId) {
+        $this->itemTypeId = $itemTypeId;
         return $this;
     }
 
@@ -121,7 +104,5 @@ class ItemImporter extends AbstractImporter {
         $this->items = $items;
         return $this;
     }
-
-
     
 }

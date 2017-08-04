@@ -8,7 +8,6 @@ abstract class AbstractController {
     private static $settings;
     private $context = array();
 
-
     public static function setEntityManager($em) {
         self::$em = $em;
     }
@@ -37,5 +36,23 @@ abstract class AbstractController {
     public function getContext() {
         return $this->context;
     }
+    
+    public static function getMsg() {
+        $msg = isset($_SESSION['msg']) ? $_SESSION['msg'] : false;
+        unset($_SESSION['msg']);
+        return $msg;
+    }
+
+    public static function setMsg(array $msg) {
+        $_SESSION['msg'] = $msg;
+    }
+
+    public static function addMsg($msg) {
+        if(isset($_SESSION['msg']) && !is_array($_SESSION['msg'])) {
+            $_SESSION['msg'] = [];
+        }
+        $_SESSION['msg'][] = $msg;
+    }
+
     
 }

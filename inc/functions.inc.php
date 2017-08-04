@@ -23,6 +23,19 @@ function shutdown() {
 
 }
 
+
+function import_handle() {
+    $e = error_get_last();
+    if( is_array($e) &&
+        $e != null &&
+        $e['type'] == 1) {
+       header('Location: '.BASE_DIR.'/import'); 
+    }
+}
+
+
+
+
 function n($n) {
     return number_format($n,0,'.',',');
 }

@@ -4,13 +4,14 @@ namespace Helper;
 
 class ActiveSkillImporter extends AbstractImporter {
 
+    private $heroClassId;
     private $url;
-    private $heroClass;
     private $dom;
     private $skills = [];
 
-    public function __construct($url) {
-        $this->setUrl($url);
+    public function __construct($heroClass) {
+        $this->setHeroClassId($heroClass->id);
+        $this->setUrl( sprintf(ACTIVE_SKILL_IMPORT_URL, $heroClass->key) );
         $this->setDom( self::loadDomData( $this->getUrl() ) );
     }
     
@@ -22,35 +23,40 @@ class ActiveSkillImporter extends AbstractImporter {
         $runeData = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' rune-list ')]");
 
         foreach($skillData as $data) {
-            $skill = new \Entities\ImportActiveSkill();
-            $skill
-                ->setHeroClass( $this->getHeroClass() )
-                ->setSlug( $this->parseSkillSlug($data) )
-                ->setName( $this->parseSkillName($data) )
-                ->setIcon( $this->parseSkillIcon($data) );
-            $this->addSkill($skill);
+            $this->createSkillObject($data);
         }
 
         $i=0;
         foreach($runeData as $data) {
-            foreach($data->getElementsByTagName('li') as $li) {
-                $rune = new \Entities\ImportRune();
-                $rune
-                    ->setSkillId(false)
-                    ->setSlug($this->parseRuneSlug( $this->getSkill($i), $li ) )
-                    ->setName( $this->parseRuneName($li) )
-                    ->setType( $this->parseRuneType($li) );
-                $this->getSkill($i)->addRune($rune);
-            }
+            $this->addRunes($data, $this->getSkill($i));
             $i++;
         }
         
     }
+    
+    
+    private function createSkillObject($data) {
+        $skill = new \Entities\ImportActiveSkill();
+        $skill
+            ->setHeroClass( $this->getHeroClassId() )
+            ->setSlug( $this->parseSkillSlug($data) )
+            ->setName( $this->parseSkillName($data) )
+            ->setIcon( $this->parseSkillIcon($data) );
+        $this->addSkill($skill);
+    }
 
-    
+    private function addRunes($data, $skill) {
+        foreach($data->getElementsByTagName('li') as $li) {
+            $rune = new \Entities\ImportRune();
+            $rune
+                ->setSkillId(false)
+                ->setSlug($this->parseRuneSlug( $skill, $li ) )
+                ->setName( $this->parseRuneName($li) )
+                ->setType( $this->parseRuneType($li) );
+            $skill->addRune($rune);
+        }
+    }
 
-    
-    
     private function parseSkillSlug($data) {
         return self::getLastElement( $data
                                 ->getElementsByTagName('h3')[0]
@@ -134,12 +140,12 @@ class ActiveSkillImporter extends AbstractImporter {
         return $this;
     }
 
-    public function getHeroClass() {
-        return $this->heroClass;
+    public function getHeroClassId() {
+        return $this->heroClassId;
     }
 
-    public function setHeroClass($heroClass) {
-        $this->heroClass = $heroClass;
+    public function setHeroClassId($heroClassId) {
+        $this->heroClassId = $heroClassId;
         return $this;
     }
 

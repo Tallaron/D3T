@@ -52,6 +52,7 @@ class BuildListCollectionMapper {
         foreach($slots as $slot) {
             $collection[$slot] = \Mappers\DBMapper::findAllItems([8, $classId], [$slot]);
         }
+        $collection['rightFinger'] = $collection['leftFinger']; // there are no items in db for rightFinger, but it's the same as leftFinger
         return $collection;
     }
 

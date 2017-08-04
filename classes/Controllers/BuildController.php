@@ -37,12 +37,16 @@ class BuildController extends AbstractController {
      * @param int $buildId
      */
     public function editAction($buildId) {
-        $build = \Mappers\DBMapper::findBuildById($buildId);
+        $build = \Mappers\BuildDBMapper::findBuildById($buildId);
         $lists = \Mappers\BuildListCollectionMapper::createObject($build);
+        
+        $cube = \Mappers\EditorCubeMapper::createObject(
+                                \Mappers\BuildDBMapper::findCubeById($buildId));
 
         \Views\View::getInstance()->assign('heroClasses', \Mappers\DBMapper::findAllHeroClasses());
         \Views\View::getInstance()->assign('lists', $lists);
         \Views\View::getInstance()->assign('build', $build);
+        \Views\View::getInstance()->assign('cube', $cube);
         \Views\View::getInstance()->display('builds/edit_build_form.tpl');
     }
 
@@ -54,13 +58,26 @@ class BuildController extends AbstractController {
      * 
      */
     public function saveAction() {
-        $post = filter_input_array(INPUT_POST);
-        \Mappers\DBMapper::saveBuildCube(json_decode(json_encode($post), false));
+        $postObj = json_decode(
+                        json_encode(
+                            filter_input_array(INPUT_POST)
+                            ), false
+                    );
         
+//                    echo '<pre>';
+//                    print_r($postObj);
+//                    die();
         
-//        echo '<pre>';
-//        print_r(json_decode(json_encode($_POST),false));
-//        die();
+        \Mappers\BuildDBMapper::saveMeta($postObj);
+        \Mappers\BuildDBMapper::saveCube($postObj);
+        \Mappers\BuildDBMapper::saveItems($postObj);
+        
+        //save item
+        //save active skills
+        //  save runes
+        //save passive skills
+        
+//        $this->redirect('build/edit/'.$postObj->id);
     }
     
 

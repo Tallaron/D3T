@@ -4,160 +4,102 @@ namespace Controllers;
 
 class ImportController extends AbstractController {
 
+    /**
+     * This method contains several loops that will end up in a fatal timeout.
+     * To avoid script termination and as of it termination of the automated
+     * imports, there is a shutdown function used <b>import_handle</b>.
+     * 
+     * That function will restart the import script again and again until all
+     * imports are done w/o timeouts.
+     * 
+     * The script works with some kind of task list managed within the
+     * <b>$_SESSION</b>. At the end of each single import there is a individual
+     * key stored in the <b>$_SESSION</b>. Before a single import will be
+     * started the script checks if the task is already done in the current
+     * batch to prevent for endless timeouts while redoing the tasks over and
+     * over again.
+     */
     public function indexAction() {
-        if(!isset($_SESSION['imports_done'])) {
-            $_SESSION['imports_done'] = [];
-        }
-        
-        echo '<pre>';
-        print_r($_SESSION['imports_done']);
-        echo '</pre>';
-        
         if(IMPORT_ENABLED) {
+            self::setMsg( isset($_SESSION['imports_done']) ? $_SESSION['imports_done'] : [] );
+            register_shutdown_function('import_handle');
+            $importMapper = new \Mappers\ImportMapper();
             
             /* Import items */
             foreach(\Mappers\DBMapper::findAllItemTypes() as $itemType) {
-                try {
-                    if(!$this->isDone('item', $itemType->key)) {
-                        $this->itemAction($itemType->key);
-                        $_SESSION['imports_done'][] = 'item:'.$itemType->key;
-                        echo 'importItem: '. $itemType->name . ': done<br>';
-                    } else {
-                        echo 'importItem: '. $itemType->name . ': allready done<br>';
-                    }
-                } catch(\Exception $e) {
-                    echo 'importItem: '. $itemType->name . ': failed<br>';
+                if(!$importMapper->isDone('item'.$itemType->key)) {
+                    $importMapper->importItems($itemType->key);
+                    self::addMsg('item'.$itemType->key);
                 }
             }
             
             /* Import active skills and runes */
             foreach(\Mappers\DBMapper::findAllHeroClasses() as $heroClass) {
-                try {
-                    if(!$this->isDone('aSkill', $heroClass->key)) {
-                        $this->activeAction($heroClass->key);
-                        $_SESSION['imports_done'][] = 'aSkill:'.$heroClass->key;
-                        echo 'importASkill: '. $heroClass->name . ': done<br>';
-                    } else {
-                        echo 'importASkill: '. $heroClass->name . ': allready done<br>';
-                    }
-                } catch(\Exception $e) {
-                    echo 'importASkill: '. $heroClass->name . ': failed<br>';
+                if(!$importMapper->isDone('aSkill'.$heroClass->key)) {
+                    $importMapper->importActiveSkills($heroClass->key);
+                    self::addMsg('aSkill'.$heroClass->key);
                 }
             }
             
             /* Import passive skills */
             foreach(\Mappers\DBMapper::findAllHeroClasses() as $heroClass) {
-                try {
-                    if(!$this->isDone('pSkill', $heroClass->key)) {
-                        $this->passiveAction($heroClass->key);
-                        $_SESSION['imports_done'][] = 'pSkill:'.$heroClass->key;
-                        echo 'importPSkill: '. $heroClass->name . ': done<br>';
-                    } else {
-                        echo 'importPSkill: '. $heroClass->name . ': allready done<br>';
-                    }
-                } catch(\Exception $e) {
-                    echo 'importPSkill: '. $heroClass->name . ': failed<br>';
+                if(!$importMapper->isDone('pSkill'.$heroClass->key)) {
+                    $importMapper->importPassiveSkills($heroClass->key);
+                    self::addMsg('pSkill'.$heroClass->key);
                 }
             }
+            
+            if(!$importMapper->isDone('gem')) {
+                $importMapper->importGems();
+                self::addMsg('gem');
+            }
 
-        }        
+        }
+        self::addMsg('all imports done!');
         $this->redirect();
     }
     
     
     
-    public function activeAction($heroClass) {
+    public function activeAction($heroClass = false) {
         if(IMPORT_ENABLED) {
             $heroClass = \Mappers\DBMapper::findHeroClassByKey(strtolower($heroClass));
-            $skills = $this->importActiveSkills($heroClass);
-            foreach($skills as $skill) {
-                \Mappers\DBMapper::saveActiveSkill($skill);
+            if($heroClass !== false) {
+                (new \Mappers\ImportMapper())->importActiveSkills($heroClass->key);
+                self::addMsg('aSkill'.$heroClass->key);
             }
         }
-        
-    }
-    
-    public function passiveAction($heroClass) {
-        if(IMPORT_ENABLED) {
-            $heroClass = \Mappers\DBMapper::findHeroClassByKey(strtolower($heroClass));
-            $skills = $this->importPassiveSkills($heroClass);
-            foreach($skills as $skill) {
-                \Mappers\DBMapper::savePassiveSkill($skill);
-            }
-        }
+        $this->redirect();
     }
 
-    public function itemAction($type) {
+    public function passiveAction($heroClass = false) {
         if(IMPORT_ENABLED) {
-            $itemType = \Mappers\DBMapper::findItemTypeByKey($type);
-            $items = $this->importItems($itemType);
-            foreach($items as $item) {
-                \Mappers\DBMapper::saveItem($item);
+            $heroClass = \Mappers\DBMapper::findHeroClassByKey(strtolower($heroClass));
+            if($heroClass !== false) {
+                (new \Mappers\ImportMapper())->importPassiveSkills($heroClass->key);
+                self::addMsg('pSkill'.$heroClass->key);
             }
         }
+        $this->redirect();
+    }
+
+    public function itemAction($type = false) {
+        if(IMPORT_ENABLED) {
+            $itemType = \Mappers\DBMapper::findItemTypeByKey($type);
+            if($itemType !== false) {
+                (new \Mappers\ImportMapper())->importItems($itemType->key);
+                self::addMsg('item'.$itemType->key);
+            }
+        }
+        $this->redirect();
     }
     
     public function gemAction() {
         if(IMPORT_ENABLED) {
-            $gems = $this->importGems();
-            foreach($gems as $gem) {
-                \Mappers\DBMapper::saveGem($gem);
-            }
+            (new \Mappers\ImportMapper())->importGems();
+            self::addMsg('gem');
         }
-        
+        $this->redirect();
     }
-
-    
-
-
-
-
-
-    private function importActiveSkills($heroClass) {
-        $url = sprintf(ACTIVE_SKILL_IMPORT_URL, $heroClass->key);
-        $importer = new \Helper\ActiveSkillImporter($url);
-        $importer
-                ->setHeroClass($heroClass->id)
-                ->proceed();
-        return $importer->getSkills();
-    }
-    
-    private function importPassiveSkills($heroClass) {
-        $url = sprintf(PASSIVE_SKILL_IMPORT_URL, $heroClass->key);
-        $importer = new \Helper\PassiveSkillImporter($url);
-        $importer
-                ->setHeroClass($heroClass->id)
-                ->proceed();
-        return $importer->getSkills();
-    }
-    
-    private function importItems($itemType) {
-        $url = sprintf(ITEM_IMPORT_URL, $itemType->key);
-        $importer = new \Helper\ItemImporter($url);
-        $importer
-                ->setItemType($itemType->id)
-                ->proceed();
-        return $importer->getItems();
-    }
-    
-    private function importGems() {
-        $url = sprintf(GEM_IMPORT_URL);
-        $importer = new \Helper\GemImporter($url);
-        $importer
-                ->proceed();
-        return $importer->getGems();
-    }
-    
-    
-    
-    
-    
-    
-    private function isDone($actionType, $key) {
-        return in_array($actionType.':'.$key, $_SESSION['imports_done']);
-    }
-    
-    
-    
     
 }

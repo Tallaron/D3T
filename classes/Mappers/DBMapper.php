@@ -166,14 +166,6 @@ class DBMapper extends \Mappers\AbstractDBMapper {
         return $stmt->fetchColumn();
     }
     
-    public static function  findBuildById($id) {
-        $sql = 'SELECT id, name, class_id as "classId", version FROM builds WHERE id = :id;';
-        $stmt = self::getPDO()->prepare($sql);
-        $stmt->execute([
-            ':id' => $id,
-            ]);
-        return $stmt->fetchObject('\Entities\Build');
-    }
     
     
     
@@ -228,40 +220,6 @@ class DBMapper extends \Mappers\AbstractDBMapper {
     
     
     
-    
-    
-    
-    
-    public static function saveBuildCube($obj) {
-        $cubeData = $obj->cube;
-        $params = [];
-        foreach($cubeData as $key => $val) {
-            $params = array_merge($params, array($obj->id,$val,$key));
-        }
-        
-        $sql = 'INSERT INTO build_cube (`build_id`, `item_id`, `type`) VALUES '
-                . implode(',', array_fill(0, count((array)$cubeData), '(?,?,?)')).' '
-                . 'ON DUPLICATE KEY UPDATE '
-                . '`id`=`id`, '
-                . '`build_id`=VALUES(`build_id`), '
-                . '`item_id`=VALUES(`item_id`), '
-                . '`type`=VALUES(`type`);';
-        
-        $stmt = self::getPDO()->prepare($sql);
-        $stmt->execute($params);
-        
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-
     
     
 }

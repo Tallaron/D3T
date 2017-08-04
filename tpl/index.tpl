@@ -2,6 +2,7 @@
     <html>
         <head>
             <title>D3T</title>
+            <script>BASE_DIR = "{BASE_DIR}";</script>
             <link href="{BASE_DIR}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
             <script src="{BASE_DIR}/js/jquery-3.2.1.min.js" type="text/javascript"></script>
             <script src="{BASE_DIR}/js/bootstrap.min.js" type="text/javascript"></script>

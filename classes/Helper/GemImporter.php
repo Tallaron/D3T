@@ -8,8 +8,8 @@ class GemImporter extends AbstractImporter {
     private $dom;
     private $gems = [];
 
-    public function __construct($url) {
-        $this->setUrl($url);
+    public function __construct() {
+        $this->setUrl( GEM_IMPORT_URL );
         $this->setDom( self::loadDomData( $this->getUrl() ) );
     }
     

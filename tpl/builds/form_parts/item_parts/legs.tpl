@@ -4,6 +4,6 @@
     {include file="builds/form_parts/item_parts/item_select.tpl"}
     
     {$gemType = 'legs'}
-    {include file="builds/form_parts/item_parts/socket_select.tpl"}
+    {$numSockets = 2}
     {include file="builds/form_parts/item_parts/socket_select.tpl"}
 </div>

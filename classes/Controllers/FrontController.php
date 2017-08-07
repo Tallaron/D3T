@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-class FrontController {
+class FrontController extends AbstractController {
 
     private $controller = '\Controllers\IndexController';
     private $simpleController = 'index';
@@ -10,9 +10,10 @@ class FrontController {
     private $simpleAction = 'index';
     private $params = [];
     private $basepath;
-    private $excludeIndex = ['ladder.json'];
+    private $excludeIndex;
 
     public function __construct($basepath = '') {
+        $this->setExcludeIndex( self::getSettings()->get('INDEX_EXCLUDED_ENDPOINTS') );
         $this->basepath = $basepath;
         $this->parseURL();
     }

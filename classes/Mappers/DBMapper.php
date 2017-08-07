@@ -212,7 +212,7 @@ class DBMapper extends \Mappers\AbstractDBMapper {
                             ORDER BY i.name ASC;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute(array_merge($classes, $slots) );
-        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Item');
     }
     
     

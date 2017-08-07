@@ -13,6 +13,7 @@ class Gem {
     private $icon = false;
     private $displayColor = EMPTY_ITEM_DEFAULT_DISPLAY_COLOR;
     private $tooltipParams = EMPTY_ITEM_DEFAULT_TOOLTIP_PARAMS;
+    private $slotIndex;
 
     /**
      * returns Blizzard cdn image url for large icon
@@ -148,5 +149,24 @@ class Gem {
         $this->type = $type;
         return $this;
     }
-    
+
+    /**
+     * 
+     * @return int
+     */
+    public function getSlotIndex() {
+        return $this->slotIndex;
+    }
+
+    /**
+     * 
+     * @param int $slotIndex
+     * @return \Entities\Gem
+     */
+    public function setSlotIndex($slotIndex) {
+        $this->slotIndex = $slotIndex;
+        return $this;
+    }
+
+
 }

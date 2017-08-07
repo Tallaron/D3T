@@ -13,7 +13,9 @@ class Rune {
     private $description;
     private $simpleDescription;
     private $tooltipParams;
-    
+    private $type;
+
+
     /**
      * 
      * @return String
@@ -121,5 +123,25 @@ class Rune {
         $this->id = $id;
         return $this;
     }
+    
+    /**
+     * 
+     * @return String
+     */
+    public function getType() {
+        return $this->type;
+    }
+
+    /**
+     * 
+     * @param int $type
+     * @return \Entities\Rune
+     */
+    public function setType($type) {
+        $this->type = $type;
+        return $this;
+    }
+
+
 
 }

@@ -14,6 +14,8 @@ class Item {
     private $tooltipParams = EMPTY_ITEM_DEFAULT_TOOLTIP_PARAMS;
     private $sockets = 0;
     private $gems = [];
+    private $quality;
+    private $level;
 
     /**
      * returns Blizzard cdn image url for large icon
@@ -202,5 +204,43 @@ class Item {
         $this->sockets = $sockets;
         return $this;
     }
+
+    /**
+     * 
+     * @return String
+     */
+    public function getQuality() {
+        return $this->quality;
+    }
+
+    /**
+     * 
+     * @param String $quality
+     * @return \Entities\Item
+     */
+    public function setQuality($quality) {
+        $this->quality = $quality;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getLevel() {
+        return $this->level;
+    }
+
+    /**
+     * 
+     * @param int $level
+     * @return \Entities\Item
+     */
+    public function setLevel($level) {
+        $this->level = $level;
+        return $this;
+    }
+
+
 
 }

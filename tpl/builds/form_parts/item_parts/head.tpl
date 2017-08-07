@@ -4,5 +4,6 @@
     {include file="builds/form_parts/item_parts/item_select.tpl"}
     
     {$gemType = 'helm'}
+    {$numSockets = 1}
     {include file="builds/form_parts/item_parts/socket_select.tpl"}
 </div>

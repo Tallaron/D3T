@@ -6,6 +6,16 @@ class BuildController extends AbstractController {
 
     
     public function indexAction() {
+        
+        $classes = \Mappers\DBMapper::findAllHeroClasses();
+        $builds = [];
+        
+        foreach($classes as $class) {
+            $builds[$class->key] = \Mappers\BuildDBMapper::findBuildMetaByKey($class->key);
+        }
+        
+        \Views\View::getInstance()->assign('heroClasses', $classes);
+        \Views\View::getInstance()->assign('builds', $builds);
         \Views\View::getInstance()->display('builds/builds.tpl');
     }
     
@@ -42,11 +52,26 @@ class BuildController extends AbstractController {
         
         $cube = \Mappers\EditorCubeMapper::createObject(
                                 \Mappers\BuildDBMapper::findCubeById($buildId));
-
+        $inventory = \Mappers\EditorInventoryMapper::createObject(
+                                \Mappers\BuildDBMapper::findInventoryById($buildId));
+        $activeSkills = \Mappers\EditorSkillSetMapper::createObject(
+                                \Mappers\BuildDBMapper::findActiveSkillsById($buildId));
+        $runeLists = [];
+        foreach($activeSkills->getSkills() as $activeSkill) {
+            $runeLists[$activeSkill->getIndex()] = \Mappers\BuildDBMapper::findRawRunesBySkillId( $activeSkill->getSkillId() );
+        }
+        $passiveSkills = \Mappers\EditorSkillSetMapper::createObject(
+                                \Mappers\BuildDBMapper::findPassiveSkillsById($buildId));
+        
+        
         \Views\View::getInstance()->assign('heroClasses', \Mappers\DBMapper::findAllHeroClasses());
         \Views\View::getInstance()->assign('lists', $lists);
+        \Views\View::getInstance()->assign('runeLists', $runeLists);
         \Views\View::getInstance()->assign('build', $build);
         \Views\View::getInstance()->assign('cube', $cube);
+        \Views\View::getInstance()->assign('inventory', $inventory);
+        \Views\View::getInstance()->assign('activeSkills', $activeSkills);
+        \Views\View::getInstance()->assign('passiveSkills', $passiveSkills);
         \Views\View::getInstance()->display('builds/edit_build_form.tpl');
     }
 
@@ -64,20 +89,15 @@ class BuildController extends AbstractController {
                             ), false
                     );
         
-//                    echo '<pre>';
-//                    print_r($postObj);
-//                    die();
-        
         \Mappers\BuildDBMapper::saveMeta($postObj);
         \Mappers\BuildDBMapper::saveCube($postObj);
         \Mappers\BuildDBMapper::saveItems($postObj);
+        \Mappers\BuildDBMapper::saveActiveSkills($postObj);
+        \Mappers\BuildDBMapper::savePassiveSkills($postObj);
         
-        //save item
-        //save active skills
-        //  save runes
-        //save passive skills
         
-//        $this->redirect('build/edit/'.$postObj->id);
+        
+        $this->redirect('build/edit/'.$postObj->id);
     }
     
 
@@ -87,6 +107,11 @@ class BuildController extends AbstractController {
 
 
 
+    public function runeAction($skillId) {
+        $runes = \Mappers\BuildDBMapper::findRawRunesBySkillId($skillId);
+        \Views\View::getInstance()->assign('runes', $runes);
+        \Views\View::getInstance()->display('builds/form_parts/runes_options.tpl');
+    }
 
 
 

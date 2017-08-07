@@ -180,6 +180,10 @@ $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
                     'mainHand',
                     'offHand',))
         ->addContext('RANKING_DEFAULT_MIN_PARAGON', 1)
-        ->addContext('RANKING_DEFAULT_MAX_PARAGON', 10000);
+        ->addContext('RANKING_DEFAULT_MAX_PARAGON', 10000)
+        ->addContext('INDEX_EXCLUDED_ENDPOINTS', array(         //Those Endpoints don't trigger default index.tpl but returning the endpoints data
+            'ladder.json',
+            'build.rune',
+        ));
 
 

@@ -1,9 +1,7 @@
 $(function() {
     
     $("option").click(function() {
-        var cls = $(this).attr("class");
-        $(this).parent("select").attr("class", "form-control");
-        $(this).parent("select").addClass(cls);
+        changeSelectClass(this);
     });
     
     /*
@@ -18,15 +16,15 @@ $(function() {
     
     $("#build-skills-a option").click(function() {
         var skillId = $(this).val();
+        var target = $(this).parent("select").data("rune");
         $.post(
-//            BASE_DIR+"/ajax/get_runes.php",
-            BASE_DIR+"/ladder/json/eu/0/0/8/team-4/1/5/1/10000/1",
-            {
-                skillId: skillId
-            },
+            BASE_DIR+"/build/rune/"+skillId,
+            {},
             function(data) {
-                alert(data);
-//                $("#"+$(this).parent("select").data("rune")).html(data);
+                $("#"+target).html(data);
+                $("option").click(function() {
+                    changeSelectClass(this);
+                });
             }
         );
     });
@@ -34,3 +32,9 @@ $(function() {
     
     
 });
+
+function changeSelectClass(obj) {
+    var cls = $(obj).attr("class");
+    $(obj).parent("select").attr("class", "form-control");
+    $(obj).parent("select").addClass(cls);
+}

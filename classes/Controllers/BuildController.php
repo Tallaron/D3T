@@ -6,14 +6,8 @@ class BuildController extends AbstractController {
 
     
     public function indexAction() {
-        
         $classes = \Mappers\DBMapper::findAllHeroClasses();
-        $builds = [];
-        
-        foreach($classes as $class) {
-            $builds[$class->key] = \Mappers\BuildDBMapper::findBuildMetaByKey($class->key);
-        }
-        
+        $builds = $this->getBuildList($classes);
         \Views\View::getInstance()->assign('heroClasses', $classes);
         \Views\View::getInstance()->assign('builds', $builds);
         \Views\View::getInstance()->display('builds/builds.tpl');
@@ -25,10 +19,11 @@ class BuildController extends AbstractController {
      * or any other data may be delivered to the db with this form.
      */
     public function newAction() {
+        $this->prepareNav();
         $date = new \DateTime();
         \Views\View::getInstance()->assign('defaultName', 'build_'.$date->format('d-m-y_H-i'));
-        \Views\View::getInstance()->assign('heroClasses', \Mappers\DBMapper::findAllHeroClasses());
-        \Views\View::getInstance()->display('builds/new_build_form.tpl');
+        \Views\View::getInstance()->assign('content', 'newBuild'); //content switch case
+        \Views\View::getInstance()->display('builds/builds.tpl');
     }
 
     /**
@@ -38,7 +33,7 @@ class BuildController extends AbstractController {
      */
     public function createAction() {
         $post = filter_input_array(INPUT_POST);
-        $bId = \Mappers\DBMapper::createBuild($post['class'], $post['name'], $post['version']);
+        $bId = \Mappers\BuildDBMapper::createBuild($post['class'], $post['name'], $post['version']);
         $this->redirect('build/edit/'.$bId);
     }
 
@@ -47,41 +42,20 @@ class BuildController extends AbstractController {
      * @param int $buildId
      */
     public function editAction($buildId) {
-        $build = \Mappers\BuildDBMapper::findBuildById($buildId);
+        $this->prepareNav();
+        $build = \Mappers\BuildMapper::createObject($buildId);
         $lists = \Mappers\BuildListCollectionMapper::createObject($build);
         
-        $cube = \Mappers\EditorCubeMapper::createObject(
-                                \Mappers\BuildDBMapper::findCubeById($buildId));
-        $inventory = \Mappers\EditorInventoryMapper::createObject(
-                                \Mappers\BuildDBMapper::findInventoryById($buildId));
-        $activeSkills = \Mappers\EditorSkillSetMapper::createObject(
-                                \Mappers\BuildDBMapper::findActiveSkillsById($buildId));
-        $runeLists = [];
-        foreach($activeSkills->getSkills() as $activeSkill) {
-            $runeLists[$activeSkill->getIndex()] = \Mappers\BuildDBMapper::findRawRunesBySkillId( $activeSkill->getSkillId() );
-        }
-        $passiveSkills = \Mappers\EditorSkillSetMapper::createObject(
-                                \Mappers\BuildDBMapper::findPassiveSkillsById($buildId));
-        
-        
-        \Views\View::getInstance()->assign('heroClasses', \Mappers\DBMapper::findAllHeroClasses());
         \Views\View::getInstance()->assign('lists', $lists);
-        \Views\View::getInstance()->assign('runeLists', $runeLists);
         \Views\View::getInstance()->assign('build', $build);
-        \Views\View::getInstance()->assign('cube', $cube);
-        \Views\View::getInstance()->assign('inventory', $inventory);
-        \Views\View::getInstance()->assign('activeSkills', $activeSkills);
-        \Views\View::getInstance()->assign('passiveSkills', $passiveSkills);
-        \Views\View::getInstance()->display('builds/edit_build_form.tpl');
+        \Views\View::getInstance()->assign('content', 'editBuild'); //content switch case
+        \Views\View::getInstance()->display('builds/builds.tpl');
     }
 
     
 
 
     
-    /**
-     * 
-     */
     public function saveAction() {
         $postObj = json_decode(
                         json_encode(
@@ -89,16 +63,28 @@ class BuildController extends AbstractController {
                             ), false
                     );
         
-        \Mappers\BuildDBMapper::saveMeta($postObj);
+        \Mappers\BuildDBMapper::updateMeta($postObj);
         \Mappers\BuildDBMapper::saveCube($postObj);
         \Mappers\BuildDBMapper::saveItems($postObj);
         \Mappers\BuildDBMapper::saveActiveSkills($postObj);
         \Mappers\BuildDBMapper::savePassiveSkills($postObj);
-        
-        
-        
         $this->redirect('build/edit/'.$postObj->id);
     }
+    
+
+
+
+
+    
+    
+    public function showAction($id) {
+        $this->prepareNav();
+        $build = \Mappers\BuildMapper::createObject($id);        
+        \Views\View::getInstance()->assign('build', $build);
+        \Views\View::getInstance()->assign('content', 'showBuild'); //content switch case
+        \Views\View::getInstance()->display('builds/builds.tpl');
+    }
+
     
 
 
@@ -107,15 +93,40 @@ class BuildController extends AbstractController {
 
 
 
+
+
+
+
+
+
+
+    /**
+     * Just for reducing redundancy...
+     */
+    private function prepareNav() {
+        $classes = \Mappers\DBMapper::findAllHeroClasses();
+        $builds = $this->getBuildList($classes);
+        \Views\View::getInstance()->assign('heroClasses', $classes);
+        \Views\View::getInstance()->assign('builds', $builds);
+    }
+
+    
+    /**
+     * Endpoint to receive a list of runes for the specified skill.
+     * @param int $skillId
+     */
     public function runeAction($skillId) {
-        $runes = \Mappers\BuildDBMapper::findRawRunesBySkillId($skillId);
+        $runes = \Mappers\DBMapper::findRawRunesBySkillId($skillId);
         \Views\View::getInstance()->assign('runes', $runes);
         \Views\View::getInstance()->display('builds/form_parts/runes_options.tpl');
     }
-
-
-
-
+    
+    private function getBuildList($classes) {
+        $builds = [];
+        foreach($classes as $class) {
+            $builds[$class->getKey()] = \Mappers\BuildDBMapper::findBuildMetaByClassKey($class->getKey());
+        } return $builds;
+    }
 
 
     

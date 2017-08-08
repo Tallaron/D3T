@@ -5,7 +5,7 @@ namespace Entities;
 /**
  * Data class for Diablo 3 active skill, e.g. 'Furious Charge'
  */
-class ActiveSkill {
+class ActiveSkill extends AbstractSkill {
 
     private $id;
     private $slug;
@@ -15,46 +15,6 @@ class ActiveSkill {
     private $description;
     private $simpleDescription;
     private $rune;
-    
-    /**
-     * returns Blizzard cdn image url for large icon
-     * @return String
-     */
-    public function getLargeIconUrl() {
-        return BLIZZARD_D3_SKILL_BASE_PATH . '42/' . strtolower($this->getIcon()) . '.png';
-    }
-
-    /**
-     * returns Blizzard cdn image url for small icon
-     * @return String
-     */
-    public function getSmallIconUrl() {
-        return BLIZZARD_D3_SKILL_BASE_PATH . '21/' . strtolower($this->getIcon()) . '.png';
-    }
-    
-    /**
-     * 
-     * @return String Returns String or null
-     */
-    public function getSlug() {
-        return $this->slug;
-    }
-
-    /**
-     * 
-     * @return String Returns String or null
-     */
-    public function getName() {
-        return $this->name;
-    }
-
-    /**
-     * 
-     * @return String Returns String or null
-     */
-    public function getIcon() {
-        return $this->icon;
-    }
 
     /**
      * 
@@ -86,36 +46,6 @@ class ActiveSkill {
      */
     public function getRune() {
         return $this->rune;
-    }
-
-    /**
-     * 
-     * @param String $slug
-     * @return \Entities\ActiveSkill
-     */
-    public function setSlug($slug) {
-        $this->slug = $slug;
-        return $this;
-    }
-
-    /**
-     * 
-     * @param String $name
-     * @return \Entities\ActiveSkill
-     */
-    public function setName($name) {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * 
-     * @param String $icon
-     * @return \Entities\ActiveSkill
-     */
-    public function setIcon($icon) {
-        $this->icon = $icon;
-        return $this;
     }
 
     /**
@@ -160,7 +90,61 @@ class ActiveSkill {
 
     /**
      * 
-     * @return \Entities\ActiveSkill
+     * @return String Returns String or null
+     */
+    public function getSlug() {
+        return $this->slug;
+    }
+
+    /**
+     * 
+     * @return String Returns String or null
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
+     * 
+     * @return String Returns String or null
+     */
+    public function getIcon() {
+        return $this->icon;
+    }
+
+    /**
+     * 
+     * @param String $slug
+     * @return \Entities\*Skill
+     */
+    public function setSlug($slug) {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param String $name
+     * @return \Entities\*Skill
+     */
+    public function setName($name) {
+        $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param String $icon
+     * @return \Entities\*Skill
+     */
+    public function setIcon($icon) {
+        $this->icon = $icon;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return int
      */
     public function getId() {
         return $this->id;
@@ -169,13 +153,11 @@ class ActiveSkill {
     /**
      * 
      * @param int $id
-     * @return \Entities\ActiveSkill
+     * @return \Entities\*Skill
      */
     public function setId($id) {
         $this->id = $id;
         return $this;
     }
-
-
-
+    
 }

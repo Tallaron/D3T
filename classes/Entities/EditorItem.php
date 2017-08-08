@@ -4,10 +4,10 @@ namespace Entities;
 
 class EditorItem {
 
-    private $itemId = -1;
+    private $itemId;
     private $gems = [];
     
-    public function __construct($itemId) {
+    public function __construct($itemId = -1) {
         $this->itemId = $itemId;
     }
 
@@ -16,7 +16,9 @@ class EditorItem {
     }
     
     public function getGemAt($index) {
-        return $this->gems[$index];
+        if(array_key_exists($index, $this->getGems())) {
+            return $this->gems[$index];
+        } return false;
     }
 
     public function getItemId() {

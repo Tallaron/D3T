@@ -1,6 +1,6 @@
 <?php
 
-namespace Controllers;
+namespace Helper;
 
 class ParagonCalculator {
 
@@ -39,10 +39,17 @@ class ParagonCalculator {
 
     
 
+    public function calculate() {
+        $this->setOverall( new \Entities\Paragon() );
+        $this->getOverall()->setXp( $this->getOverallXp() );
+        $this->getOverall()->setLevel( $this->getOverallLevel() );
+        return $this;
+    }
 
     
-    
-    
+
+
+
     public function getOverallXp() {
         return $this->getNonSeason()->getXp() + $this->getSeason()->getXp();
     }
@@ -110,12 +117,12 @@ class ParagonCalculator {
     }
 
     public function setNonSeason($nonSeason) {
-        $this->nonSeason = $nonSeason;
+        $this->nonSeason = $this->createParagon( (int)$nonSeason );
         return $this;
     }
 
     public function setSeason($season) {
-        $this->season = $season;
+        $this->season = $this->createParagon( (int)$season );
         return $this;
     }
 

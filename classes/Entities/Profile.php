@@ -21,6 +21,8 @@ class Profile extends PlayedTime {
     private $paragonHardcore;
     private $paragonSeasonal;
     private $paragonSeasonalHardcore;
+    private $paragonOverall;
+    private $paragonHardcoreOverall;
     private $seasons = [];
 
     /**
@@ -335,6 +337,42 @@ class Profile extends PlayedTime {
      */
     public function setEliteKills($eliteKills) {
         $this->eliteKills = $eliteKills;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getParagonOverall() {
+        return $this->paragonOverall;
+    }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getParagonHardcoreOverall() {
+        return $this->paragonHardcoreOverall;
+    }
+
+    /**
+     * 
+     * @param int $paragonOverall
+     * @return \Entities\Profile
+     */
+    public function setParagonOverall($paragonOverall) {
+        $this->paragonOverall = $paragonOverall;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param int $paragonHardcoreOverall
+     * @return \Entities\Profile
+     */
+    public function setParagonHardcoreOverall($paragonHardcoreOverall) {
+        $this->paragonHardcoreOverall = $paragonHardcoreOverall;
         return $this;
     }
 

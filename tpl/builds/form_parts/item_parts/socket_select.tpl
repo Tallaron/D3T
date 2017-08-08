@@ -6,7 +6,11 @@
             <select size="1" name="items[{$itemType}][socket][]" class="form-control custom-select-untouched">
                 <option value="-1">EMPTY</option>
                 {foreach from=$lists->getGems() item=$gem}
-                    <option value="{$gem->getId()}" class="custom-select-{$gem->getType()}" {if $gem->getId() == $inventory->get($itemType)->getGemAt($i-1)->getId()} selected{/if}>{$gem->getName()}</option>
+                    <option value="{$gem->getId()}" 
+                            class="custom-select-{$gem->getType()}" 
+                            {if $build->getItems()->get($itemType)->getGemAt($i-1) != false && $gem->getId() == $build->getItems()->get($itemType)->getGemAt($i-1)->getId()}
+                                selected
+                            {/if}>{$gem->getName()}</option>
                 {/foreach}
             </select>
         </div>

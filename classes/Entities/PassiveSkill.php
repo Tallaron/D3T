@@ -5,29 +5,49 @@ namespace Entities;
 /**
  * Data class for Diablo 3 passive skill, e.g. 'Nerves of Steel'
  */
-class PassiveSkill {
+class PassiveSkill extends AbstractSkill {
 
     private $id;
     private $slug;
-    private $name = 'EMPTY';
-    private $icon;
+    private $name;
+    private $icon; //filename w/o extention and path
     private $tooltipUrl;
     private $description;
     
     /**
-     * returns Blizzard cdn image url for large icon
-     * @return String
+     * 
+     * @return String Returns String or null
      */
-    public function getLargeIconUrl() {
-        return BLIZZARD_D3_SKILL_BASE_PATH . '42/' . strtolower($this->getIcon()) . '.png';
+    public function getTooltipUrl() {
+        return $this->tooltipUrl;
     }
 
     /**
-     * returns Blizzard cdn image url for small icon
-     * @return String
+     * 
+     * @return String Returns String or null
      */
-    public function getSmallIconUrl() {
-        return BLIZZARD_D3_SKILL_BASE_PATH . '21/' . strtolower($this->getIcon()) . '.png';
+    public function getDescription() {
+        return $this->description;
+    }
+
+    /**
+     * 
+     * @param String $tooltipUrl
+     * @return \Entities\PassiveSkill
+     */
+    public function setTooltipUrl($tooltipUrl) {
+        $this->tooltipUrl = $tooltipUrl;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param String $description
+     * @return \Entities\PassiveSkill
+     */
+    public function setDescription($description) {
+        $this->description = $description;
+        return $this;
     }
 
     /**
@@ -56,24 +76,8 @@ class PassiveSkill {
 
     /**
      * 
-     * @return String Returns String or null
-     */
-    public function getTooltipUrl() {
-        return $this->tooltipUrl;
-    }
-
-    /**
-     * 
-     * @return String Returns String or null
-     */
-    public function getDescription() {
-        return $this->description;
-    }
-
-    /**
-     * 
      * @param String $slug
-     * @return \Entities\PassiveSkill
+     * @return \Entities\*Skill
      */
     public function setSlug($slug) {
         $this->slug = $slug;
@@ -83,7 +87,7 @@ class PassiveSkill {
     /**
      * 
      * @param String $name
-     * @return \Entities\PassiveSkill
+     * @return \Entities\*Skill
      */
     public function setName($name) {
         $this->name = $name;
@@ -93,7 +97,7 @@ class PassiveSkill {
     /**
      * 
      * @param String $icon
-     * @return \Entities\PassiveSkill
+     * @return \Entities\*Skill
      */
     public function setIcon($icon) {
         $this->icon = $icon;
@@ -102,27 +106,7 @@ class PassiveSkill {
 
     /**
      * 
-     * @param String $tooltipUrl
-     * @return \Entities\PassiveSkill
-     */
-    public function setTooltipUrl($tooltipUrl) {
-        $this->tooltipUrl = $tooltipUrl;
-        return $this;
-    }
-
-    /**
-     * 
-     * @param String $description
-     * @return \Entities\PassiveSkill
-     */
-    public function setDescription($description) {
-        $this->description = $description;
-        return $this;
-    }
-
-    /**
-     * 
-     * @return \Entities\PassiveSkill
+     * @return int
      */
     public function getId() {
         return $this->id;
@@ -131,11 +115,11 @@ class PassiveSkill {
     /**
      * 
      * @param int $id
-     * @return \Entities\PassiveSkill
+     * @return \Entities\*Skill
      */
     public function setId($id) {
         $this->id = $id;
         return $this;
     }
-
+    
 }

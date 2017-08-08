@@ -27,8 +27,35 @@ class ProfileMapper extends AbstractMapper {
         self::loadProfileInformation($profile, $data);
         self::loadHeroes($profile, $data);
         self::loadSeasons($profile, $data);
+        self::calculateParagon($profile);
         return $profile;
     }
+    
+    
+    
+    
+    
+    private static function calculateParagon(\Entities\Profile $profile) {
+        $pc = \Mappers\ParagonCalculationMapper::createObject(
+                                            $profile->getParagon(),
+                                            $profile->getParagonSeasonal());
+        $profile->setParagonOverall( $pc->getOverallLevel() );
+        $pc = \Mappers\ParagonCalculationMapper::createObject(
+                                            $profile->getParagonHardcore(),
+                                            $profile->getParagonSeasonalHardcore());
+        $profile->setParagonHardcoreOverall( $pc->getOverallLevel() );
+    }
+
+    
+
+
+
+
+
+
+
+
+
 
     /**
      * 

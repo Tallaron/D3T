@@ -31,18 +31,22 @@
                         <tr>
                             <td>Normal</td>
                             <td>{n($profile->getParagon())}</td>
+                            <td class="custom-grey-text">{n($profile->getParagonOverall())}</td>
                         </tr>
                         <tr>
                             <td>Hardcore</td>
                             <td>{n($profile->getParagonHardcore())}</td>
+                            <td class="custom-grey-text">{n($profile->getParagonHardcoreOverall())}</td>
                         </tr>
                         <tr>
                             <td>Season</td>
                             <td>{n($profile->getParagonSeasonal())}</td>
+                            <td>&nbsp;</td>
                         </tr>
                         <tr>
                             <td>Season Hardcore</td>
                             <td>{n($profile->getParagonSeasonalHardcore())}</td>
+                            <td>&nbsp;</td>
                         </tr>
                     </tbody>
                 </table>

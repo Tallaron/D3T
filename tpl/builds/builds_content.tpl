@@ -5,8 +5,12 @@
     
     {if isset($content)}
         
-        {if $content == 'addNewBuild'}
-            {include file="builds/new_build_form.tpl"}    
+        {if $content == 'newBuild'}
+            {include file="builds/new_build_form.tpl"}   
+        {elseif $content == 'editBuild'}
+            {include file="builds/edit_build_form.tpl"}
+        {elseif $content == 'showBuild'}
+            {include file="builds/show_build.tpl"}
         {/if}
     
     {/if}

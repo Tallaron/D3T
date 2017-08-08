@@ -17,8 +17,24 @@ class EditorInventory {
     private $offHand;
     private $bracers;
     private $neck;
+    
+    public function __construct() {
+        $this->head = new \Entities\EditorItem();
+        $this->torso = new \Entities\EditorItem();
+        $this->waist = new \Entities\EditorItem();
+        $this->legs = new \Entities\EditorItem();
+        $this->feet = new \Entities\EditorItem();
+        $this->shoulders = new \Entities\EditorItem();
+        $this->hands = new \Entities\EditorItem();
+        $this->leftFinger = new \Entities\EditorItem();
+        $this->rightFinger = new \Entities\EditorItem();
+        $this->mainHand = new \Entities\EditorItem();
+        $this->offHand = new \Entities\EditorItem();
+        $this->bracers = new \Entities\EditorItem();
+        $this->neck = new \Entities\EditorItem();
+    }
 
-    public function getHead() {
+        public function getHead() {
         return $this->head;
     }
 

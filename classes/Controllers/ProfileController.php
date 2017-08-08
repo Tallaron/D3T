@@ -24,7 +24,7 @@ class ProfileController extends AbstractController {
     
     public function showAction($realm, $btag, $content = 'overview', $id = 0) {
         $profile = \Mappers\ProfileMapper::createObj($realm, str_replace('-', '#', $btag), $content, $id);
-        \Views\View::getInstance()->assign('content', $content);
+        \Views\View::getInstance()->assign('content', $content); //containts just a switch case key
         \Views\View::getInstance()->assign('profile', $profile);
         \Views\View::getInstance()->display('profile/profile.tpl');
     }

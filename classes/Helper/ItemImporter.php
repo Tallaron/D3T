@@ -4,14 +4,14 @@ namespace Helper;
 
 class ItemImporter extends AbstractImporter {
 
-    private $itemTypeId;
+    private $itemType;
     private $url;
     private $dom;
     private $items = [];
 
     public function __construct($itemType) {
-        $this->setItemTypeId($itemType->id);
-        $this->setUrl( sprintf(ITEM_IMPORT_URL, $itemType->key) );
+        $this->setItemType($itemType);
+        $this->setUrl( sprintf(ITEM_IMPORT_URL, $itemType->getKey()) );
         $this->setDom( self::loadDomData( $this->getUrl() ) );
     }
     
@@ -24,13 +24,13 @@ class ItemImporter extends AbstractImporter {
           
         foreach($itemData as $itemType => $subData) {
             foreach($subData as $data) {
-                $item = new \Entities\ImportItem();
+                $item = new \Entities\Item();
                 $item
                     ->setSlug( $this->parseItemSlug($data) )
                     ->setName( $this->parseItemName($data) )
                     ->setIcon( $this->parseItemIcon($data) )
                     ->setLevel( $this->parseItemLevel($data) )
-                    ->setType( $this->getItemTypeId() )
+                    ->setType( $this->getItemType() )
                     ->setQuality( $itemType );
                 $this->addItem($item);
             }
@@ -69,12 +69,12 @@ class ItemImporter extends AbstractImporter {
         $this->items[] = $item;
     }
 
-    public function getItemTypeId() {
-        return $this->itemTypeId;
+    public function getItemType() {
+        return $this->itemType;
     }
 
-    public function setItemTypeId($itemTypeId) {
-        $this->itemTypeId = $itemTypeId;
+    public function setItemType($itemType) {
+        $this->itemType = $itemType;
         return $this;
     }
 

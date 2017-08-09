@@ -5,9 +5,9 @@ namespace Mappers;
 class EditorInventoryMapper {
 
     public static function createObject($data) {
-        $obj = new \Entities\EditorInventory();
+        $obj = new \Entities\BuildInventory();
         foreach($data as $item) {
-            $editorItem = new \Entities\EditorItem( $item->getId() );
+            $editorItem = new \Entities\BuildItem( $item->getId() );
             $gems = \Mappers\BuildDBMapper::findGemsByItemId( $item->getId() );
             
             foreach($gems as $gem) {

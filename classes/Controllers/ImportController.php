@@ -27,25 +27,25 @@ class ImportController extends AbstractController {
             
             /* Import items */
             foreach(\Mappers\DBMapper::findAllItemTypes() as $itemType) {
-                if(!$importMapper->isDone('item'.$itemType->key)) {
-                    $importMapper->importItems($itemType->key);
-                    self::addMsg('item'.$itemType->key);
+                if(!$importMapper->isDone('item'.$itemType->getKey())) {
+                    $importMapper->importItems($itemType->getKey());
+                    self::addMsg('item'.$itemType->getKey());
                 }
             }
             
             /* Import active skills and runes */
             foreach(\Mappers\DBMapper::findAllHeroClasses() as $heroClass) {
-                if(!$importMapper->isDone('aSkill'.$heroClass->key)) {
-                    $importMapper->importActiveSkills($heroClass->key);
-                    self::addMsg('aSkill'.$heroClass->key);
+                if(!$importMapper->isDone('aSkill'.$heroClass->getKey())) {
+                    $importMapper->importActiveSkills($heroClass->getKey());
+                    self::addMsg('aSkill'.$heroClass->getKey());
                 }
             }
             
             /* Import passive skills */
             foreach(\Mappers\DBMapper::findAllHeroClasses() as $heroClass) {
-                if(!$importMapper->isDone('pSkill'.$heroClass->key)) {
-                    $importMapper->importPassiveSkills($heroClass->key);
-                    self::addMsg('pSkill'.$heroClass->key);
+                if(!$importMapper->isDone('pSkill'.$heroClass->getKey())) {
+                    $importMapper->importPassiveSkills($heroClass->getKey());
+                    self::addMsg('pSkill'.$heroClass->getKey());
                 }
             }
             
@@ -63,10 +63,10 @@ class ImportController extends AbstractController {
     
     public function activeAction($heroClass = false) {
         if(IMPORT_ENABLED) {
-            $heroClass = \Mappers\DBMapper::findHeroClassByKey(strtolower($heroClass));
             if($heroClass !== false) {
-                (new \Mappers\ImportMapper())->importActiveSkills($heroClass->key);
-                self::addMsg('aSkill'.$heroClass->key);
+                $heroClass = \Mappers\DBMapper::findHeroClassByKey(strtolower($heroClass));
+                (new \Mappers\ImportMapper())->importActiveSkills($heroClass->getKey());
+                self::addMsg('aSkill'.$heroClass->getKey());
             }
         }
         $this->redirect();
@@ -74,10 +74,10 @@ class ImportController extends AbstractController {
 
     public function passiveAction($heroClass = false) {
         if(IMPORT_ENABLED) {
-            $heroClass = \Mappers\DBMapper::findHeroClassByKey(strtolower($heroClass));
             if($heroClass !== false) {
-                (new \Mappers\ImportMapper())->importPassiveSkills($heroClass->key);
-                self::addMsg('pSkill'.$heroClass->key);
+                $heroClass = \Mappers\DBMapper::findHeroClassByKey(strtolower($heroClass));
+                (new \Mappers\ImportMapper())->importPassiveSkills($heroClass->getKey());
+                self::addMsg('pSkill'.$heroClass->getKey());
             }
         }
         $this->redirect();
@@ -85,10 +85,10 @@ class ImportController extends AbstractController {
 
     public function itemAction($type = false) {
         if(IMPORT_ENABLED) {
-            $itemType = \Mappers\DBMapper::findItemTypeByKey($type);
             if($itemType !== false) {
-                (new \Mappers\ImportMapper())->importItems($itemType->key);
-                self::addMsg('item'.$itemType->key);
+                $itemType = \Mappers\DBMapper::findItemTypeByKey(strtolower($type));
+                (new \Mappers\ImportMapper())->importItems($itemType->getKey());
+                self::addMsg('item'.$itemType->getKey());
             }
         }
         $this->redirect();

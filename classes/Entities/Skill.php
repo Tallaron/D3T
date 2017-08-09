@@ -2,10 +2,7 @@
 
 namespace Entities;
 
-/**
- * Data class for Diablo 3 active skill, e.g. 'Furious Charge'
- */
-class ActiveSkill extends AbstractSkill {
+class Skill {
 
     private $id;
     private $slug;
@@ -15,6 +12,33 @@ class ActiveSkill extends AbstractSkill {
     private $description;
     private $simpleDescription;
     private $rune;
+    private $index;
+    private $heroClass;
+    private $runes = [];
+
+    /**
+     * 
+     * @param \Entities\Rune $rune
+     */
+    public function addRune(\Entities\Rune $rune) {
+        $this->runes[] = $rune;
+    }
+
+    /**
+     * returns Blizzard cdn image url for large icon
+     * @return String
+     */
+    public function getLargeIconUrl() {
+        return BLIZZARD_D3_SKILL_BASE_PATH . '42/' . strtolower($this->getIcon()) . '.png';
+    }
+
+    /**
+     * returns Blizzard cdn image url for small icon
+     * @return String
+     */
+    public function getSmallIconUrl() {
+        return BLIZZARD_D3_SKILL_BASE_PATH . '21/' . strtolower($this->getIcon()) . '.png';
+    }
 
     /**
      * 
@@ -51,7 +75,7 @@ class ActiveSkill extends AbstractSkill {
     /**
      * 
      * @param String $tooltipUrl
-     * @return \Entities\ActiveSkill
+     * @return \Entities\Skill
      */
     public function setTooltipUrl($tooltipUrl) {
         $this->tooltipUrl = $tooltipUrl;
@@ -61,7 +85,7 @@ class ActiveSkill extends AbstractSkill {
     /**
      * 
      * @param String $description
-     * @return \Entities\ActiveSkill
+     * @return \Entities\Skill
      */
     public function setDescription($description) {
         $this->description = $description;
@@ -71,7 +95,7 @@ class ActiveSkill extends AbstractSkill {
     /**
      * 
      * @param String $simpleDescription
-     * @return \Entities\ActiveSkill
+     * @return \Entities\Skill
      */
     public function setSimpleDescription($simpleDescription) {
         $this->simpleDescription = $simpleDescription;
@@ -81,7 +105,7 @@ class ActiveSkill extends AbstractSkill {
     /**
      * 
      * @param \Entities\Rune $rune
-     * @return \Entities\ActiveSkill
+     * @return \Entities\Skill
      */
     public function setRune(\Entities\Rune $rune) {
         $this->rune = $rune;
@@ -115,7 +139,7 @@ class ActiveSkill extends AbstractSkill {
     /**
      * 
      * @param String $slug
-     * @return \Entities\*Skill
+     * @return \Entities\Skill
      */
     public function setSlug($slug) {
         $this->slug = $slug;
@@ -125,7 +149,7 @@ class ActiveSkill extends AbstractSkill {
     /**
      * 
      * @param String $name
-     * @return \Entities\*Skill
+     * @return \Entities\Skill
      */
     public function setName($name) {
         $this->name = $name;
@@ -135,7 +159,7 @@ class ActiveSkill extends AbstractSkill {
     /**
      * 
      * @param String $icon
-     * @return \Entities\*Skill
+     * @return \Entities\Skill
      */
     public function setIcon($icon) {
         $this->icon = $icon;
@@ -153,11 +177,68 @@ class ActiveSkill extends AbstractSkill {
     /**
      * 
      * @param int $id
-     * @return \Entities\*Skill
+     * @return \Entities\Skill
      */
     public function setId($id) {
         $this->id = $id;
         return $this;
     }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getIndex() {
+        return $this->index;
+    }
+
+    /**
+     * 
+     * @param int $index
+     * @return \Entities\Skill
+     */
+    public function setIndex($index) {
+        $this->index = $index;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return \Entities\HeroClass
+     */
+    public function getHeroClass() {
+        return $this->heroClass;
+    }
+
+    /**
+     * Returns an array of \Entities\Rune.
+     * @return array
+     */
+    public function getRunes() {
+        return $this->runes;
+    }
+
+    /**
+     * 
+     * @param \Entities\HeroClass $heroClass
+     * @return \Entities\Skill
+     */
+    public function setHeroClass(\Entities\HeroClass $heroClass) {
+        $this->heroClass = $heroClass;
+        return $this;
+    }
+
+    /**
+     * Awaits an array of \Entities\Rune to put into <b>$this->runes</b>.
+     * @param array $runes
+     * @return \Entities\Skill
+     */
+    public function setRunes(array $runes) {
+        $this->runes = $runes;
+        return $this;
+    }
+
+
+
     
 }

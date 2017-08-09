@@ -5,7 +5,7 @@ namespace Mappers;
 class EditorSkillSetMapper {
 
     public static function createObject($data) {
-        $obj = new \Entities\EditorSkillSet();
+        $obj = new \Entities\BuildSkillSet();
 
 
         foreach($data as $skill) {

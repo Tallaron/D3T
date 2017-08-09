@@ -16,6 +16,8 @@ class Item {
     private $gems = [];
     private $quality;
     private $level;
+    private $slug;
+    private $type;
 
     /**
      * returns Blizzard cdn image url for large icon
@@ -241,6 +243,40 @@ class Item {
         return $this;
     }
 
+    /**
+     * 
+     * @return String
+     */
+    public function getSlug() {
+        return $this->slug;
+    }
 
+    /**
+     * 
+     * @return String
+     */
+    public function getType() {
+        return $this->type;
+    }
+
+    /**
+     * 
+     * @param String $slug
+     * @return \Entities\Item
+     */
+    public function setSlug($slug) {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param String $type
+     * @return \Entities\Item
+     */
+    public function setType($type) {
+        $this->type = $type;
+        return $this;
+    }
 
 }

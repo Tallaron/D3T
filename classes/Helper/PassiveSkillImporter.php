@@ -4,14 +4,14 @@ namespace Helper;
 
 class PassiveSkillImporter extends AbstractImporter {
 
-    private $heroClassId;
+    private $heroClass;
     private $url;
     private $dom;
     private $skills = [];
 
     public function __construct($url) {
-        $this->setHeroClassId($heroClass->id);
-        $this->setUrl( sprintf(PASSIVE_SKILL_IMPORT_URL, $heroClass->key) );
+        $this->setHeroClass($heroClass);
+        $this->setUrl( sprintf(PASSIVE_SKILL_IMPORT_URL, $heroClass->getKey()) );
         $this->setDom( self::loadDomData( $this->getUrl() ) );
     }
     
@@ -22,9 +22,9 @@ class PassiveSkillImporter extends AbstractImporter {
         $skillData = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' skill-details ')]");
 
         foreach($skillData as $data) {
-            $skill = new \Entities\ImportPassiveSkill();
+            $skill = new \Entities\Skill();
             $skill
-                ->setHeroClass( $this->getHeroClassId() )
+                ->setHeroClass( $this->getHeroClass() )
                 ->setSlug( $this->parseSkillSlug($data) )
                 ->setName( $this->parseSkillName($data) )
                 ->setIcon( $this->parseSkillIcon($data) );
@@ -98,12 +98,12 @@ class PassiveSkillImporter extends AbstractImporter {
         return $this;
     }
 
-    public function getHeroClassId() {
-        return $this->heroClassId;
+    public function getHeroClass() {
+        return $this->heroClass;
     }
 
-    public function setHeroClassId($heroClassId) {
-        $this->heroClassId = $heroClassId;
+    public function setHeroClass($heroClass) {
+        $this->heroClass = $heroClass;
         return $this;
     }
 

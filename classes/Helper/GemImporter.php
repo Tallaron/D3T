@@ -20,7 +20,7 @@ class GemImporter extends AbstractImporter {
         $gemData = $finder->query("//*[contains(concat(' ', normalize-space(@class), ' '), ' data-cell ')]");
         
         foreach($gemData as $data) {
-            $gem = new \Entities\ImportGem();
+            $gem = new \Entities\Gem();
             $icon = $this->parseGemIcon($data);
             $type = $this->parseGemType($icon);
             $gem

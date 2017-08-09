@@ -14,7 +14,8 @@ class Rune {
     private $simpleDescription;
     private $tooltipParams;
     private $type;
-
+    private $skillId;
+    private $level;
 
     /**
      * 
@@ -142,6 +143,40 @@ class Rune {
         return $this;
     }
 
+    /**
+     * 
+     * @return int
+     */
+    public function getSkillId() {
+        return $this->skillId;
+    }
 
+    /**
+     * 
+     * @return int
+     */
+    public function getLevel() {
+        return $this->level;
+    }
+
+    /**
+     * 
+     * @param int $skillId
+     * @return \Entities\Rune
+     */
+    public function setSkillId($skillId) {
+        $this->skillId = $skillId;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param int $level
+     * @return \Entities\Rune
+     */
+    public function setLevel($level) {
+        $this->level = $level;
+        return $this;
+    }
 
 }

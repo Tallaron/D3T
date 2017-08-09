@@ -6,10 +6,7 @@ class BuildController extends AbstractController {
 
     
     public function indexAction() {
-        $classes = \Mappers\DBMapper::findAllHeroClasses();
-        $builds = $this->getBuildList($classes);
-        \Views\View::getInstance()->assign('heroClasses', $classes);
-        \Views\View::getInstance()->assign('builds', $builds);
+        $this->prepareNav();
         \Views\View::getInstance()->display('builds/builds.tpl');
     }
     
@@ -22,8 +19,7 @@ class BuildController extends AbstractController {
         $this->prepareNav();
         $date = new \DateTime();
         \Views\View::getInstance()->assign('defaultName', 'build_'.$date->format('d-m-y_H-i'));
-        \Views\View::getInstance()->assign('content', 'newBuild'); //content switch case
-        \Views\View::getInstance()->display('builds/builds.tpl');
+        \Views\View::getInstance()->display('builds/new_build.tpl');
     }
 
     /**
@@ -48,8 +44,7 @@ class BuildController extends AbstractController {
         
         \Views\View::getInstance()->assign('lists', $lists);
         \Views\View::getInstance()->assign('build', $build);
-        \Views\View::getInstance()->assign('content', 'editBuild'); //content switch case
-        \Views\View::getInstance()->display('builds/builds.tpl');
+        \Views\View::getInstance()->display('builds/edit_build.tpl');
     }
 
     
@@ -81,24 +76,10 @@ class BuildController extends AbstractController {
         $this->prepareNav();
         $build = \Mappers\BuildMapper::createObject($id);        
         \Views\View::getInstance()->assign('build', $build);
-        \Views\View::getInstance()->assign('content', 'showBuild'); //content switch case
-        \Views\View::getInstance()->display('builds/builds.tpl');
+        \Views\View::getInstance()->display('builds/show_build.tpl');
     }
 
     
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     /**
      * Just for reducing redundancy...

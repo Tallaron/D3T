@@ -17,17 +17,21 @@ class Cube {
     }
 
     /**
-     * 
+     * Param <b>$i</b> might be int or String, depending on what kind of array
+     * shall be supported. For Blizzard API data the system uses an numeric array.
+     * The build section uses an associative array to place the different kinds
+     * of items into the cube.
      * @param \Entities\Item $item
-     * @param int $i
+     * @param mixed $i
      */
     public function addItem(\Entities\Item $item, $i) {
         $this->items[$i] = $item;
     }
 
     /**
-     * 
-     * @param int $index
+     * Both types of indexes are allowed here. Blizzard API uses numeric indexes
+     * and the build section uses associative indexes.
+     * @param mixed $index
      * @return \Entity\Item
      */
     public function getItemAt($index) {
@@ -59,10 +63,5 @@ class Cube {
         }
         return $this;
     }
-
-
-    
-    
-
     
 }

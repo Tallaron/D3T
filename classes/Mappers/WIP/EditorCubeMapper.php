@@ -5,7 +5,7 @@ namespace Mappers;
 class EditorCubeMapper {
 
     public static function createObject($data) {
-        $obj = new \Entities\EditorCube();
+        $obj = new \Entities\BuildCube();
         foreach($data as $item) {
             $method = 'set'.ucfirst($item->type);
             if(method_exists($obj, $method)) {

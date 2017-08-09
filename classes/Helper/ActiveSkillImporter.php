@@ -4,14 +4,14 @@ namespace Helper;
 
 class ActiveSkillImporter extends AbstractImporter {
 
-    private $heroClassId;
+    private $heroClass;
     private $url;
     private $dom;
     private $skills = [];
 
     public function __construct($heroClass) {
-        $this->setHeroClassId($heroClass->id);
-        $this->setUrl( sprintf(ACTIVE_SKILL_IMPORT_URL, $heroClass->key) );
+        $this->setHeroClass($heroClass);
+        $this->setUrl( sprintf(ACTIVE_SKILL_IMPORT_URL, $heroClass->getKey()) );
         $this->setDom( self::loadDomData( $this->getUrl() ) );
     }
     
@@ -36,9 +36,9 @@ class ActiveSkillImporter extends AbstractImporter {
     
     
     private function createSkillObject($data) {
-        $skill = new \Entities\ImportActiveSkill();
+        $skill = new \Entities\Skill();
         $skill
-            ->setHeroClass( $this->getHeroClassId() )
+            ->setHeroClass( $this->getHeroClass() )
             ->setSlug( $this->parseSkillSlug($data) )
             ->setName( $this->parseSkillName($data) )
             ->setIcon( $this->parseSkillIcon($data) );
@@ -47,7 +47,7 @@ class ActiveSkillImporter extends AbstractImporter {
 
     private function addRunes($data, $skill) {
         foreach($data->getElementsByTagName('li') as $li) {
-            $rune = new \Entities\ImportRune();
+            $rune = new \Entities\Rune();
             $rune
                 ->setSkillId(false)
                 ->setSlug($this->parseRuneSlug( $skill, $li ) )
@@ -140,12 +140,12 @@ class ActiveSkillImporter extends AbstractImporter {
         return $this;
     }
 
-    public function getHeroClassId() {
-        return $this->heroClassId;
+    public function getHeroClass() {
+        return $this->heroClass;
     }
 
-    public function setHeroClassId($heroClassId) {
-        $this->heroClassId = $heroClassId;
+    public function setHeroClass($heroClass) {
+        $this->heroClass = $heroClass;
         return $this;
     }
 

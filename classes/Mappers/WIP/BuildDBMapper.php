@@ -263,7 +263,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
         $sql = 'SELECT skill_id AS skillId, rune_id AS runeId, `index` AS "index" FROM build_skills_a WHERE build_id = :id';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\EditorSkill');
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\BuildSkill');
     }
     
     /**
@@ -276,7 +276,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
         $sql = 'SELECT skill_id AS skillId, `index` AS "index" FROM build_skills_p WHERE build_id = :id';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\EditorSkill');
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\BuildSkill');
     }
     
     /**

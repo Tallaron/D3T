@@ -541,9 +541,5 @@ class Ladder {
         $this->searchMode = $searchMode;
         return $this;
     }
-
-
-
-    
     
 }

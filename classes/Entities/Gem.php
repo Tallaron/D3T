@@ -13,7 +13,9 @@ class Gem {
     private $icon = false;
     private $displayColor = EMPTY_ITEM_DEFAULT_DISPLAY_COLOR;
     private $tooltipParams = EMPTY_ITEM_DEFAULT_TOOLTIP_PARAMS;
-    private $slotIndex;
+    private $index;
+    private $slug;
+    private $level = 1;
 
     /**
      * returns Blizzard cdn image url for large icon
@@ -154,19 +156,54 @@ class Gem {
      * 
      * @return int
      */
-    public function getSlotIndex() {
-        return $this->slotIndex;
+    public function getIndex() {
+        return $this->index;
     }
 
     /**
      * 
-     * @param int $slotIndex
+     * @param int $Index
      * @return \Entities\Gem
      */
-    public function setSlotIndex($slotIndex) {
-        $this->slotIndex = $slotIndex;
+    public function setIndex($index) {
+        $this->index = $index;
         return $this;
     }
 
+    /**
+     * 
+     * @return String
+     */
+    public function getSlug() {
+        return $this->slug;
+    }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getLevel() {
+        return $this->level;
+    }
+
+    /**
+     * 
+     * @param String $slug
+     * @return \Entities\Gem
+     */
+    public function setSlug($slug) {
+        $this->slug = $slug;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param int $level
+     * @return \Entities\Gem
+     */
+    public function setLevel($level) {
+        $this->level = $level;
+        return $this;
+    }
 
 }

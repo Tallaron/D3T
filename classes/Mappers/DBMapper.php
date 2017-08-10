@@ -102,7 +102,7 @@ class DBMapper extends \Mappers\AbstractDBMapper {
         $sql = 'SELECT * FROM raw_data_skills_a WHERE class_id = :id;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute([':id' => $classId]);
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\ActiveSkill');
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Skill');
     }
     
     /**
@@ -128,7 +128,7 @@ class DBMapper extends \Mappers\AbstractDBMapper {
         $sql = 'SELECT * FROM raw_data_skills_p WHERE class_id = :id;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute([':id' => $classId]);
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\PassiveSkill');
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Skill');
     }
     
 

@@ -24,7 +24,7 @@ class ImportMapper {
         foreach($importer->getItems() as $item) {
             \Mappers\DBMapper::saveItem($item);
         }
-        $this->markAsDone('item'.$itemType->key);
+        $this->markAsDone('item'.$itemType->getKey());
     }
 
     public function importActiveSkills($key) {
@@ -34,7 +34,7 @@ class ImportMapper {
         foreach($importer->getSkills() as $skill) {
             \Mappers\DBMapper::saveActiveSkill($skill);
         }
-        $this->markAsDone('aSkill'.$heroClass->key);
+        $this->markAsDone('aSkill'.$heroClass->getKey());
     }
 
     public function importPassiveSkills($key) {
@@ -44,7 +44,7 @@ class ImportMapper {
         foreach($importer->getSkills() as $skill) {
             \Mappers\DBMapper::savePassiveSkill($skill);
         }
-        $this->markAsDone('pSkill'.$heroClass->key);
+        $this->markAsDone('pSkill'.$heroClass->getKey());
     }
 
     public function importGems() {

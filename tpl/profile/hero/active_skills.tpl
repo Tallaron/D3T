@@ -16,6 +16,9 @@
                             <div class="skill-title" title="{$skill->getName()}{if $skill->getRune() != null}&#10;{$skill->getRune()->getName()}{/if}"></div>
                         </a>
                     </div>
+                        {if $skill->getRune() != null}
+                            <a href="{D3_GAME_GUIDE_SKILL_BASE_URL}{$profile->getHero()->getClass()}/active/{$skill->getSlug()}" target="_blank" data-d3tooltip="{$skill->getRune()->getTooltipParams()}">{$skill->getRune()->getName()}</a>
+                        {/if}
                 {/if}
             {/foreach}
         </div>

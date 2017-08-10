@@ -62,7 +62,7 @@ abstract class LadderMapper extends AbstractMapper {
                 $rank->setPos($pos);
             }
             
-            // filter rank by paragon level
+            // filter rank
             if(\Validators\AbstractBattleNetValidator::validateInt($rank->getPlayer()->getParagon(),
                     $ladder->getMinPara(), $ladder->getMaxPara())) {
                 $ladder->addRank( $rank );

@@ -35,6 +35,10 @@ if (typeof Bnet.D3.Tooltips == 'undefined')
             calculator: {
                 type: 'calculator',
                 url: 'calculator/{folder}/{key}'
+            },
+            rune: {
+                type: 'rune',
+                url: 'rune/{folder}/{key}'
             }
         };
 
@@ -96,7 +100,14 @@ if (typeof Bnet.D3.Tooltips == 'undefined')
                 params: {
                     type: 'calculator'
                 }
-            }
+            },
+            // rune/{runeSlug}/{key}
+            {
+                regex: new RegExp('^rune/([^/]+)/([^#\\?]+)$'),
+                params: {
+                    type: 'rune'
+                }
+            },
         ];
 
         var DELAY_LOADING = 500; // ms
@@ -272,17 +283,14 @@ if (typeof Bnet.D3.Tooltips == 'undefined')
         }
 
         function registerData(data) {
-
             clearTimeout(loadingTimer);
 
             var params = data.params;
-
-            if (params.type == "item") {
+            if (params.type == "item" || params.type == "rune") {
                 params.key = currentParams.key;
             }
 
             saveData(params, data);
-
             if (currentParams != null && getCacheKeyFromParams(params) == getCacheKeyFromParams(currentParams)) {
                 showTooltip(data);
             }
@@ -311,7 +319,6 @@ if (typeof Bnet.D3.Tooltips == 'undefined')
         }
 
         function showTooltip(data) {
-
             if (currentLink != null) {
                 Tooltip.show(currentLink, data.tooltipHtml);
             }
@@ -323,13 +330,11 @@ if (typeof Bnet.D3.Tooltips == 'undefined')
         }
 
         function saveData(params, data) {
-
             var cacheKey = getCacheKeyFromParams(params);
             dataCache[cacheKey] = data;
         }
 
         function loadData(params) {
-
             var cacheKey = getCacheKeyFromParams(params);
             return dataCache[cacheKey];
         }

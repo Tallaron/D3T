@@ -15,13 +15,13 @@ abstract class PassiveSkillMapper {
     public static function createObj($data) {
         $skill = null;
         if(property_exists($data, 'skill')) {
-            $skill = new \Entities\PassiveSkill();
+            $skill = new \Entities\Skill();
             self::setSkillData($skill, $data->skill);
         }
         return $skill;
     }
     
-    private static function setSkillData(\Entities\PassiveSkill $skill, $data) {
+    private static function setSkillData(\Entities\Skill $skill, $data) {
         $skill
             ->setSlug($data->slug)
             ->setName($data->name)

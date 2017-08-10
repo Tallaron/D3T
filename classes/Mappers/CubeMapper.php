@@ -14,9 +14,12 @@ abstract class CubeMapper {
      */
     public static function createObj($data) {
         $cube = new \Entities\Cube();
-        for($i = 0; $i < count($data); $i++) {
-            $cube->addItem( \Mappers\ItemMapper::createObj($data[$i]) , $i);
+        foreach((array)$data as $key => $val) {
+            $cube->addItem( \Mappers\ItemMapper::createObj($val) , $key);
         }
+//        for($i = 0; $i < count($data); $i++) {
+//            $cube->addItem( \Mappers\ItemMapper::createObj($data[$i]) , $i);
+//        }
         return $cube;
     }
 

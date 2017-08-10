@@ -15,7 +15,7 @@ abstract class ActiveSkillMapper {
     public static function createObj($data) {
         $skill = null;
         if(property_exists($data, 'skill')) {
-            $skill = new \Entities\ActiveSkill();
+            $skill = new \Entities\Skill();
             self::setSkillData($skill, $data->skill);
         }
         if(property_exists($data, 'rune')) {
@@ -24,7 +24,7 @@ abstract class ActiveSkillMapper {
         return $skill;
     }
     
-    private static function setSkillData(\Entities\ActiveSkill $skill, $data) {
+    private static function setSkillData(\Entities\Skill $skill, $data) {
         $skill
             ->setSlug($data->slug)
             ->setName($data->name)
@@ -34,7 +34,7 @@ abstract class ActiveSkillMapper {
             ->setSimpleDescription($data->simpleDescription);
     }
     
-    private static function setSkillRune(\Entities\ActiveSkill $skill, $data) {
+    private static function setSkillRune(\Entities\Skill $skill, $data) {
         $skill->setRune( \Mappers\RuneMapper::createObj($data) );
     }
     

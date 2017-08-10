@@ -263,7 +263,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
         $sql = 'SELECT skill_id AS skillId, rune_id AS runeId, `index` AS "index" FROM build_skills_a WHERE build_id = :id';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\BuildSkill');
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Skill');
     }
     
     /**
@@ -276,7 +276,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
         $sql = 'SELECT skill_id AS skillId, `index` AS "index" FROM build_skills_p WHERE build_id = :id';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\BuildSkill');
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Skill');
     }
     
     /**
@@ -289,7 +289,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
         $sql = 'SELECT b.id, b.name, b.version, c.key FROM builds b JOIN classes c ON(b.class_id=c.id) WHERE c.key LIKE :key;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':key' => $key,] );
-        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Build');
     }
     
 }

@@ -526,6 +526,8 @@ if (typeof Bnet.D3.Tooltips == 'undefined')
 
             function initialize() {
 
+
+
                 tooltipWrapper = $.create('div');
                 tooltipWrapper.className = 'd3-tooltip-wrapper';
 

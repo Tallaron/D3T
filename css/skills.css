@@ -1,52 +1,47 @@
-.skill {
-    display: block;
+.skill-outer {
     border: 1px solid #000;
     border-radius: 4px;
-    background-color: rgba(200,200,0,0.5);
     margin: 1px 0px 1px 0px;
-    background-color: #927354;
-    position: relative;
-    max-width: 200px;
+    width: 250px;
 }
 
-.skill-title {
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0px;
-    left: 0px;
+.skill {
     border: 1px solid transparent;
     border-radius: 4px;
+    background-color: #927354;
 }
-.skill-title:hover {
+.skill:hover {
     border-color: #cccc66;
+}
+.skill a {
+    cursor: default;
+    color: #000;
+    text-decoration: none;
+}
+.skill a:hover {
+    color: #444;
 }
 
 .a-skill-image {
-    position: relative;
-    display: block;
+    float: left;
+}
+.a-skill-image img {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
 }
 
-.a-skill-name, .a-skill-rune, .p-skill-name {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    display: block;
+.a-skill-name, .p-skill-name {
+    padding: 3px 0px 0px 6px;
     white-space: nowrap;
     overflow: hidden; 
     text-overflow: ellipsis;
-    width: 100%;
     color: #000;
 }
 
-.a-skill-name {
-    padding: 2px 10px 0px 50px;
-}
-
 .a-skill-rune {
+    padding: 0px 0px 0px 48px;
     font-size: 70%;
-    padding: 22px 10px 0px 50px;
+    color: #000;
 }
 
 .p-skill-name {

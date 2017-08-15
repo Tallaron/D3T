@@ -16,9 +16,9 @@
 
                     <ul class="nav nav-pills nav-stacked">
                         {foreach from=$builds[$heroClass->getKey()] item=$listItem}
-                            <li class="bg-{if isset($build) && $listItem->id == $build->getId()}success{else}info{/if}">
-                                <a href="{BASE_DIR}/build/show/{$listItem->id}">
-                                    <span class="nav-item-name">{$listItem->name}</span>
+                            <li class="bg-{if isset($build) && $listItem->getId() == $build->getId()}success{else}info{/if}">
+                                <a href="{BASE_DIR}/build/show/{$listItem->getId()}">
+                                    <span class="nav-item-name">{$listItem->getName()}</span>
                                 </a>
                             </li>
                         {foreachelse}

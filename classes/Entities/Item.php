@@ -7,7 +7,7 @@ namespace Entities;
  */
 class Item {
 
-    private $id = 0;
+    private $id = -1;
     private $name = EMPTY_ITEM_DEFAULT_NAME;
     private $icon = false;
     private $displayColor = EMPTY_ITEM_DEFAULT_DISPLAY_COLOR;
@@ -68,8 +68,12 @@ class Item {
      * Puts a gem object into the gem's array
      * @param \Entities\Gem $gem
      */
-    public function addGem(\Entities\Gem $gem) {
-        $this->gems[] = $gem;
+    public function addGem(\Entities\Gem $gem, $index = false) {
+        if($index !== false) {
+            $this->gems[$index] = $gem;
+        } else {
+            $this->gems[] = $gem;
+        }
     }
     
     /**

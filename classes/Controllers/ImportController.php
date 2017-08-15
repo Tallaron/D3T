@@ -83,10 +83,10 @@ class ImportController extends AbstractController {
         $this->redirect();
     }
 
-    public function itemAction($type = false) {
+    public function itemAction($itemType = false) {
         if(IMPORT_ENABLED) {
             if($itemType !== false) {
-                $itemType = \Mappers\DBMapper::findItemTypeByKey(strtolower($type));
+                $itemType = \Mappers\DBMapper::findItemTypeByKey(strtolower($itemType));
                 (new \Mappers\ImportMapper())->importItems($itemType->getKey());
                 self::addMsg('item'.$itemType->getKey());
             }

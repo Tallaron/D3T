@@ -14,7 +14,14 @@ class Build {
     private $cube;
     private $passiveSkills;
     private $activeSkills;
+    private $runeLists = [];
+    
+    
+    public function getRuneList($index) {
+        return $this->runeLists[$index];
+    }
 
+    
     /**
      * 
      * @return int
@@ -159,4 +166,22 @@ class Build {
         return $this;
     }
     
+    /**
+     * Returns the lists of runes according to the skills of the current build.
+     * @return array
+     */
+    public function getRuneLists() {
+        return $this->runeLists;
+    }
+    
+    /**
+     * Sets the rune lists for that build.
+     * @param array $runeLists
+     * @return \Entities\Build
+     */
+    public function setRuneLists($runeLists) {
+        $this->runeLists = $runeLists;
+        return $this;
+    }
+
 }

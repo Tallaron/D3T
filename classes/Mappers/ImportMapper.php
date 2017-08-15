@@ -22,7 +22,7 @@ class ImportMapper {
         $importer = new \Helper\ItemImporter($itemType);
         $importer->proceed();
         foreach($importer->getItems() as $item) {
-            \Mappers\DBMapper::saveItem($item);
+            \Mappers\ImportDBMapper::saveItem($item);
         }
         $this->markAsDone('item'.$itemType->getKey());
     }
@@ -32,7 +32,7 @@ class ImportMapper {
         $importer = new \Helper\ActiveSkillImporter($heroClass);
         $importer->proceed();
         foreach($importer->getSkills() as $skill) {
-            \Mappers\DBMapper::saveActiveSkill($skill);
+            \Mappers\ImportDBMapper::saveActiveSkill($skill);
         }
         $this->markAsDone('aSkill'.$heroClass->getKey());
     }
@@ -42,7 +42,7 @@ class ImportMapper {
         $importer = new \Helper\PassiveSkillImporter($heroClass);
         $importer->proceed();
         foreach($importer->getSkills() as $skill) {
-            \Mappers\DBMapper::savePassiveSkill($skill);
+            \Mappers\ImportDBMapper::savePassiveSkill($skill);
         }
         $this->markAsDone('pSkill'.$heroClass->getKey());
     }
@@ -51,7 +51,7 @@ class ImportMapper {
         $importer = new \Helper\GemImporter();
         $importer->proceed();
         foreach($importer->getGems() as $gem) {
-            \Mappers\DBMapper::saveGem($gem);
+            \Mappers\ImportDBMapper::saveGem($gem);
         }
         $this->markAsDone('gem');
     }

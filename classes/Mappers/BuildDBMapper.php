@@ -218,10 +218,12 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function findCubeByBuildId($id) {
-        $sql = 'SELECT item_id AS itemId, `type` FROM build_cube WHERE build_id=:id;';
+        $sql = 'SELECT i.*, bc.`type` AS `type` FROM build_cube bc 
+                    JOIN raw_data_items i ON(bc.item_id=i.id)
+                        WHERE bc.id=:id;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
-        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Item');
     }
 
     /**
@@ -231,7 +233,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function findInventoryByBuildId($id) {
-        $sql = 'SELECT item_id AS id, slot_key AS slotKey FROM build_items WHERE build_id=:id;';
+        $sql = 'SELECT item_id AS id, slot_key AS `type` FROM build_items WHERE build_id=:id;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
         return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Item');
@@ -244,7 +246,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function findGemsByItemId($itemId) {
-        $sql = 'SELECT bg.gem_id AS id, bg.socket_index AS slotIndex '
+        $sql = 'SELECT bg.gem_id AS id, bg.socket_index AS `index` '
                 . 'FROM build_items bi JOIN build_gems bg ON(bg.build_item_id = bi.id) '
                 . 'WHERE bi.item_id = :id;';
         $stmt = self::getPDO()->prepare($sql);
@@ -253,7 +255,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
     }
 
     /**
-     * Returns an array of \Entities\EditorSkill. The objects are associated to
+     * Returns an array of StdObject. The objects are associated to
      * the build given by <b>$id</b> and they contain not only the skill id's
      * but also the runeId which is set to the build-skill-combination.
      * @param int $id
@@ -263,11 +265,11 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
         $sql = 'SELECT skill_id AS skillId, rune_id AS runeId, `index` AS "index" FROM build_skills_a WHERE build_id = :id';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Skill');
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
     
     /**
-     * Returns an array of \Entities\EditorSkill. The objects are associated to
+     * Returns an array of StdObject. The objects are associated to
      * the build given by <b>$id</b>.
      * @param int $id
      * @return array
@@ -276,7 +278,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
         $sql = 'SELECT skill_id AS skillId, `index` AS "index" FROM build_skills_p WHERE build_id = :id';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
-        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Skill');
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
     }
     
     /**
@@ -290,6 +292,42 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':key' => $key,] );
         return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Build');
+    }
+    
+    
+    
+    
+    
+
+    public static function findPassiveSkillById($id) {
+        $sql = 'SELECT * FROM raw_data_skills_p WHERE id=:id';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute( [':id' => $id,] );
+        return $stmt->fetchObject('\Entities\Skill');
+    }
+    
+    public static function findAktiveSkillById($id) {
+        $sql = 'SELECT * FROM raw_data_skills_a WHERE id=:id';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute( [':id' => $id,] );
+        return $stmt->fetchObject('\Entities\Skill');
+    }
+    
+    
+    
+    
+    
+    
+    /**
+     * Returns the \Entities\Rune object of the rune indentified by <b>$id</b>.
+     * @param int $id
+     * @return \Entities\Rune
+     */
+    public static function findRuneById($id) {
+        $sql = 'SELECT * FROM raw_data_runes WHERE id=:id';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute( [':id' => $id,] );
+        return $stmt->fetchObject('\Entities\Rune');
     }
     
 }

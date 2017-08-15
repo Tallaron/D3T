@@ -11,9 +11,9 @@ class Cube {
     private $items = [];
     
     public function __construct() {
-        for($i = 0; $i<3; $i++) { // Prefills the item array with default Items
-            $this->items[$i] = new \Entities\Item();
-        }
+        $this->items['weapon'] = new \Entities\Item();
+        $this->items['armor'] = new \Entities\Item();
+        $this->items['jewelry'] = new \Entities\Item();
     }
 
     /**

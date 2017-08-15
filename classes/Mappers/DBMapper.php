@@ -47,7 +47,7 @@ class DBMapper extends \Mappers\AbstractDBMapper {
         $sql = 'SELECT * FROM classes WHERE `key` LIKE :key;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute([':key' => $key]);
-        return $stmt->fetch(\PDO::FETCH_CLASS, 'Entities\HeroClass');
+        return $stmt->fetchObject('Entities\HeroClass');
     }
 
     /**
@@ -55,7 +55,7 @@ class DBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function findAllItemTypes() {
-        $sql = 'SELECT t.`*`, s.`key` AS slotKey, s.sockets, c.`key` as classKey '
+        $sql = 'SELECT t.*, s.`key` AS slotKey, s.sockets, c.`key` as classKey '
                 .'FROM item_types t '
                 .'JOIN slots s ON(t.slot=s.id) '
                 .'JOIN classes c ON(t.class=c.id);';
@@ -70,14 +70,14 @@ class DBMapper extends \Mappers\AbstractDBMapper {
      * @return \Entities\ItemType
      */
     public static function findItemTypeByKey($key) {
-        $sql = 'SELECT t.`*`, s.`key` AS slotKey, s.sockets, c.`key` as classKey '
+        $sql = 'SELECT t.*, s.`key` AS slotKey, s.sockets, c.`key` as classKey '
                 .'FROM item_types t '
                 .'JOIN slots s ON(t.slot=s.id) '
                 .'JOIN classes c ON(t.class=c.id)'
                 .'WHERE t.`key` LIKE :key;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute([':key' => $key]);
-        return $stmt->fetch(\PDO::FETCH_CLASS, '\Entities\ItemType');
+        return $stmt->fetchObject('\Entities\ItemType');
     }
     
     /**

@@ -9,7 +9,7 @@ class PassiveSkillImporter extends AbstractImporter {
     private $dom;
     private $skills = [];
 
-    public function __construct($url) {
+    public function __construct($heroClass) {
         $this->setHeroClass($heroClass);
         $this->setUrl( sprintf(PASSIVE_SKILL_IMPORT_URL, $heroClass->getKey()) );
         $this->setDom( self::loadDomData( $this->getUrl() ) );

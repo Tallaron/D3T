@@ -7,7 +7,7 @@ namespace Entities;
  */
 class Rune {
 
-    private $id;
+    private $id = -1;
     private $slug;
     private $name;
     private $description;

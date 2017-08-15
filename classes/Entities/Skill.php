@@ -4,7 +4,7 @@ namespace Entities;
 
 class Skill {
 
-    private $id;
+    private $id = -1;
     private $slug;
     private $name;
     private $icon; //filename w/o extention and path
@@ -181,6 +181,9 @@ class Skill {
      */
     public function setId($id) {
         $this->id = $id;
+        foreach($this->getRunes() as $rune) {
+            $rune->setSkillId($id);
+        }
         return $this;
     }
 

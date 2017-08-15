@@ -15,10 +15,17 @@ abstract class InventoryMapper extends AbstractMapper {
     public static function createObj($data) {
         $inventory = new \Entities\Inventory();
         foreach($data as $k => $v) {
-            $method = 'set'.ucfirst($k);
-            if(method_exists($inventory, $method)) {
+            if($v instanceof \Entities\Item) {
+                $method = 'set'.ucfirst($v->getType());
+                self::addGems($v);
+                $item = $v;
+            } else {
+                $method = 'set'.ucfirst($k);
                 $mayHaveSockets = in_array($k, self::getSettings()->get('SOCKETED_ITEMS'));
                 $item = \Mappers\ItemMapper::createObj($v, $mayHaveSockets);
+            }
+            
+            if(method_exists($inventory, $method)) {
                 $inventory->$method( $item );
             }
         }
@@ -27,6 +34,16 @@ abstract class InventoryMapper extends AbstractMapper {
                     $inventory->getMainHand()) );
         }
         return $inventory;
+    }
+    
+    
+    private static function addGems($item) {
+        if($item->getId() != -1) {
+            $gems = \Mappers\BuildDBMapper::findGemsByItemId($item->getId());
+            foreach($gems as $gem) {
+                $item->addGem($gem, $gem->getIndex());
+            }
+        }
     }
     
 }

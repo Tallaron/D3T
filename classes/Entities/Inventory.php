@@ -41,6 +41,18 @@ class Inventory {
     }
     
     /**
+     * Returns the \Entities\Item according to the given <b>$key</b>. If <b>$key</b>
+     * isn't valid the method returns false.
+     * @param String $key
+     * @return mixed
+     */
+    public function get($key) {
+        if(property_exists($this, $key)) {
+            return $this->$key;
+        } return false;
+    }
+
+        /**
      * 
      * @return \Entities\Item
      */

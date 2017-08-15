@@ -25,12 +25,15 @@ function shutdown() {
 
 
 function import_handle() {
-    $e = error_get_last();
-    if( is_array($e) &&
-        $e != null &&
-        $e['type'] == 1) {
-       header('Location: '.BASE_DIR.'/import'); 
-    }
+//    $e = error_get_last();
+//    if( is_array($e) &&
+//        $e != null &&
+//        $e['type'] == 1) {
+//       header('Location: '.BASE_DIR.'/import'); 
+//    }
+    echo '<pre>';
+    print_r($_SESSION['imports_done']);
+    die();
 }
 
 

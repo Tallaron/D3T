@@ -15,11 +15,12 @@ abstract class CubeMapper {
     public static function createObj($data) {
         $cube = new \Entities\Cube();
         foreach((array)$data as $key => $val) {
-            $cube->addItem( \Mappers\ItemMapper::createObj($val) , $key);
+            if($val instanceof \Entities\Item) {
+                $cube->addItem($val, $val->getType());
+            } else {
+                $cube->addItem( \Mappers\ItemMapper::createObj($val) , $key);
+            }
         }
-//        for($i = 0; $i < count($data); $i++) {
-//            $cube->addItem( \Mappers\ItemMapper::createObj($data[$i]) , $i);
-//        }
         return $cube;
     }
 

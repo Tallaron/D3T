@@ -6,14 +6,23 @@
                 {if $skill != null}
 
 
-                <div class="skill">
-                    <a href="{D3_GAME_GUIDE_SKILL_BASE_URL}{$profile->getHero()->getClass()}/passive/{$skill->getSlug()}" target="_blank">
+                <div class="skill-outer">
+                    <div class="skill" title="{$skill->getName()}">
+                        
                         <div class="p-skill-frame">
-                            <img src="{$skill->getLargeIconUrl()}" />
+                            <a href="{D3_GAME_GUIDE_SKILL_BASE_URL}{$profile->getHero()->getClass()}/passive/{$skill->getSlug()}" target="_blank">
+                                <img src="{$skill->getLargeIconUrl()}" />
+                            </a>
                         </div>
-                        <div class="p-skill-name">{$skill->getName()}</div>
-                        <div class="skill-title" title="{$skill->getName()}"></div>
-                    </a>
+    
+                        <div class="p-skill-name">
+                            <a href="{D3_GAME_GUIDE_SKILL_BASE_URL}{$profile->getHero()->getClass()}/passive/{$skill->getSlug()}" target="_blank">
+                                {$skill->getName()}
+                            </a>
+                        </div>
+                        
+                        <div style="clear: both;"></div>
+                    </div>
                 </div>
 
 

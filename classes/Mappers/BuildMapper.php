@@ -11,6 +11,7 @@ class BuildMapper {
      */
     public static function createObject($buildId) {
         $build = \Mappers\BuildDBMapper::findBuildMetaById($buildId);
+        $build->setClass(\Mappers\DBMapper::findHeroClassByBuildId($buildId) );
         $build
             ->setInventory(\Mappers\InventoryMapper::createObj(
                                     \Mappers\BuildDBMapper::findInventoryByBuildId($buildId)))
@@ -55,7 +56,7 @@ class BuildMapper {
         $ss = new \Entities\SkillSet();
         foreach($skillsData as $skillData) {
             if($skillData->skillId != -1) {
-                $skill = \Mappers\BuildDBMapper::findAktiveSkillById( $skillData->skillId );
+                $skill = \Mappers\BuildDBMapper::findPassiveSkillById( $skillData->skillId );
                 $skill->setIndex($skillData->index);
             } else {
                 $skill = new \Entities\Skill();

@@ -6,12 +6,11 @@
 
             <div class="cube-doll">
 
-    {for $i=0 to count($profile->getHero()->getCube()->getItems())-1}
-        {$item = $profile->getHero()->getCube()->getItemAt($i)}
+    {foreach from=$build->getCube()->getItems() key=$key item=$item}
         {if $item != false}
-            <div class="cube-slot cube-item-{$i+1}{if $item->getIcon() != false} is-active{/if}" title="{$item->getName()}">
+            <div class="cube-slot cube-item-{$key}{if $item->getIcon() != false} is-active{/if}" title="{$item->getName()}">
                 {if $item->getIcon() != false}
-                    <a href="{$item->getLink()}" target="_blank" data-d3tooltip="{$item->getTooltipParams()}">
+                    <a href="{$item->getLink()}" target="_blank">
                         <span class="cube-item-container">
                             <span class="cube-item-align">
                                 <img src="{$item->getLargeIconUrl()}" />
@@ -21,7 +20,7 @@
                 {/if}
             </div>
         {/if}
-    {/for}
+    {/foreach}
 
 </div>
 

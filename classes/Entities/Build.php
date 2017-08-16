@@ -6,7 +6,7 @@ class Build {
     
     //META
     private $id;
-    private $classId;
+    private $class;
     private $name;
     private $version;
     //DETAILS
@@ -16,11 +16,15 @@ class Build {
     private $activeSkills;
     private $runeLists = [];
     
-    
+    /**
+     * Returns an array of \Entities\Rune from <b>$runeLists</b> by the given
+     * <b>$index</b>.
+     * @param int $index
+     * @return array
+     */
     public function getRuneList($index) {
         return $this->runeLists[$index];
     }
-
     
     /**
      * 
@@ -34,8 +38,8 @@ class Build {
      * 
      * @return int
      */
-    public function getClassId() {
-        return $this->classId;
+    public function getClass() {
+        return $this->class;
     }
 
     /**
@@ -66,11 +70,11 @@ class Build {
 
     /**
      * 
-     * @param int $classId
+     * @param \Entities\HeroClass $class
      * @return \Entities\Build
      */
-    public function setClassId($classId) {
-        $this->classId = $classId;
+    public function setClass(\Entities\HeroClass $class) {
+        $this->class = $class;
         return $this;
     }
 

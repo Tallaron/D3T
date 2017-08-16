@@ -12,7 +12,7 @@
                     {$heroClass->getName()}
                     <span class="badge pull-right">{count($builds[$heroClass->getKey()])}</span>
                 </a>
-                <div class="collapse{if isset($build) && $heroClass->getId() == $build->getClassId()} in{/if}" id="{$heroClass->getKey()}">
+                <div class="collapse{if isset($build) && $heroClass->getId() == $build->getClass()->getId()} in{/if}" id="{$heroClass->getKey()}">
 
                     <ul class="nav nav-pills nav-stacked">
                         {foreach from=$builds[$heroClass->getKey()] item=$listItem}

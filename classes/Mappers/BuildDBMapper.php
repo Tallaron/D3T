@@ -220,7 +220,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
     public static function findCubeByBuildId($id) {
         $sql = 'SELECT i.*, bc.`type` AS `type` FROM build_cube bc 
                     JOIN raw_data_items i ON(bc.item_id=i.id)
-                        WHERE bc.id=:id;';
+                        WHERE bc.build_id=:id;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
         return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Item');
@@ -233,7 +233,11 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function findInventoryByBuildId($id) {
-        $sql = 'SELECT item_id AS id, slot_key AS `type` FROM build_items WHERE build_id=:id;';
+        $sql = 'SELECT i.id, i.slug, i.name, i.icon, i.quality, bi.slot_key AS `type`, IF(i.quality="set", "green", "orange") AS displayColor, s.sockets, concat("item/",i.slug) AS tooltipParams
+                    FROM build_items bi
+                    JOIN raw_data_items i ON(bi.item_id=i.id)
+                    JOIN slots s ON(bi.slot_key=s.`key`)
+                        WHERE bi.build_id=:id;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
         return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Item');
@@ -246,9 +250,11 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function findGemsByItemId($itemId) {
-        $sql = 'SELECT bg.gem_id AS id, bg.socket_index AS `index` '
-                . 'FROM build_items bi JOIN build_gems bg ON(bg.build_item_id = bi.id) '
-                . 'WHERE bi.item_id = :id;';
+        $sql = 'SELECT g.*, bg.socket_index AS `index`
+                    FROM build_items bi 
+                    JOIN build_gems bg ON(bg.build_item_id = bi.id) 
+                    JOIN raw_data_gems g ON(bg.gem_id=g.id)
+                        WHERE bi.item_id = :id;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $itemId,] );
         return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Gem');

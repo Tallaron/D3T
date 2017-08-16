@@ -16,21 +16,24 @@
     z-index: 1;
     top: 5px;
 }
-.cube-item-1 {
+.cube-item-1, .cube-item-weapon {
     left: 5px;
     background-image: url("../gfx/inventory/Weapon-Empty.png");
 }
-.cube-item-2 {
+.cube-item-2, .cube-item-armor {
     left: 125px;
     background-image: url("../gfx/inventory/Armor-Empty.png");
 }
-.cube-item-3 {
+.cube-item-3, .cube-item-jewelry {
     left: 245px;
     background-image: url("../gfx/inventory/Jewelry-Empty.png");
 }
 .cube-item-1.is-active,
 .cube-item-2.is-active,
-.cube-item-3.is-active {
+.cube-item-3.is-active,
+.cube-item-weapon.is-active,
+.cube-item-armor.is-active,
+.cube-item-jewelry.is-active {
     background-image: url("../gfx/inventory/Active-Default.png");
 }
 .cube-item-container {

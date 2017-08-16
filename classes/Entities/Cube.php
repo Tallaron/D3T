@@ -30,12 +30,15 @@ class Cube {
 
     /**
      * Both types of indexes are allowed here. Blizzard API uses numeric indexes
-     * and the build section uses associative indexes.
+     * and the build section uses associative indexes. Returns false if the call
+     * tries to access an invalid index.
      * @param mixed $index
-     * @return \Entity\Item
+     * @return false or \Entity\Item
      */
     public function getItemAt($index) {
-        return $this->items[$index];
+        if(array_key_exists($index, $this->items)) {
+            return $this->items[$index];
+        } return false;
     }
 
     /**

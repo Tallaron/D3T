@@ -51,6 +51,32 @@ class DBMapper extends \Mappers\AbstractDBMapper {
     }
 
     /**
+     * Returns an object of \Entities\HeroClass according to the given <b>$id</b>.
+     * @param int $id
+     * @return \Entities\HeroClass
+     */
+    public static function findHeroClassById($id) {
+        $sql = 'SELECT * FROM classes WHERE `id` LIKE :id;';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute([':id' => $id]);
+        return $stmt->fetchObject('Entities\HeroClass');
+    }
+
+    /**
+     * Returns an object of \Entities\HeroClass according to the given <b>$buildId</b>.
+     * @param int $buildId
+     * @return \Entities\HeroClass
+     */
+    public static function findHeroClassByBuildId($buildId) {
+        $sql = 'SELECT c.* FROM builds b
+                    JOIN classes c ON(b.class_id=c.id)
+                        WHERE b.id=:id;';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute([':id' => $buildId]);
+        return $stmt->fetchObject('Entities\HeroClass');
+    }
+
+    /**
      * Returns an array of \Entities\ItemType.
      * @return array
      */

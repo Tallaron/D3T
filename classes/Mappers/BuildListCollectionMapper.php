@@ -6,11 +6,11 @@ class BuildListCollectionMapper {
 
     public static function createObject(\Entities\Build $build) {
         return (new \Entities\BuildListCollection())
-            ->setActiveSkills( self::loadActiveSkills( $build->getClassId() ) )
-            ->setPassiveSkills( self::loadPassiveSkills( $build->getClassId() ) )
+            ->setActiveSkills( self::loadActiveSkills( $build->getClass()->getId() ) )
+            ->setPassiveSkills( self::loadPassiveSkills( $build->getClass()->getId() ) )
             ->setGems( self::loadGems() )
-            ->setItems( self::loadItems( $build->getClassId() ) )
-            ->setCube( self::loadCube( $build->getClassId() ) );
+            ->setItems( self::loadItems( $build->getClass()->getId() ) )
+            ->setCube( self::loadCube( $build->getClass()->getId() ) );
     }
 
     private static function loadActiveSkills($classId) {

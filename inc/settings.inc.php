@@ -1,6 +1,7 @@
 <?php
 
 define('DEBUG_MODE', true);
+define('EDIT_MODE', true);
 define('IMPORT_ENABLED', true); //false for live systems
 define('BASE_DIR', '/D3T'); // '' if live!
 define('IS_API', false);

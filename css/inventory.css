@@ -184,7 +184,10 @@
 .gear-slot.gear-slot-neck           {   width: 56px;    height: 56px;   top: 48px;    left:204px; }
 .gear-slot-neck .center-frame       {   width: 165px;   height: 165px;  margin-left: -56px;  margin-top: -56px; }
 .gear-slot-neck .item-content-cell  {   width: 165px;   height: 165px; }
-
+.gear-slot-neck img {
+    width: 54px;
+    height: 54px;
+}
 
 
 

@@ -19,6 +19,7 @@
         {include file="builds/form_parts/cube.tpl" once=true}
         {include file="builds/form_parts/skills_a.tpl" once=true}
         {include file="builds/form_parts/skills_p.tpl" once=true}
+        {include file="builds/form_parts/scope.tpl" once=true}
     </form>
 
 </div>

@@ -9,6 +9,7 @@ class BuildController extends AbstractController {
      */
     public function indexAction() {
         $this->prepareNav();
+        $randomBuilds = [];
         \Views\View::getInstance()->display('builds/builds.tpl');
     }
     
@@ -76,6 +77,7 @@ class BuildController extends AbstractController {
             \Mappers\BuildDBMapper::saveItems($postObj);
             \Mappers\BuildDBMapper::saveActiveSkills($postObj);
             \Mappers\BuildDBMapper::savePassiveSkills($postObj);
+            \Mappers\BuildDBMapper::saveScope($postObj);
             $this->redirect('build/edit/'.$postObj->id);
         } else {
             $this->redirect('build');

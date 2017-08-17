@@ -2,6 +2,13 @@
     <div class="panel panel-info">
         <div class="panel-heading">
             <strong>{$build->getName()}</strong> - {$build->getClass()->getName()}
+            {if EDIT_MODE != false}
+                <a href="{BASE_DIR}/build/edit/{$build->getId()}" 
+                   class="btn btn-xs btn-primary pull-right">
+                    <small><span class="glyphicon glyphicon-link"></span></small> 
+                    Edit
+                </a>
+            {/if}
         </div>
         <div class="panel-body">
             <div class="col-sm-7">
@@ -9,6 +16,7 @@
                 {include file="builds/content/show/cube.tpl"}
             </div>
             <div class="col-sm-5">
+                {include file="builds/content/show/scopes.tpl"}
                 {include file="builds/content/show/active_skills.tpl"}
                 {include file="builds/content/show/passive_skills.tpl"}
             </div>

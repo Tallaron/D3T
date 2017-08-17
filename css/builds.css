@@ -1,0 +1,67 @@
+.scope-outer {
+    border: 1px solid #000;
+    border-radius: 4px;
+    margin: 1px 0px 1px 0px;
+    width: 100%;
+}
+
+.scope {
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: #927354;
+    cursor: default;
+    padding: 3px 0px 3px 5px;
+}
+.scope:hover {
+    border-color: #cccc66;
+}
+
+.scope-key {
+    width: 40%;
+    float: left;
+}
+
+.scope-stars {
+    width: 60%;
+    float: left;
+}
+
+.custom-star-on {
+    color: #dd0;
+    text-shadow: 1px 1px 1px #000;
+}
+
+.custom-star-off {
+    color: #333;
+    opacity: 0.3;
+}
+
+.scope-not-rated {
+    opacity: 0.7;
+}
+
+.scope-group {
+    background-color: #ccc;
+    position: relative;
+}
+
+.scope-group-text {
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+}
+.scope-group-text:first-of-type {
+    margin: 0px;
+}
+
+.scope-group-hr-container {
+    margin: -20px 0px -15px 0px;
+}
+
+
+.scope-group-hr-container hr {
+    width: 100%;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}

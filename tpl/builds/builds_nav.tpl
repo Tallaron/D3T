@@ -34,5 +34,9 @@
         {/if}
     {/foreach}
     
-    
+    {if EDIT_MODE != false}
+        <li class="active">
+            <a href="{BASE_DIR}/build/new">New</a>
+        </li>
+    {/if}
 </ul>

@@ -199,6 +199,69 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
         ]);
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    public static function saveScope($obj) {
+        $fields = ['build_id','scope_group','scope_key', 'val'];
+        $params = [];
+        foreach(['solo', 'team'] as $group) {
+            foreach($obj->scope->$group as $key => $val) {
+                $params = array_merge($params, [
+                    $obj->id,
+                    $group,
+                    $key,
+                    $val,
+                ]);
+            }
+        }
+        $sql = self::getPreparedInsertUpdateSQL('build_scope', $fields, count($params)/count($fields));
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute($params);
+    }
+
+    public static function findScopeByBuildIdAndGroup($buildId, $group) {
+        $sql = 'SELECT s.scope_key as `key`, s.val FROM build_scope s WHERE s.build_id = ? AND s.scope_group = ?;';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->execute([
+            $buildId,
+            $group
+        ]);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);
+    }
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     /**
      * Returns a \Entities\Build object containing the meta data of that build.
      * @param int $id

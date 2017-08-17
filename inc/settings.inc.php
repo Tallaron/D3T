@@ -1,9 +1,18 @@
 <?php
 
+//LIVE
+//define('DEBUG_MODE', false);
+//define('EDIT_MODE', false);
+//define('IMPORT_ENABLED', false); //false for live systems
+//define('BASE_DIR', ''); // '' if live!
+
+//DEV
 define('DEBUG_MODE', true);
 define('EDIT_MODE', true);
 define('IMPORT_ENABLED', true); //false for live systems
 define('BASE_DIR', '/D3T'); // '' if live!
+
+
 define('IS_API', false);
 define('DEFAULT_CACHE_DIR', 'cached_data');
 define('BUILDS_DATA_BASE_DIR', 'data/builds');
@@ -185,6 +194,24 @@ $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
         ->addContext('INDEX_EXCLUDED_ENDPOINTS', array(         //Those Endpoints don't trigger default index.tpl but returning the endpoints data
             'ladder.json',
             'build.rune',
+        ))
+        ->addContext('SCOPE_GROUPS', array(
+            'solo' => 'Solo',
+            'team' => 'Team',
+        ))
+        ->addContext('SCOPE_TYPES', array(
+            'bounty' => 'Bounties',
+            'key' => 'KeyRifts',
+            'lowgr' => 'Low GR',
+            'push' => 'Push',
+        ))
+        ->addContext('SCOPE_VALUE_TEXT', array(
+            'useless',
+            'bad',
+            'weak',
+            'ok',
+            'good',
+            'best',
         ));
 
 

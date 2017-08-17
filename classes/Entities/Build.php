@@ -9,6 +9,8 @@ class Build {
     private $class;
     private $name;
     private $version;
+    private $scopeSolo;
+    private $scopeTeam;
     //DETAILS
     private $inventory;
     private $cube;
@@ -16,6 +18,20 @@ class Build {
     private $activeSkills;
     private $runeLists = [];
     
+    /**
+     * Returns the value of a specified scope, indentified by <b>$group</b> and
+     * <b>$key</b>. If the method cannot find a valid end point it will return false.
+     * @param String $group e.g. 'solo'
+     * @param String $key e.g. 'bounty'
+     * @return mixed
+     */
+    public function getScope($group, $key) {
+        $method = 'getScope'.ucfirst($group);
+        if(method_exists($this, $method)) {
+            return $this->$method()->get($key);
+        } return false;
+    }
+
     /**
      * Returns an array of \Entities\Rune from <b>$runeLists</b> by the given
      * <b>$index</b>.
@@ -185,6 +201,42 @@ class Build {
      */
     public function setRuneLists($runeLists) {
         $this->runeLists = $runeLists;
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return \Entities\ScopeList
+     */
+    public function getScopeSolo() {
+        return $this->scopeSolo == null ? new \Entities\ScopeList() : $this->scopeSolo;
+    }
+
+    /**
+     * 
+     * @return \Entities\ScopeList
+     */
+    public function getScopeTeam() {
+        return $this->scopeTeam == null ? new \Entities\ScopeList() : $this->scopeTeam;
+    }
+
+    /**
+     * 
+     * @param \Entities\ScopeList $scopeSolo
+     * @return \Entities\Build
+     */
+    public function setScopeSolo(\Entities\ScopeList $scopeSolo) {
+        $this->scopeSolo = $scopeSolo;
+        return $this;
+    }
+
+    /**
+     * 
+     * @param \Entities\ScopeList $scopeTeam
+     * @return \Entities\Build
+     */
+    public function setScopeTeam(\Entities\ScopeList $scopeTeam) {
+        $this->scopeTeam = $scopeTeam;
         return $this;
     }
 

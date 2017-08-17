@@ -2,7 +2,7 @@
     <div class="panel-heading custom-collapse collapsed" data-toggle="collapse" data-target="#build-cube">
         <span>Cube</span>
     </div>
-    <div id="build-cube" class="panel-collapse collapse in">
+    <div id="build-cube" class="panel-collapse collapse">
         <div class="panel-body">
 
             <div class="form-group clearfix">

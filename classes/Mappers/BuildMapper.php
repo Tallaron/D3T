@@ -18,7 +18,11 @@ class BuildMapper {
             ->setCube(\Mappers\CubeMapper::createObj(
                                     \Mappers\BuildDBMapper::findCubeByBuildId($buildId)))
             ->setActiveSkills( self::loadActiveSkillSet(\Mappers\BuildDBMapper::findActiveSkillsByBuildId($buildId)) )
-            ->setPassiveSkills( self::loadPassiveSkillSet(\Mappers\BuildDBMapper::findPassiveSkillsByBuildId($buildId)) );
+            ->setPassiveSkills( self::loadPassiveSkillSet(\Mappers\BuildDBMapper::findPassiveSkillsByBuildId($buildId)) )
+            ->setScopeSolo( \Mappers\ScopeListMapper::createObject( 
+                                        \Mappers\BuildDBMapper::findScopeByBuildIdAndGroup($buildId, 'solo') ) )
+            ->setScopeTeam( \Mappers\ScopeListMapper::createObject( 
+                                        \Mappers\BuildDBMapper::findScopeByBuildIdAndGroup($buildId, 'team') ) );
         $build->setRuneLists( self::loadRuneLists($build) );
         return $build;
     }

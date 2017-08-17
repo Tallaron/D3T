@@ -2,7 +2,7 @@
     <div class="panel-heading custom-collapse collapsed" data-toggle="collapse" data-target="#build-skills-p">
         <span>Passive Skills</span>
     </div>
-    <div id="build-skills-p" class="panel-collapse collapse in">
+    <div id="build-skills-p" class="panel-collapse collapse">
         <div class="panel-body">
 
             {for $key=1 to 4}

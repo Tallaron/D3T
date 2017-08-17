@@ -23,16 +23,16 @@ class Item {
      * returns Blizzard cdn image url for large icon
      * @return String
      */
-    public function getLargeIconUrl() {
-        return BLIZZARD_D3_ITEM_BASE_PATH . 'large/' . strtolower($this->getIcon()) . '.png';
+    public function getLargeIconUrl($classKey = 'demonhunter') {
+        return BLIZZARD_D3_ITEM_BASE_PATH . 'large/' . strtolower($this->getIcon($classKey)) . '.png';
     }
 
     /**
      * returns Blizzard cdn image url for small icon
      * @return String
      */
-    public function getSmallIconUrl() {
-        return BLIZZARD_D3_ITEM_BASE_PATH . 'small/' . strtolower($this->getIcon()) . '.png';
+    public function getSmallIconUrl($classKey = 'demonhunter') {
+        return BLIZZARD_D3_ITEM_BASE_PATH . 'small/' . strtolower($this->getIcon($classKey)) . '.png';
     }
     
     /**
@@ -105,8 +105,8 @@ class Item {
      * 
      * @return String
      */
-    public function getIcon() {
-        return $this->icon;
+    public function getIcon($classKey = 'demonhunter') {
+        return $classKey != 'necromancer' ? str_replace('demonhunter', str_replace('-', '', $classKey), $this->icon) : $this->icon;
     }
 
     /**

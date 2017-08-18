@@ -18,6 +18,7 @@ class Item {
     private $level;
     private $slug;
     private $type;
+    private $buildId = false;
 
     /**
      * returns Blizzard cdn image url for large icon
@@ -106,7 +107,8 @@ class Item {
      * @return String
      */
     public function getIcon($classKey = 'demonhunter') {
-        return $classKey != 'necromancer' ? str_replace('demonhunter', str_replace('-', '', $classKey), $this->icon) : $this->icon;
+//        return $classKey != 'necromancer' ? str_replace('demonhunter', str_replace('-', '', $classKey), $this->icon) : $this->icon;
+        return $this->icon;
     }
 
     /**
@@ -282,5 +284,24 @@ class Item {
         $this->type = $type;
         return $this;
     }
+
+    /**
+     * Returns the <b>$buildId</b> if the item is part of a build and false if not.
+     * @return int
+     */
+    public function getBuildId() {
+        return $this->buildId;
+    }
+
+    /**
+     * 
+     * @param int $buildId
+     * @return \Entities\Item
+     */
+    public function setBuildId($buildId) {
+        $this->buildId = $buildId;
+        return $this;
+    }
+
 
 }

@@ -9,7 +9,17 @@ class BuildController extends AbstractController {
      */
     public function indexAction() {
         $this->prepareNav();
-        $randomBuilds = [];
+        $randomBuilds = \Mappers\BuildDBMapper::findBuildMetaRandomised('2.6.0', 4);
+        
+        foreach($randomBuilds as $randomBuild) {
+            $randomBuild->setClass( \Mappers\DBMapper::findHeroClassByBuildId( $randomBuild->getId() ) )
+                        ->setScopeSolo( \Mappers\ScopeListMapper::createObject( 
+                                        \Mappers\BuildDBMapper::findScopeByBuildIdAndGroup($randomBuild->getId(), 'solo') ) )
+                        ->setScopeTeam( \Mappers\ScopeListMapper::createObject( 
+                                        \Mappers\BuildDBMapper::findScopeByBuildIdAndGroup($randomBuild->getId(), 'team') ) );
+        }
+        
+        \Views\View::getInstance()->assign('randomBuilds', $randomBuilds);
         \Views\View::getInstance()->display('builds/builds.tpl');
     }
     
@@ -71,7 +81,7 @@ class BuildController extends AbstractController {
                                 filter_input_array(INPUT_POST)
                                 ), false
                         );
-
+            
             \Mappers\BuildDBMapper::updateMeta($postObj);
             \Mappers\BuildDBMapper::saveCube($postObj);
             \Mappers\BuildDBMapper::saveItems($postObj);

@@ -17,6 +17,7 @@
                 {include file="profile/hero/cube.tpl"}
             </div>
             <div class="col-sm-5">
+                {include file="profile/hero/stats.tpl"}
                 {include file="profile/hero/active_skills.tpl"}
                 {include file="profile/hero/passive_skills.tpl"}
             </div>

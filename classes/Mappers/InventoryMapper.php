@@ -29,7 +29,7 @@ abstract class InventoryMapper extends AbstractMapper {
                 $inventory->$method( $item );
             }
         }
-        if($inventory->getMainHand()->isTwohand()) {
+        if($inventory->getMainHand()->isTwohand() && $inventory->getOffHand()->getId() == -1) {
             $inventory->setOffHand(\Mappers\ItemMapper::createShadowItem(
                     $inventory->getMainHand()) );
         }
@@ -37,9 +37,9 @@ abstract class InventoryMapper extends AbstractMapper {
     }
     
     
-    private static function addGems($item) {
-        if($item->getId() != -1) {
-            $gems = \Mappers\BuildDBMapper::findGemsByItemId($item->getId());
+    private static function addGems(\Entities\Item $item) {
+        if($item->getBuildId() != false && $item->getId() != -1) {
+            $gems = \Mappers\BuildDBMapper::findGemsByItemId($item->getBuildId(), $item->getId());
             foreach($gems as $gem) {
                 $item->addGem($gem, $gem->getIndex());
             }

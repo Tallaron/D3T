@@ -46,6 +46,11 @@
 }
 
 .scope-group-text {
+    color: #000;
+    font-weight: bolder;
+    text-shadow: 1px 1px 2px #ccc;
+    background-color: rgba(150,150,150,0.5);
+    border-radius: 4px;
     width: 100%;
     text-align: center;
     margin-top: 10px;
@@ -64,4 +69,54 @@
     border: 0;
     height: 1px;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+.random-build-scope-panel {
+    font-size: 10px;
+}
+
+.random-build-link,
+.random-build-link:visited,
+.random-build-link:link,
+.random-build-link:active
+{
+    color: #000;
+}
+
+.random-build-link:hover {
+    opacity: 0.9;
+}
+
+.random-build-bg {
+    background-repeat: no-repeat;
+    background-color: #000;
+}
+
+.random-build-barbarian {
+    background-image: url('../gfx/barbarian-bg.jpg');
+    background-position: -420px -15px;
+}
+.random-build-crusader {
+    background-image: url('../gfx/crusader-bg.jpg');
+    background-position: -520px -25px;
+}
+.random-build-demon-hunter {
+    background-image: url('../gfx/demon-hunter-bg.jpg');
+    background-position: -420px -25px;
+}
+.random-build-monk {
+    background-image: url('../gfx/monk-bg.jpg');
+    background-position: -540px -20px;
+}
+.random-build-necromancer {
+    background-image: url('../gfx/necromancer-bg.jpg');
+    background-position: -455px -45px;
+}
+.random-build-witch-doctor {
+    background-image: url('../gfx/witch-doctor-bg.jpg');
+    background-position: -460px -5px;
+}
+.random-build-wizard {
+    background-image: url('../gfx/wizard-bg.jpg');
+    background-position: -550px 0px;
 }

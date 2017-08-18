@@ -268,10 +268,26 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return \Entities\Build
      */
     public static function  findBuildMetaById($id) {
-        $sql = 'SELECT id, name, class_id as "classId", version FROM builds WHERE id = :id;';
+        $sql = 'SELECT id, name, class_id AS classId, version FROM builds WHERE id = :id;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
         return $stmt->fetchObject('\Entities\Build');
+    }
+    
+    /**
+     * Returns an array of \Entities\Build objects randomly picked from database.
+     * Restrictions are the game<b>$version</b> and the <b>$limit</b> of results.
+     * @param String $version
+     * @param int $limit
+     * @return array
+     */
+    public static function  findBuildMetaRandomised($version, $limit) {
+        $sql = 'SELECT b.id, b.name, b.class_id AS classId, b.version FROM builds b WHERE b.version LIKE :version ORDER BY RAND() LIMIT :limit;';
+        $stmt = self::getPDO()->prepare($sql);
+        $stmt->bindParam(':version', $version, \PDO::PARAM_STR);
+        $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT); //bind methods are required for "prepared LIMIT"!
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Build');
     }
 
     /**
@@ -296,7 +312,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function findInventoryByBuildId($id) {
-        $sql = 'SELECT i.id, i.slug, i.name, i.icon, i.quality, bi.slot_key AS `type`, IF(i.quality="set", "green", "orange") AS displayColor, s.sockets, concat("item/",i.slug) AS tooltipParams
+        $sql = 'SELECT bi.build_id AS buildId, i.id, i.slug, i.name, i.icon, i.quality, bi.slot_key AS `type`, IF(i.quality="set", "green", "orange") AS displayColor, s.sockets, concat("item/",i.slug) AS tooltipParams
                     FROM build_items bi
                     JOIN raw_data_items i ON(bi.item_id=i.id)
                     JOIN slots s ON(bi.slot_key=s.`key`)
@@ -312,14 +328,14 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @param int $itemId
      * @return array
      */
-    public static function findGemsByItemId($itemId) {
-        $sql = 'SELECT g.*, bg.socket_index AS `index`
-                    FROM build_items bi 
-                    JOIN build_gems bg ON(bg.build_item_id = bi.id) 
+    public static function findGemsByItemId($buildId, $itemId) {
+        $sql = 'SELECT g.*, bg.socket_index AS `index` FROM build_items bi 
+                    JOIN build_gems bg ON(bi.id=bg.build_item_id)
                     JOIN raw_data_gems g ON(bg.gem_id=g.id)
-                        WHERE bi.item_id = :id;';
+                        WHERE bi.build_id = :build
+                        AND bi.item_id=:id;';
         $stmt = self::getPDO()->prepare($sql);
-        $stmt->execute( [':id' => $itemId,] );
+        $stmt->execute( ['build' => $buildId, ':id' => $itemId,] );
         return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Gem');
     }
 
@@ -398,5 +414,14 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
         $stmt->execute( [':id' => $id,] );
         return $stmt->fetchObject('\Entities\Rune');
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 }

@@ -212,6 +212,28 @@ $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
             'ok',
             'good',
             'best',
+        ))
+        ->addContext('HERO_STAT_MAP', array(
+            'stats' => array(
+                'strength' => 'Strength',
+                'dexterity' => 'Dexterity',
+                'intelligence' => 'Intelligence',
+                'vitality' => 'Vitality',
+            ),
+            'effects' => array(
+                'life' => 'Hit Points',
+                'damage' => 'Damage',
+                'toughness' => 'Toughness',
+                'healing' => 'Healing',
+            ),
+            'resists' => array(
+                'physicalResist' => 'Physical',
+                'fireResist' => 'Fire',
+                'coldResist' => 'Cold',
+                'lightningResist' => 'Lightning',
+                'poisonResist' => 'Poison',
+                'arcaneResist' => 'Arcane/Holy',
+            ),
         ));
 
 

@@ -7,7 +7,7 @@ namespace Entities;
  */
 class Gem {
 
-    private $id = 0;
+    private $id = -1;
     private $type;
     private $name = EMPTY_ITEM_DEFAULT_NAME;
     private $icon = false;

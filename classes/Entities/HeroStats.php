@@ -14,7 +14,7 @@ class HeroStats {
     private $dexterity;
     private $intelligence;
     private $vitality;
-    private $physResist;
+    private $physicalResist;
     private $fireResist;
     private $coldResist;
     private $lightningResist;
@@ -26,7 +26,13 @@ class HeroStats {
     private $primaryResource;
     private $secondaryResource;
     
-    
+    public function get($key) {
+        $method = 'get'.ucfirst($key);
+        if(method_exists($this, $method)) {
+            return $this->$method();
+        } return -1;
+    }
+
     public function getLife() {
         return $this->life;
     }
@@ -67,8 +73,8 @@ class HeroStats {
         return $this->vitality;
     }
 
-    public function getPhysResist() {
-        return $this->physResist;
+    public function getPhysicalResist() {
+        return $this->physicalResist;
     }
 
     public function getFireResist() {
@@ -161,8 +167,8 @@ class HeroStats {
         return $this;
     }
 
-    public function setPhysResist($physResist) {
-        $this->physResist = $physResist;
+    public function setPhysicalResist($physicalResist) {
+        $this->physicalResist = $physicalResist;
         return $this;
     }
 

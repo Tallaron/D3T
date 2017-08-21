@@ -10,9 +10,7 @@
 
         <div class="form-group clearfix">
             {include file="builds/form_parts/name.tpl" once=true}
-            <div class="col-sm-6">
-                <button type="submit" class="btn btn-primary pull-right">Ok</button>
-            </div>
+            {include file="builds/form_parts/publish_submit.tpl" once=true}
         </div>
 
         {include file="builds/form_parts/items.tpl" once=true}

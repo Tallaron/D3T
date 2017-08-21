@@ -14,13 +14,14 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @param String $version Game version the build was made for.
      * @return int
      */
-    public static function createBuild($classId, $name, $version) {
-        $sql = 'INSERT INTO builds (`name`, `class_id`, `version`, `created`, `updated`) VALUES (:name, :classId, :version, NOW(), NOW())';
+    public static function createBuild($classId, $name, $version, $published) {
+        $sql = 'INSERT INTO builds (`name`, `class_id`, `version`, `created`, `updated`, `published`) VALUES (:name, :classId, :version, NOW(), NOW(), :published)';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute([
             ':name' => $name,
             ':classId' => $classId,
             ':version' => $version,
+            ':published' => $version,
             ]);
         return self::findBuildIdByName($name);
     }
@@ -64,6 +65,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
             'name' => $obj->name,
             'version' => $obj->version,
             'updated' => (new \DateTime())->format('y-m-d H:i:s'),
+            'published' => $obj->published,
             ];
         $sql = self::getPreparedUpdateSQL('builds', $map);
                 
@@ -268,7 +270,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return \Entities\Build
      */
     public static function  findBuildMetaById($id) {
-        $sql = 'SELECT id, name, class_id AS classId, version FROM builds WHERE id = :id;';
+        $sql = 'SELECT id, name, class_id AS classId, version, published FROM builds WHERE id = :id;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
         return $stmt->fetchObject('\Entities\Build');
@@ -282,7 +284,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function  findBuildMetaRandomised($version, $limit) {
-        $sql = 'SELECT b.id, b.name, b.class_id AS classId, b.version FROM builds b WHERE b.version LIKE :version ORDER BY RAND() LIMIT :limit;';
+        $sql = 'SELECT b.id, b.name, b.class_id AS classId, b.version FROM builds b WHERE b.version LIKE :version AND b.published=1 ORDER BY RAND() LIMIT :limit;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->bindParam(':version', $version, \PDO::PARAM_STR);
         $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT); //bind methods are required for "prepared LIMIT"!
@@ -373,7 +375,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function findBuildMetaByClassKey($key) {
-        $sql = 'SELECT b.id, b.name, b.version, c.key FROM builds b JOIN classes c ON(b.class_id=c.id) WHERE c.key LIKE :key;';
+        $sql = 'SELECT b.id, b.name, b.version, c.key FROM builds b JOIN classes c ON(b.class_id=c.id) WHERE c.key LIKE :key AND b.published=1;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':key' => $key,] );
         return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Build');

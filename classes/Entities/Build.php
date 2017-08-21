@@ -9,6 +9,7 @@ class Build {
     private $class;
     private $name;
     private $version;
+    private $published;
     private $scopeSolo;
     private $scopeTeam;
     //DETAILS
@@ -237,6 +238,26 @@ class Build {
      */
     public function setScopeTeam(\Entities\ScopeList $scopeTeam) {
         $this->scopeTeam = $scopeTeam;
+        return $this;
+    }
+
+    /**
+     * 0 (default) - Not published
+     * 1           - Published
+     * @return int
+     */
+    public function getPublished() {
+        return $this->published;
+    }
+
+    /**
+     * 0 - Not published
+     * 1 - Published
+     * @param int $published
+     * @return \Entities\Build
+     */
+    public function setPublished($published) {
+        $this->published = $published;
         return $this;
     }
 

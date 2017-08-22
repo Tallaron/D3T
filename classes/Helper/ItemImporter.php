@@ -27,6 +27,7 @@ class ItemImporter extends AbstractImporter {
                 $item = new \Entities\Item();
                 $item
                     ->setSlug( $this->parseItemSlug($data) )
+                    ->setLink( $this->parseItemLink($data) )
                     ->setName( $this->parseItemName($data) )
                     ->setIcon( $this->parseItemIcon($data) )
                     ->setLevel( $this->parseItemLevel($data) )
@@ -43,6 +44,13 @@ class ItemImporter extends AbstractImporter {
                                 ->getElementsByTagName('h3')[0]
                                 ->getElementsByTagName('a')[0]
                                 ->getAttribute('href'));
+    }
+    
+    private function parseItemLink($data) {
+        return self::cutElementsAtFront( $data
+                                ->getElementsByTagName('h3')[0]
+                                ->getElementsByTagName('a')[0]
+                                ->getAttribute('href'), 2);
     }
 
     private function parseItemName($data) {

@@ -10,6 +10,7 @@ class Item {
     private $id = -1;
     private $name = EMPTY_ITEM_DEFAULT_NAME;
     private $icon = false;
+    private $link = null;
     private $displayColor = EMPTY_ITEM_DEFAULT_DISPLAY_COLOR;
     private $tooltipParams = EMPTY_ITEM_DEFAULT_TOOLTIP_PARAMS;
     private $sockets = 0;
@@ -51,10 +52,14 @@ class Item {
      * @return String
      */
     public function getLink() {
-        return D3_GAME_GUIDE_ITEM_BASE_URL.strtolower( 
+        if($this->link != null) {
+            return strtolower($this->link);
+        } else {
+            return D3_GAME_GUIDE_ITEM_BASE_URL.strtolower( 
                 str_replace(' ', '-', 
                         str_replace('\'', '', 
                                 $this->getName() ) ) );
+        }
     }
 
         /**
@@ -124,7 +129,15 @@ class Item {
      * @return String
      */
     public function getTooltipParams() {
-        return $this->tooltipParams;
+        if($this->link != null) {
+            if(strpos($this->link, 'recipe')) {
+                return false;
+            } else {
+                return 'item/'.$this->getSlug();
+            }
+        } else {
+            return $this->tooltipParams;
+        }
     }
 
     /**
@@ -302,6 +315,17 @@ class Item {
         $this->buildId = $buildId;
         return $this;
     }
+
+    /**
+     * 
+     * @param String $link
+     * @return \Entities\Item
+     */
+    public function setLink($link) {
+        $this->link = $link;
+        return $this;
+    }
+
 
 
 }

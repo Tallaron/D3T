@@ -60,6 +60,29 @@ class ImportController extends AbstractController {
     }
     
     
+    /**
+     * Tries to import all available items by iterating through  alist of item
+     * types and calling the specific item import method.
+     */
+    public function itemsAction() {
+        if(IMPORT_ENABLED) {
+            self::setMsg( isset($_SESSION['imports_done']) ? $_SESSION['imports_done'] : [] );
+            register_shutdown_function('import_handle');
+            $importMapper = new \Mappers\ImportMapper();
+            
+            /* Import items */
+            foreach(\Mappers\DBMapper::findAllItemTypes() as $itemType) {
+                if(!$importMapper->isDone('item'.$itemType->getKey())) {
+                    $importMapper->importItems($itemType->getKey());
+                    self::addMsg('item'.$itemType->getKey());
+                }
+            }
+        }
+        self::addMsg('all imports done!');
+        $this->redirect();
+    }
+    
+    
     
     public function activeAction($heroClass = false) {
         if(IMPORT_ENABLED) {

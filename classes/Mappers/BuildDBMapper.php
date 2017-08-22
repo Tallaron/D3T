@@ -314,11 +314,23 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function findInventoryByBuildId($id) {
-        $sql = 'SELECT bi.build_id AS buildId, i.id, i.slug, i.name, i.icon, i.quality, bi.slot_key AS `type`, IF(i.quality="set", "green", "orange") AS displayColor, s.sockets, concat("item/",i.slug) AS tooltipParams
-                    FROM build_items bi
-                    JOIN raw_data_items i ON(bi.item_id=i.id)
-                    JOIN slots s ON(bi.slot_key=s.`key`)
-                        WHERE bi.build_id=:id;';
+        $sql = 'SELECT 
+                    bi.build_id AS buildId, 
+                    i.id, 
+                    i.slug, 
+                    i.name, 
+                    i.icon, 
+                    i.quality, 
+                    i.link, 
+                    bi.slot_key AS `type`, 
+                    IF(i.quality="set", "green", "orange") AS displayColor, 
+                    s.sockets 
+                        FROM build_items bi
+                        JOIN raw_data_items i ON(bi.item_id=i.id)
+                        JOIN slots s ON(bi.slot_key=s.`key`)
+                            WHERE bi.build_id=:id;';
+//                    concat("item/",i.slug) AS tooltipParams //there was an issue with recipe based items
+
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':id' => $id,] );
         return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Item');
@@ -331,11 +343,24 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function findGemsByItemId($buildId, $itemId) {
-        $sql = 'SELECT g.*, bg.socket_index AS `index` FROM build_items bi 
-                    JOIN build_gems bg ON(bi.id=bg.build_item_id)
-                    JOIN raw_data_gems g ON(bg.gem_id=g.id)
-                        WHERE bi.build_id = :build
-                        AND bi.item_id=:id;';
+        $sql = 'SELECT
+	bg.gem_id AS id,
+	g.slug,
+	g.name,
+	g.icon,
+	g.`type`,
+	g.`level`,
+	bg.socket_index AS `index`
+		FROM raw_data_gems g
+			RIGHT JOIN build_gems bg ON bg.gem_id=g.id
+			RIGHT JOIN build_items bi ON bi.id=bg.build_item_id
+				WHERE bi.build_id=:build
+				AND bi.item_id=:id;';
+//        $sql = 'SELECT g.*, bg.socket_index AS `index` FROM build_items bi 
+//                    JOIN build_gems bg ON(bi.id=bg.build_item_id)
+//                    JOIN raw_data_gems g ON(bg.gem_id=g.id)
+//                        WHERE bi.build_id = :build
+//                        AND bi.item_id=:id;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( ['build' => $buildId, ':id' => $itemId,] );
         return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Gem');
@@ -375,7 +400,7 @@ class BuildDBMapper extends \Mappers\AbstractDBMapper {
      * @return array
      */
     public static function findBuildMetaByClassKey($key) {
-        $sql = 'SELECT b.id, b.name, b.version, c.key FROM builds b JOIN classes c ON(b.class_id=c.id) WHERE c.key LIKE :key AND b.published=1;';
+        $sql = 'SELECT b.id, b.name, b.version, c.key FROM builds b JOIN classes c ON(b.class_id=c.id) WHERE c.key LIKE :key AND b.published=1 ORDER BY name ASC;';
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute( [':key' => $key,] );
         return $stmt->fetchAll(\PDO::FETCH_CLASS, '\Entities\Build');

@@ -55,6 +55,7 @@ define('MILLION', 1000000);
 define('BILLION', 1000000000);
 define('TRILLION', 1000000000000);
 
+define('D3_GAME_GUIDE_BASE_URL', 'https://eu.battle.net/d3/en/');
 define('D3_GAME_GUIDE_ITEM_BASE_URL', 'https://eu.battle.net/d3/en/item/');
 define('D3_GAME_GUIDE_SKILL_BASE_URL', 'https://eu.battle.net/d3/en/class/');
 
@@ -67,7 +68,7 @@ define('BLIZZARD_D3_ITEM_API_URL', 'https://%s.api.battle.net/d3/data/item/%s?lo
 define('ITEM_API_DEFAULT_REALM', 'eu');
 define('EMPTY_ITEM_DEFAULT_NAME', 'EMPTY');
 define('EMPTY_ITEM_DEFAULT_DISPLAY_COLOR', 'white');
-define('EMPTY_ITEM_DEFAULT_TOOLTIP_PARAMS', '');
+define('EMPTY_ITEM_DEFAULT_TOOLTIP_PARAMS', false);
 
 define('EMPTY_SKILL_DEFAULT_NAME', 'EMPTY');
 

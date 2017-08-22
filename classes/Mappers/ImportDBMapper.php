@@ -9,7 +9,7 @@ class ImportDBMapper extends \Mappers\AbstractDBMapper {
      * @param \Entities\ImportItem $item
      */
     public static function saveItem(\Entities\Item $item) {
-        $fields = ['slug','name','icon','level','type','quality'];
+        $fields = ['slug','name','icon','level','type','quality','link'];
         $sql = self::getPreparedInsertUpdateSQL('raw_data_items', $fields, 1);
         $stmt = self::getPDO()->prepare($sql);
         $stmt->execute([
@@ -19,6 +19,7 @@ class ImportDBMapper extends \Mappers\AbstractDBMapper {
             $item->getLevel(),
             $item->getType()->getId(),
             $item->getQuality(),
+            $item->getLink(),
         ]);
         
     }

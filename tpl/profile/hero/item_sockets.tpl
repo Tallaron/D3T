@@ -3,7 +3,7 @@
         <div class="item-content-cell">
             <div class="item-content">
                 {for $i=0 to $item->getSockets()-1}
-                    {if $item->getGemAt($i)->getId() != 0}
+                    {if $item->getGemAt($i)->getId()!='0'}
                     <span class="socket" title="{$item->getGemAt($i)->getName()}">
                         {if $item->getGemAt($i)->getIcon() != false}
                             <a href="{$item->getGemAt($i)->getLink()}" target="_blank">
@@ -17,9 +17,3 @@
         </div>
     {/if}
 </div>
-
-
-
-
-
-

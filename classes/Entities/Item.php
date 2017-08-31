@@ -20,6 +20,8 @@ class Item {
     private $slug;
     private $type;
     private $buildId = false;
+    private $ancientRank = 0;
+    private $caldesan = false;
 
     /**
      * returns Blizzard cdn image url for large icon
@@ -27,6 +29,24 @@ class Item {
      */
     public function getLargeIconUrl($classKey = 'demonhunter') {
         return BLIZZARD_D3_ITEM_BASE_PATH . 'large/' . strtolower($this->getIcon($classKey)) . '.png';
+    }
+    
+    /**
+     * Returns a symbol for ancient rank:
+     * 0 - '' (empty String)
+     * 1 - 'A' (Ancient)
+     * 2 - 'P' (Primal Ancient)
+     * @return string
+     */
+    public function getAncientText() {
+        switch($this->getAncientRank()) {
+            case 1:
+                return 'A';
+            case 2:
+                return 'P';
+            default:
+                return '';
+        }
     }
 
     /**
@@ -323,6 +343,44 @@ class Item {
      */
     public function setLink($link) {
         $this->link = $link;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getAncientRank() {
+        return $this->ancientRank;
+    }
+
+    /**
+     * 0 - normal (default)
+     * 1 - ancient
+     * 2 - primal
+     * @param int $ancientRank
+     * @return \Entities\Item
+     */
+    public function setAncientRank($ancientRank) {
+        $this->ancientRank = $ancientRank;
+        return $this;
+    }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getCaldesan() {
+        return (int)$this->caldesan;
+    }
+
+    /**
+     * 
+     * @param String $caldesan Representing numeric value
+     * @return \Entities\Item
+     */
+    public function setCaldesan($caldesan) {
+        $this->caldesan = $caldesan;
         return $this;
     }
 

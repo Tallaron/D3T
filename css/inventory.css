@@ -58,8 +58,6 @@
 }
 
 .item-disabled-2h {
-/*    border-color: #748e3d;
-    background-color: #262f14;*/
     border: none !important;
     box-shadow: none !important;
     background-image: url("../gfx/inventory/disabled-offhand.gif");
@@ -207,3 +205,55 @@
     height: 20px;
 }
 
+.ancient-0 {
+    
+}
+
+.ancient-1 {
+    border-top-color: rgb(224,167,26);
+    border-right-color: rgb(170, 103, 24);
+    border-bottom-color: rgb(155, 103, 36);
+    border-left-color: rgb(198, 124, 27);
+    box-shadow: 0 0 9px rgba(0,0,0,0.09), 0 0 10px rgba(230, 230, 0, 0.75);
+}
+.ancient-1 .ancient-text {
+    color: #ff0;
+}
+
+.ancient-2 {
+    border-top-color: rgb(134,16,16);
+    border-right-color: rgb(111, 7, 7);
+    border-bottom-color: rgb(123, 11, 11);
+    border-left-color: rgb(123, 11, 11);
+    box-shadow: 0 0 9px rgba(0,0,0,0.09), 0 0 10px rgba(235, 0, 0, 0.95);
+}
+.ancient-2 .ancient-text {
+    color: #f00;
+}
+
+.caldesan {
+    cursor: default;
+    font-size: 10px;
+    color: #ddd;
+    position: absolute;
+    z-index: 200;
+    right: 0px;
+    bottom: 0px;
+    padding-right: 3px;
+    font-weight: bold;
+    text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
+}
+
+.ancient-text {
+    text-align: left;
+    cursor: default;
+    font-size: 10px;
+    /*color: #ddd;*/
+    position: absolute;
+    z-index: 200;
+    left: 0px;
+    bottom: 0px;
+    padding-left: 3px;
+    font-weight: bold;
+    text-shadow: 1px 1px #000, -1px 1px #000, 1px -1px #000, -1px -1px #000;
+}

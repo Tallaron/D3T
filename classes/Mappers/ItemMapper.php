@@ -16,16 +16,24 @@ abstract class ItemMapper extends AbstractMapper {
     public static function createObj($data, $mayHaveSockets = false) {
         $item = new \Entities\Item();
         if($data != null) {
+            $itemData = self::getApiDataWithKey(
+                    \Factories\BlizzardItemApiUrlFactory::getUrl(
+                            ITEM_API_DEFAULT_REALM,
+                            $data->tooltipParams),
+                    true,
+                    SYS_ITEM_CACHE_LIFETIME);
+
             if($mayHaveSockets) {
-                $itemData = self::getApiDataWithKey(
-                        \Factories\BlizzardItemApiUrlFactory::getUrl(
-                                ITEM_API_DEFAULT_REALM,
-                                $data->tooltipParams),
-                        true,
-                        SYS_ITEM_CACHE_LIFETIME);
                 self::addSockets($item, $itemData);
             }
 
+            if(property_exists($itemData->attributesRaw, 'Ancient_Rank')) {
+                $item->setAncientRank((int)$itemData->attributesRaw->Ancient_Rank->min);
+            }
+            if(property_exists($itemData->attributesRaw, 'CubeEnchantedGemRank')) {
+                $item->setCaldesan((int)$itemData->attributesRaw->CubeEnchantedGemRank->min);
+            }
+        
             foreach($data as $k => $v) {
                 $method = 'set'.ucfirst($k);
                 if(method_exists($item, $method)) {

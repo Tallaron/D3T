@@ -16,6 +16,7 @@ require_once 'inc/db_con.inc.php';
 //die();
 
 $fc = new \Controllers\FrontController(BASE_DIR);
+\Views\View::getInstance()->assign('twitchStatus', \Controllers\TwitchController::isOnline());
 \Views\View::getInstance()->assign('settings', $settings);
 \Views\View::getInstance()->assign('fc', $fc);
 \Views\View::getInstance()->display('index.tpl');

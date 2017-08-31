@@ -20,6 +20,7 @@ define('BUILDS_DATA_BASE_DIR', 'data/builds');
 define('CURRENT_D3_VERSION', '2.6.0');
 
 define('TWITCH_DEFAULT_CHANNEL', 'tallaron');
+define('TWITCH_API_ROOT', 'https://api.twitch.tv/kraken');
 
 define('SMARTY_TPL_DIR', 'tpl/');
 define('SMARTY_COMP_DIR', 'tpl_c/');

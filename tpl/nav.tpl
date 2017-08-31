@@ -21,7 +21,12 @@
 
         <div class="navbar-form navbar-right">
             <div class="btn-group" role="group" aria-label="...">
-                <a href="{BASE_DIR}/twitch" class="btn btn-primary"><small><span class="glyphicon glyphicon-facetime-video"></span></small> Twitch</a>
+                {if $twitchStatus}
+                    <a href="{BASE_DIR}/twitch"  class="btn btn-success"><div class="twitch-status">on</div></a>
+                {else}
+                    <a href="{BASE_DIR}/twitch"  class="btn btn-danger"><div class="twitch-status">off</div></a>
+                {/if}
+                <a href="{BASE_DIR}/twitch" class="btn btn-default"><small><span class="glyphicon glyphicon-facetime-video"></span></small> Twitch</a>
             </div>
         </div>
 

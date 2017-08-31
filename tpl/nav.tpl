@@ -26,7 +26,7 @@
                 {else}
                     <a href="{BASE_DIR}/twitch"  class="btn btn-danger"><div class="twitch-status">off</div></a>
                 {/if}
-                <a href="{BASE_DIR}/twitch" class="btn btn-default"><small><span class="glyphicon glyphicon-facetime-video"></span></small> Twitch</a>
+                <a href="{BASE_DIR}/twitch" class="btn btn-warning"><small><span class="glyphicon glyphicon-facetime-video"></span></small> Twitch</a>
             </div>
         </div>
 

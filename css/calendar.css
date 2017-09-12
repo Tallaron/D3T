@@ -11,8 +11,10 @@
 }
 
 .month-table tr.week {
+    opacity: 1;
 }
 .month-table tr.week:hover {
+    opacity: 0.9;
 }
 
 .month-table th,
@@ -42,7 +44,7 @@
 }
 
 .month-name {
-    color: #F3E6D0;
+    color: #f3e6d0;
     text-transform: uppercase;
     font-size: 12px;
     line-height: 30px;

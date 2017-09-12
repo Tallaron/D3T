@@ -1,0 +1,85 @@
+.month-table {
+    width: 100%;
+    margin-bottom: 12px;
+    border-left: 1px solid #582c19;
+    border-right: 1px solid #582c19;
+    border-bottom: 1px solid #68381f;
+    border-top: 1px solid #62351f;
+    cursor: default;
+    border-collapse: separate;
+    border-radius: 5px;
+}
+
+.month-table tr.week {
+}
+.month-table tr.week:hover {
+}
+
+.month-table th,
+.month-table td {
+    text-align: center;
+    font-size: 12px;
+    padding: 2px;
+}
+
+.month-table tr:last-child td:first-child {
+    border-bottom-left-radius:3px;
+}
+
+.month-table tr:last-child td:last-child {
+    border-bottom-right-radius:3px;
+}
+
+
+.month-table tr:first-child th:first-child,
+.month-table tr:first-child td:first-child {
+    border-top-left-radius:3px
+}
+
+.month-table tr:first-child th:last-child,
+.month-table tr:first-child td:last-child {
+    border-top-right-radius:3px
+}
+
+.month-name {
+    color: #F3E6D0;
+    text-transform: uppercase;
+    font-size: 12px;
+    line-height: 30px;
+    background: #300a00 url(../gfx/table-header.png) 0 100% repeat-x;
+    border-bottom: 1px solid #68381f;
+}
+
+.calendar-day-column {
+    width: 13%;
+}
+
+.calendar-default {
+    color: #a99877;
+    background-color: #272624;
+}
+
+.calendar-invalid-day {
+    background-color: #000;
+}
+
+.calendar-off-season {
+    color: #796847;
+    background-color: #171614;
+}
+
+.calendar-season-future {
+    color: #a99877;
+    background-color: #173614;
+}
+
+.calendar-season-past {
+    color: #a99877;
+    background-color: #371614;
+}
+
+.calendar-today {
+    color: #a99877;
+    font-weight: bolder;
+    background-color: #474614;
+}

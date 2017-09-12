@@ -43,6 +43,17 @@ define('D3_CURRENT_SEASON_EU', 11);
 define('D3_CURRENT_SEASON_US', 11);
 define('D3_CURRENT_SEASON_KR', 11);
 define('D3_CURRENT_SEASON_CN', 11);
+define('D3_CURRENT_SEASON_START_DATE', '2017-07-20 00:00:00');
+define('D3_CURRENT_SEASON_END_DATE', false);
+define('D3_ESTIMATED_SEASON_DURATION', 71);
+define('DEFAULT_DATE_FORMAT', 'Y-m-d H:i:s');
+define('DEFAULT_CALENDAR_SIZE', 4);
+
+define('CSS_INVALID_DAY', 'calendar-invalid-day');
+define('CSS_TODAY', 'calendar-today');
+define('CSS_NO_SEASON_DAY', 'calendar-off-season');
+define('CSS_WAS_SEASON_DAY', 'calendar-season-past');
+define('CSS_IS_SEASON_DAY', 'calendar-season-future');
 
 define('MAX_PARAGON', 10000);
 define('MIN_PARAGON', 0);

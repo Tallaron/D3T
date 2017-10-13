@@ -5,7 +5,7 @@
             {foreach from=$profile->getHero()->getActiveSkills() item=$skill}
                 {if $skill != null}
                     <div class="skill-outer">
-                        <div class="skill" title="{$skill->getName()}{if $skill->getRune() != null}&#10;{$skill->getRune()->getName()}{/if}">
+                        <div class="skill" data-d3tooltip="{$profile->getHero()->getClass()}/{$skill->getSlug()}" title="{$skill->getName()}{if $skill->getRune() != null}&#10;{$skill->getRune()->getName()}{/if}">
                             <div class="a-skill-image">
                                 <a href="{D3_GAME_GUIDE_SKILL_BASE_URL}{$profile->getHero()->getClass()}/active/{$skill->getSlug()}" target="_blank">
                                     <img src="{$skill->getLargeIconUrl()}" />
@@ -16,9 +16,9 @@
                                     {$skill->getName()}
                                 </a>
                             </div>
-                            <div class="a-skill-rune">
+                            <div class="a-skill-rune" data-d3tooltip="{$profile->getHero()->getClass()}/{$skill->getSlug()}/{$skill->getRune()->getType()}">
                                 {if $skill->getRune() != null}
-                                <a href="{D3_GAME_GUIDE_SKILL_BASE_URL}{$profile->getHero()->getClass()}/active/{$skill->getSlug()}" target="_blank" data-d3tooltip="{$skill->getRune()->getTooltipParams()}">
+                                <a href="{D3_GAME_GUIDE_SKILL_BASE_URL}{$profile->getHero()->getClass()}/active/{$skill->getSlug()}" target="_blank">
                                     {$skill->getRune()->getName()}
                                 </a>
                                 {else}

@@ -41,7 +41,8 @@ class Gem {
         return D3_GAME_GUIDE_ITEM_BASE_URL.strtolower( 
                 str_replace(' ', '-', 
                         str_replace('\'', '', 
-                                $this->getName() ) ) );
+                                $this->getName() ) ) )
+                .'-'.$this->getId();
     }
 
     /**
@@ -175,7 +176,12 @@ class Gem {
      * @return String
      */
     public function getSlug() {
-        return $this->slug;
+        if($this->slug == null) {
+            return strtolower( 
+                str_replace(' ', '-', 
+                        str_replace('\'', '', 
+                                $this->getName() ) ) );
+        } return $this->slug;
     }
 
     /**

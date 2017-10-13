@@ -7,7 +7,7 @@
 
 
                 <div class="skill-outer">
-                    <div class="skill" title="{$skill->getName()}">
+                    <div class="skill" data-d3tooltip="{$profile->getHero()->getClass()}/{$skill->getSlug()}" title="{$skill->getName()}">
                         
                         <div class="p-skill-frame">
                             <a href="{D3_GAME_GUIDE_SKILL_BASE_URL}{$profile->getHero()->getClass()}/passive/{$skill->getSlug()}" target="_blank">

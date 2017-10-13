@@ -10,7 +10,7 @@
                 </a>
             {/if}
         </div>
-        <div class="panel-body">
+        <div class="panel-body is-build">
             <div class="col-sm-7">
                 {include file="builds/content/show/inventory.tpl"}
                 {include file="builds/content/show/cube.tpl"}

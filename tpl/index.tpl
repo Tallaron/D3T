@@ -10,7 +10,8 @@
             <script src="{BASE_DIR}/js/js.js" type="text/javascript"></script>
 
             <link href="{BASE_DIR}/css/tt.css" rel="stylesheet" type="text/css"/>
-            <script src="{BASE_DIR}/js/tt.js" type="text/javascript"></script>
+{*            <link href="{BASE_DIR}/css/item_tooltip.css" rel="stylesheet" type="text/css"/>*}
+{*            <script src="{BASE_DIR}/js/tt.js" type="text/javascript"></script>*}
 
             <link href="{BASE_DIR}/css/inventory.css" rel="stylesheet" type="text/css"/>
             <link href="{BASE_DIR}/css/cube.css" rel="stylesheet" type="text/css"/>
@@ -25,6 +26,7 @@
         </head>
         <body>
 
+                        {include file="d3t_tooltip.tpl"}
 
             <div class="container">
                 {include once=true file='nav.tpl'}

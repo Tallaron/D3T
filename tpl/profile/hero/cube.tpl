@@ -11,7 +11,7 @@
         {if $item != false}
             <div class="cube-slot cube-item-{$i+1}{if $item->getIcon() != false} is-active{/if}" title="{$item->getName()}">
                 {if $item->getIcon() != false}
-                    <a href="{$item->getLink()}" target="_blank" data-d3tooltip="{$item->getTooltipParams()}">
+                    <a href="{$item->getLink()}" target="_blank" data-d3tooltip="{$item->getTooltipParams()}-{$item->getId()}">
                         <span class="cube-item-container">
                             <span class="cube-item-align">
                                 <img src="{$item->getLargeIconUrl()}" />

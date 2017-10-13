@@ -22,7 +22,7 @@ abstract class ItemMapper extends AbstractMapper {
                             $data->tooltipParams),
                     true,
                     SYS_ITEM_CACHE_LIFETIME);
-
+            $item->setTooltipData($itemData);
             if($mayHaveSockets) {
                 self::addSockets($item, $itemData);
             }

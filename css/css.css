@@ -157,7 +157,18 @@ progress[value]::-moz-progress-bar {
     color: #333;
 }
 
-
+.d3t-tooltip {
+    display: block;
+    position: absolute;
+    top: 70px;
+    left: 70px;
+    z-index: 10000;
+    width: 358px;
+    border: 2px solid transparent;
+    background-color: #000;
+    color: #fff;
+    font-size: 12px;
+}
 
 
 

@@ -46,4 +46,5 @@ abstract class InventoryMapper extends AbstractMapper {
         }
     }
     
+    
 }

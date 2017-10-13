@@ -16,6 +16,7 @@ abstract class RuneMapper {
         return (new \Entities\Rune())
             ->setSlug($data->slug)
             ->setName($data->name)
+            ->setType($data->type)
             ->setDescription($data->description)
             ->setSimpleDescription($data->simpleDescription)
             ->setTooltipParams($data->tooltipParams);

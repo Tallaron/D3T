@@ -44,8 +44,8 @@ define('D3_CURRENT_SEASON_US', 11);
 define('D3_CURRENT_SEASON_KR', 11);
 define('D3_CURRENT_SEASON_CN', 11);
 define('D3_CURRENT_SEASON_START_DATE', '2017-07-20 00:00:00');
-define('D3_CURRENT_SEASON_END_DATE', false);
-define('D3_ESTIMATED_SEASON_DURATION', 71);
+define('D3_CURRENT_SEASON_END_DATE', '2017-10-20 00:00:00'); //false if unknown
+define('D3_ESTIMATED_SEASON_DURATION', 85);
 define('DEFAULT_DATE_FORMAT', 'Y-m-d H:i:s');
 define('DEFAULT_CALENDAR_SIZE', 4);
 
@@ -76,6 +76,10 @@ define('BLIZZARD_D3_SKILL_BASE_PATH', 'http://media.blizzard.com/d3/icons/skills
 define('BLIZZARD_D3_PORTRAIT_BASE_PATH', 'http://media.blizzard.com/d3/icons/portraits/');
 
 define('BLIZZARD_D3_ITEM_API_URL', 'https://%s.api.battle.net/d3/data/item/%s?locale=en_GB');
+define('BLIZZARD_D3_PROFILE_ITEM_TOOLTIP_URL', 'https://eu.battle.net/d3/en/tooltip/item-profile/%s'); // item-profile/<item-data-hash>
+define('BLIZZARD_D3_ITEM_TOOLTIP_URL', 'https://eu.battle.net/d3/en/tooltip/item/%s'); // item/<item-slug-id-string>
+define('BLIZZARD_D3_SKILL_TOOLTIP_URL', 'https://eu.battle.net/d3/en/tooltip/skill/%s'); // skill/<skill-data>
+define('BLIZZARD_D3_RUNE_TOOLTIP_URL', 'https://eu.battle.net/d3/en/tooltip/rune/%s'); // rune/<hero-class>/<skill-slug>/<rune>
 
 define('ITEM_API_DEFAULT_REALM', 'eu');
 define('EMPTY_ITEM_DEFAULT_NAME', 'EMPTY');
@@ -207,6 +211,7 @@ $settings->addContext('RANKING_DEFAULT_REALM', 'eu')
         ->addContext('INDEX_EXCLUDED_ENDPOINTS', array(         //Those Endpoints don't trigger default index.tpl but returning the endpoints data
             'ladder.json',
             'build.rune',
+            'ajax.tooltip'
         ))
         ->addContext('SCOPE_GROUPS', array(
             'solo' => 'Solo',

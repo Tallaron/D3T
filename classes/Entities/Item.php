@@ -22,6 +22,7 @@ class Item {
     private $buildId = false;
     private $ancientRank = 0;
     private $caldesan = false;
+    private $tooltipData;
 
     /**
      * returns Blizzard cdn image url for large icon
@@ -78,7 +79,9 @@ class Item {
             return D3_GAME_GUIDE_ITEM_BASE_URL.strtolower( 
                 str_replace(' ', '-', 
                         str_replace('\'', '', 
-                                $this->getName() ) ) );
+                                $this->getName() ) ) )
+                    .'-'.$this->getId()
+                    ;
         }
     }
 
@@ -153,7 +156,7 @@ class Item {
             if(strpos($this->link, 'recipe')) {
                 return false;
             } else {
-                return 'item/'.$this->getSlug();
+                return 'item/'.$this->getSlug().'-'.$this->getId();
             }
         } else {
             return $this->tooltipParams;
@@ -287,7 +290,12 @@ class Item {
      * @return String
      */
     public function getSlug() {
-        return $this->slug;
+        if($this->slug == null) {
+            return strtolower( 
+                str_replace(' ', '-', 
+                        str_replace('\'', '', 
+                                $this->getName() ) ) );
+        } return $this->slug;
     }
 
     /**
@@ -383,6 +391,25 @@ class Item {
         $this->caldesan = $caldesan;
         return $this;
     }
+
+    /**
+     * 
+     * @return String JSON
+     */
+    public function getTooltipData() {
+        return $this->tooltipData;
+    }
+
+    /**
+     * 
+     * @param String $tooltipData JSON
+     * @return \Entities\Item
+     */
+    public function setTooltipData($tooltipData) {
+        $this->tooltipData = $tooltipData;
+        return $this;
+    }
+
 
 
 

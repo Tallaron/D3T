@@ -1,4 +1,5 @@
 {if $profile->getHero() != false}
+    {$isProfile = true}
     <div class="panel panel-info">
         <div class="panel-heading">
             <strong>{$profile->getHero()->getName()}</strong> - {$settings->get('BNET_CLASSES_LONG', $profile->getHero()->getClass())}
@@ -11,7 +12,7 @@
                 B.Net Hero Profile
             </a>
         </div>
-        <div class="panel-body">
+        <div class="panel-body is-profile">
             <div class="col-sm-7">
                 {include file="profile/hero/inventory.tpl"}
                 {include file="profile/hero/cube.tpl"}

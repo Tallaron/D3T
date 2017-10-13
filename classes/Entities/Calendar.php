@@ -33,7 +33,7 @@ class Calendar {
      * @return \DateTime
      */
     public function getToday() {
-        return new \DateTime();
+        return (new \DateTime())->setTime(0, 0, 0);
     }
     
     /**
